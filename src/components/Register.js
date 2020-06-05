@@ -9,7 +9,7 @@ export default class Register extends React.Component{
     passwordConfirm: '',
   }
 
-  handleChange(event){
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     })
