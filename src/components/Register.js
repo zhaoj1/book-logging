@@ -14,6 +14,20 @@ export default class Register extends React.Component{
       [event.target.name]: event.target.value
     })
   }
+
+  handleRegister = (event) => {
+    event.preventDefault()
+    fetch('http://127.0.0.1:8000/core/users/',{
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({username: this.state.username, password: this.state.password})
+    })
+    .then(data => data.json())
+    .then(resp => {
+      localStorage.setItem('token', resp.token)
+      this.props.setUser(resp.username)
+    })
+  }
  
   render(){
 
@@ -40,7 +54,7 @@ export default class Register extends React.Component{
 
     return(
       <div style={pageStyle}>
-        <form>
+        <form onSubmit={this.handleRegister} >
           <input 
             type='text' 
             name='username' 
@@ -79,7 +93,7 @@ export default class Register extends React.Component{
           ></input>
         </form>
         <label>
-          Already have an account? <Link to='/login'>Login here.</Link>
+          Already have an account? <Link to='/login'>Login</Link>
         </label>
       </div>
     )

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import CSRFToken from './csrftoken'; 
 
-export default class Register extends React.Component{
+export default class Login extends React.Component{
 
   state = {
     username: '',
@@ -17,18 +16,16 @@ export default class Register extends React.Component{
 
   handleLogin = (event) => {
     event.preventDefault()
-    fetch('http://127.0.0.1:8000/users/login/',{
+    fetch('http://127.0.0.1:8000/token-auth/',{
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        'Accept': "application/json",
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Cafari/537.36',
-        'X-CSRFTOKEN': document.getElementsByName('csrfmiddlewaretoken')[0].value,
-      },
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify(this.state)
     })
-    // .then(data => data.json())
-    .then(res => console.log(res))
+    .then(data => data.json())
+    .then(resp => {
+      localStorage.setItem('token', resp.token)
+      this.props.setUser(resp.user)
+    })
   }
  
   render(){
@@ -57,7 +54,6 @@ export default class Register extends React.Component{
     return(
       <div style={pageStyle}>
         <form onSubmit={this.handleLogin} >
-          <CSRFToken />
           <input 
             type='text' 
             name='username' 
@@ -86,7 +82,7 @@ export default class Register extends React.Component{
           ></input>
         </form>
         <label>
-          Need to create an account? <Link to='/register'>Register here.</Link>
+          Don't have an account? <Link to='/register'>Register</Link>
         </label>
       </div>
     )
