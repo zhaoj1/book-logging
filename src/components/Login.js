@@ -29,37 +29,14 @@ export default class Login extends React.Component{
   }
  
   render(){
-
-    const centeredStyle = {
-      margin: 'auto',
-      marginBottom: '10px',
-      width: '50%',
-      fontSize: '20px',
-    }
-  
-    const btnStyle = {
-      margin: 'auto',
-      marginBottom: '10px',
-      fontSize: '20px',
-    }
-  
-    const pageStyle = {
-      display:'flex',
-      flexDirection: 'column',
-      textAlign: 'center',
-      justifyContents: 'center',
-      height: '100%',
-    }
-
     return(
-      <div style={pageStyle}>
+      <div className='login-page'>
         <form onSubmit={this.handleLogin} >
           <input 
             type='text' 
             name='username' 
             placeholder='Username' 
             className='input'
-            style={centeredStyle}
             value={this.state.username} 
             onChange={this.handleChange}
             required
@@ -69,7 +46,6 @@ export default class Login extends React.Component{
             name='password' 
             placeholder='Password' 
             className='input'
-            style={centeredStyle}
             value={this.state.password} 
             onChange={this.handleChange}
             required
@@ -78,7 +54,6 @@ export default class Login extends React.Component{
             className='submitBtn' 
             type='submit' 
             value="Login"
-            style={btnStyle}
           ></input>
         </form>
         <label>

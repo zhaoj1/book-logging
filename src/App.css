@@ -4,7 +4,7 @@ html, body, #app, #app>div {
 
 /* -------------------------------Landing--------------------------------------- */
 
-.landing{
+.landing, .login-page, .register-page, .profile-page{
   display:flex;
   flex-direction: column;
   text-align: center;
@@ -12,7 +12,7 @@ html, body, #app, #app>div {
   height: '100%';
 }
 
-.logo, .app-description, .app-features{
+.logo, .app-description, .app-features, .input{
   margin: auto;
   margin-bottom: 10px;
   width: 50%;
@@ -30,7 +30,7 @@ html, body, #app, #app>div {
   font-size: 20px;
 }
 
-.startBtn{
+.startBtn, .submitBtn{
   margin: auto;
   margin-bottom: 50px;
   font-size: 20px;
