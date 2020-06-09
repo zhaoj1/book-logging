@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Landing from './Landing';
 import Register from './Register';
 import Login from './Login';
+import Profile from './Profile';
 
 export default class Contents extends React.Component{
 
@@ -35,6 +36,13 @@ export default class Contents extends React.Component{
               <Login 
                 {...routerProps}
                 setUser={this.setUser}
+              />
+            } />
+            <Route exact path='/profile' render={(routerProps) => 
+              <Profile
+                {...routerProps}
+                currentUser={this.state.currentUser}
+                loggedIn={this.state.loggedIn}
               />
             } />
           </Switch>

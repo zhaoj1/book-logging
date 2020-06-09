@@ -2,7 +2,7 @@ html, body, #app, #app>div {
   height: 100%;
 }
 
-/* -------------------------------Landing--------------------------------------- */
+/* ------------------------------- landing --------------------------------------- */
 
 .landing, .login-page, .register-page, .profile-page{
   display:flex;
@@ -12,9 +12,9 @@ html, body, #app, #app>div {
   height: '100%';
 }
 
-.logo, .app-description, .app-features, .input{
+.logo, .app-description, .app-features{
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 5%;
   width: 50%;
   font-size: 20px;
   animation: slide-in 1s ease;
@@ -30,7 +30,7 @@ html, body, #app, #app>div {
   font-size: 20px;
 }
 
-.startBtn, .submitBtn{
+.startBtn{
   margin: auto;
   margin-bottom: 50px;
   font-size: 20px;
@@ -48,4 +48,19 @@ html, body, #app, #app>div {
   }
 }
 
-/* -------------------------------  --------------------------------------- */
+/* ------------------------------- login + register --------------------------------------- */
+
+.input{
+  margin: auto;
+  margin-bottom: 10px;
+  width: 50%;
+  font-size: 20px;
+}
+
+.submitBtn{
+  margin: auto;
+  font-size: 20px;
+}
+
+/* ------------------------------- profile --------------------------------------- */
+
