@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import Search from './Search';
 
 export default class Profile extends React.Component{
 
@@ -32,7 +32,9 @@ export default class Profile extends React.Component{
               library
             </div>
             <div className='search'>
-              search
+              <Search 
+                setResults={this.props.setResults}
+              />
             </div>
           </div>
         </div>

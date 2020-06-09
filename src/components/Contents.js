@@ -4,16 +4,22 @@ import Landing from './Landing';
 import Register from './Register';
 import Login from './Login';
 import Profile from './Profile';
+import Results from './Results';
 
 export default class Contents extends React.Component{
 
   state = {
     currentUser: null,
-    loggedIn: false
+    loggedIn: false,
+    results: {}
   }
 
   setUser = (user) => {
     this.setState({currentUser: user, loggedIn: true})
+  }
+
+  setResults = (results) => {
+    this.setState({results: results})
   }
 
   render(){
@@ -43,6 +49,16 @@ export default class Contents extends React.Component{
                 {...routerProps}
                 currentUser={this.state.currentUser}
                 loggedIn={this.state.loggedIn}
+                setResults={this.setResults}
+              />
+            } />
+            <Route exact path='/results' render={(routerProps) => 
+              <Results
+                {...routerProps}
+                currentUser={this.state.currentUser}
+                loggedIn={this.state.loggedIn}
+                setResults={this.setResults}
+                results={this.state.results}
               />
             } />
           </Switch>
