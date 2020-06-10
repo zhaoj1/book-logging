@@ -6,6 +6,8 @@ export default class Login extends React.Component{
   state = {
     username: '',
     password: '',
+    error: false,
+    errorMsg: ''
   }
 
   handleChange = (event) => {
@@ -22,7 +24,15 @@ export default class Login extends React.Component{
       body: JSON.stringify(this.state)
     })
     .then(data => data.json())
-    .then(resp => {this.login(resp)})
+    .then(resp => 
+      resp.non_field_errors?
+        this.setState({
+          error: true,
+          errorMsg: 'Username or password is incorrect.'
+        })
+        :
+        this.login(resp)
+    )
   }
 
   login = (input) => {
@@ -62,6 +72,12 @@ export default class Login extends React.Component{
         <label>
           Don't have an account? <Link to='/register'>Register</Link>
         </label>
+        {
+          this.state.error ? 
+            <p className='errorMsg'>{this.state.errorMsg}</p>
+            :
+            null
+        }
       </div>
     )
   }

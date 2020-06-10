@@ -7,6 +7,8 @@ export default class Register extends React.Component{
     username: '',
     password: '',
     passwordConfirm: '',
+    error: false,
+    errorMsg: ''
   }
 
   handleChange = (event) => {
@@ -23,11 +25,21 @@ export default class Register extends React.Component{
       body: JSON.stringify({username: this.state.username, password: this.state.password})
     })
     .then(data => data.json())
-    .then(resp => {
-      localStorage.setItem('token', resp.token)
-      this.props.setUser(resp.username)
-      this.props.history.push('/profile')
-    })
+    .then(resp => console.log(resp)
+      // resp.non_field_errors?
+      //   this.setState({
+      //     error: true,
+      //     errorMsg: 'Username or password is incorrect.'
+      //   })
+      //   :
+      //   this.login(resp)
+    )
+  }
+
+  login = (input) => {
+    localStorage.setItem('token', input.token)
+    this.props.setUser(input.user)
+    this.props.history.push('/profile')
   }
  
   render(){
@@ -70,6 +82,12 @@ export default class Register extends React.Component{
         <label>
           Already have an account? <Link to='/login'>Login</Link>
         </label>
+        {
+          this.state.error ? 
+            <p className='errorMsg'>{this.state.errorMsg}</p>
+            :
+            null
+        }
       </div>
     )
   }

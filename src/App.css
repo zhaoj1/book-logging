@@ -62,6 +62,11 @@ html, body, #app, #app>div {
   font-size: 20px;
 }
 
+.errorMsg{
+  color: red;
+  font-weight: bold;
+}
+
 /* ------------------------------- profile --------------------------------------- */
 
 
