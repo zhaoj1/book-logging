@@ -5,7 +5,7 @@ export default class Login extends React.Component{
 
   state = {
     username: '',
-    password: ''
+    password: '',
   }
 
   handleChange = (event) => {
@@ -22,11 +22,13 @@ export default class Login extends React.Component{
       body: JSON.stringify(this.state)
     })
     .then(data => data.json())
-    .then(resp => {
-      localStorage.setItem('token', resp.token)
-      this.props.setUser(resp.user)
-      this.props.history.push('/profile')
-    })
+    .then(resp => {this.login(resp)})
+  }
+
+  login = (input) => {
+    localStorage.setItem('token', input.token)
+    this.props.setUser(input.user)
+    this.props.history.push('/profile')
   }
  
   render(){
