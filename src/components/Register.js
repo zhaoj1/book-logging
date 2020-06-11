@@ -19,21 +19,27 @@ export default class Register extends React.Component{
 
   handleRegister = (event) => {
     event.preventDefault()
-    fetch('http://127.0.0.1:8000/core/users/',{
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({username: this.state.username, password: this.state.password})
-    })
-    .then(data => data.json())
-    .then(resp => console.log(resp)
-      // resp.non_field_errors?
-      //   this.setState({
-      //     error: true,
-      //     errorMsg: 'Username or password is incorrect.'
-      //   })
-      //   :
-      //   this.login(resp)
-    )
+    this.state.password == this.state.passwordConfirm ?
+      fetch('http://127.0.0.1:8000/core/users/',{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username: this.state.username, password: this.state.password})
+      })
+      .then(data => data.json())
+      .then(resp => 
+        resp.token?
+          this.login(resp)
+          :
+          this.setState({
+            error: true,
+            errorMsg: 'Username is not available.'
+          })
+      )
+      :
+      this.setState({
+        error: true,
+        errorMsg: 'Passwords must match.'
+      })
   }
 
   login = (input) => {
