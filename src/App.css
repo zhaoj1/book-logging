@@ -1,15 +1,15 @@
-html, body, #app, #app>div {
+html, body, .App, #root {
   height: 100%;
 }
 
 /* ------------------------------- landing --------------------------------------- */
 
-.landing, .login-page, .register-page, .profile-page{
+.landing, .login-page, .register-page{
   display:flex;
   flex-direction: column;
   text-align: center;
-  justify-content: center;
-  height: '100%';
+  justify-content: flex-start;
+  height: 100%;
 }
 
 .logo, .app-description, .app-features{
@@ -69,7 +69,47 @@ html, body, #app, #app>div {
 
 /* ------------------------------- profile --------------------------------------- */
 
+.profile-page{
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  height: 100%;
+  justify-content: flex-start;
+}
 
+.profile-analytics{
+  height: 45%;
+  width: 70%;
+  margin: auto;
+  background-color: blue;
+}
+
+.profile-lower{
+  display: flex;
+  height: 45%;
+}
+
+.library, .search-box{
+  margin: auto;
+  width: 60%;
+  height: 90%;
+  background-color:red;
+  display: flex;
+}
+
+.search-box{
+  width: 20%;
+}
+
+/* ------------------------------- search --------------------------------------- */
+
+.search{
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 
 /* ------------------------------- results --------------------------------------- */
 

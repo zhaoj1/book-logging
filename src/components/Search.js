@@ -32,6 +32,7 @@ export default class Search extends React.Component{
   render(){
     return(
       <div className='search'>
+        <p>Search</p>
         <form onSubmit={this.searchAPI}>
           <input 
             type='text' 

@@ -24,7 +24,7 @@ export default class Contents extends React.Component{
 
   render(){
     return(
-      <div>
+      <>
         <Router>
           <Switch>
             <Route exact path='/' render={(routerProps) => 
@@ -63,7 +63,7 @@ export default class Contents extends React.Component{
             } />
           </Switch>
         </Router>
-      </div>
+      </>
     )
   }
 }
