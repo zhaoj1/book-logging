@@ -1,5 +1,6 @@
 import React from 'react';
 import Search from './Search';
+import BookCard from './BookCard';
 
 export default class Profile extends React.Component{
 

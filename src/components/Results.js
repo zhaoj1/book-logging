@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
-import ResultsLineItem from './ResultsLineItem';
+import BookCard from './BookCard';
 
 export default class Search extends React.Component{
 
@@ -10,7 +10,7 @@ export default class Search extends React.Component{
         {this.props.loggedIn ? 
           <>
             {this.props.results.items.map(ele => 
-              <ResultsLineItem ele={ele} />
+              <BookCard ele={ele} />
             )}
           </>
           :

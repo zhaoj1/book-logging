@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ResultsLineItem(props){
+function BookCard(props){
 
   return(
     <div className='resultsLineItem'>
@@ -20,4 +20,4 @@ function ResultsLineItem(props){
   )
 }
 
-export default ResultsLineItem
+export default BookCard

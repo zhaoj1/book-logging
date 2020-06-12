@@ -41,7 +41,13 @@ export default class Search extends React.Component{
             value={this.state.queryParams} 
             onChange={this.handleChange}
             required
-          ></input>
+          ></input><br></br>
+          <input 
+            className='submitBtn' 
+            type='submit' 
+            value="Search"
+          ></input><br></br>
+          <img src='https://books.google.com/googlebooks/images/poweredby.png' />
         </form>
         {this.state.searched ? 
           <Redirect to='/results' />

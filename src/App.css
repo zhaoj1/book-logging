@@ -59,6 +59,7 @@ html, body, .App, #root {
 
 .submitBtn{
   margin: auto;
+  margin-bottom: 10px;
   font-size: 20px;
 }
 
@@ -108,7 +109,6 @@ html, body, .App, #root {
   margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
 /* ------------------------------- results --------------------------------------- */
