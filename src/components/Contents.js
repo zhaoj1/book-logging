@@ -1,10 +1,29 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Modal from 'react-modal'
+
 import Landing from './Landing';
 import Register from './Register';
 import Login from './Login';
 import Profile from './Profile';
 import Results from './Results';
+
+const modalStyle = {
+  overlay : {
+    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+  },
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    textAlign: 'center',
+  }
+}
+
+Modal.setAppElement('#root');
 
 export default class Contents extends React.Component{
 
@@ -63,6 +82,11 @@ export default class Contents extends React.Component{
             } />
           </Switch>
         </Router>
+        <Modal
+          //  isOpen={this.state.modalIsOpen}
+          //  onRequestClose={this.closeModal}
+           style={modalStyle}
+        ></Modal>
       </>
     )
   }
