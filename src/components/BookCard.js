@@ -3,7 +3,10 @@ import React from 'react';
 function BookCard(props){
 
   return(
-    <div className='resultsLineItem'>
+    <div 
+      className='resultsLineItem'
+      onClick={() => props.setSelectedBook(props.ele)}
+    >
       <img className='bookCover' src={props.ele.volumeInfo.imageLinks.thumbnail} />
       <div className='bookInfo'>
         <label className='bookTitle'>

@@ -7,6 +7,7 @@ import Register from './Register';
 import Login from './Login';
 import Profile from './Profile';
 import Results from './Results';
+import BookDetails from './BookDetails';
 
 const modalStyle = {
   overlay : {
@@ -20,6 +21,7 @@ const modalStyle = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
+    width: '50%'
   }
 }
 
@@ -30,7 +32,9 @@ export default class Contents extends React.Component{
   state = {
     currentUser: null,
     loggedIn: false,
-    results: {}
+    results: {},
+    modalIsOpen: false,
+    selectedBook: {}
   }
 
   setUser = (user) => {
@@ -39,6 +43,24 @@ export default class Contents extends React.Component{
 
   setResults = (results) => {
     this.setState({results: results})
+  }
+
+  setSelectedBook = (book) => {
+    this.setState({
+      selectedBook: book,
+      modalIsOpen: true
+    })
+  }
+
+  openModal = () => {
+    this.setState({modalIsOpen: true})
+  } 
+
+  closeModal = () => {
+    this.setState({
+      selectedBook: {},
+      modalIsOpen: false
+    })
   }
 
   render(){
@@ -69,6 +91,7 @@ export default class Contents extends React.Component{
                 currentUser={this.state.currentUser}
                 loggedIn={this.state.loggedIn}
                 setResults={this.setResults}
+                setSelectedBook={this.setSelectedBook}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -78,15 +101,20 @@ export default class Contents extends React.Component{
                 loggedIn={this.state.loggedIn}
                 setResults={this.setResults}
                 results={this.state.results}
+                setSelectedBook={this.setSelectedBook}
               />
             } />
           </Switch>
         </Router>
         <Modal
-          //  isOpen={this.state.modalIsOpen}
-          //  onRequestClose={this.closeModal}
+           isOpen={this.state.modalIsOpen}
+           onRequestClose={this.closeModal}
            style={modalStyle}
-        ></Modal>
+        >
+          <BookDetails
+            selectedBook={this.state.selectedBook}
+          />
+        </Modal>
       </>
     )
   }

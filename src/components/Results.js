@@ -10,7 +10,10 @@ export default class Search extends React.Component{
         {this.props.loggedIn ? 
           <>
             {this.props.results.items.map(ele => 
-              <BookCard ele={ele} />
+              <BookCard 
+                ele={ele} 
+                setSelectedBook={this.props.setSelectedBook}
+              />
             )}
           </>
           :
