@@ -21,7 +21,8 @@ const modalStyle = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
-    width: '50%'
+    width: '50%',
+    height: '45%',
   }
 }
 
@@ -58,14 +59,14 @@ export default class Contents extends React.Component{
 
   closeModal = () => {
     this.setState({
-      selectedBook: {},
       modalIsOpen: false
-    })
+    },() => this.setState({selectedBook: {}}))
   }
 
   render(){
     return(
       <>
+      {console.log(this.state.selectedBook)}
         <Router>
           <Switch>
             <Route exact path='/' render={(routerProps) => 
@@ -113,6 +114,7 @@ export default class Contents extends React.Component{
         >
           <BookDetails
             selectedBook={this.state.selectedBook}
+            currentUser={this.state.currentUser}
           />
         </Modal>
       </>
