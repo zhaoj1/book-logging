@@ -66,7 +66,6 @@ export default class Contents extends React.Component{
   render(){
     return(
       <>
-      {console.log(this.state.selectedBook)}
         <Router>
           <Switch>
             <Route exact path='/' render={(routerProps) => 

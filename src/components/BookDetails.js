@@ -5,9 +5,12 @@ export default class BookCard extends React.Component{
   saveBook = () => {
     fetch('http://127.0.0.1:8000/books/', {
       method: 'POST',
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      },
       body: {
-        book: this.props.selectedBook,
+        json: this.props.selectedBook,
         owner: this.props.currentUser.id
       }
     }).then(resp => console.log(resp))
