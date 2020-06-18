@@ -22,7 +22,7 @@ const modalStyle = {
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
     width: '50%',
-    height: '45%',
+    height: '50%',
   }
 }
 
