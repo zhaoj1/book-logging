@@ -3,16 +3,28 @@ import React from 'react';
 export default class BookCard extends React.Component{
 
   saveBook = () => {
+    var authors = this.props.selectedBook.volumeInfo.authors == undefined ? '' : this.props.selectedBook.volumeInfo.authors.toString()
+    var isbn10 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier
+    var isbn13 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier
+    var mainCategory = this.props.selectedBook.volumeInfo.mainCategory == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.mainCategory.toString()
+    var categories = this.props.selectedBook.volumeInfo.categories == undefined ? '' : this.props.selectedBook.volumeInfo.categories.toString()
+
     fetch('http://127.0.0.1:8000/books/', {
       method: 'POST',
       headers: {
+        'Authorization': `JWT ${sessionStorage.getItem('token')}`,
         "Content-Type": "application/json",
-        'Authorization': 'JWT ' + localStorage.getItem('token')
+        "Accept": "application/json"
       },
-      body: {
-        json: this.props.selectedBook,
-        owner: this.props.currentUser.id
-      }
+      body: JSON.stringify({ 
+        title: this.props.selectedBook.volumeInfo.title, 
+        api_id: this.props.selectedBook.id, 
+        authors: authors,
+        isbn10: isbn10,
+        isbn13: isbn13,
+        owner: this.props.currentUser.id,
+        username: this.props.currentUser.username
+      })
     }).then(resp => console.log(resp))
   }
 

@@ -43,8 +43,8 @@ export default class Register extends React.Component{
   }
 
   login = (input) => {
-    localStorage.setItem('token', input.token)
-    this.props.setUser(input.user)
+    sessionStorage.setItem('token', input.token)
+    this.props.setUser({username: input.username, id: input.id})
     this.props.history.push('/profile')
   }
  

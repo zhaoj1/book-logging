@@ -9,7 +9,12 @@ function BookCard(props){
           className='resultsLineItem'
           onClick={() => props.setSelectedBook(props.ele)}
         >
-          <img className='bookCover' src={props.ele.volumeInfo.imageLinks.thumbnail} />
+          <img className='bookCover' src={
+            props.ele.volumeInfo.imageLinks == undefined ?
+              null
+              :
+              props.ele.volumeInfo.imageLinks.thumbnail
+          } />
           <div className='bookInfo'>
             <label className='bookTitle'>
               {
@@ -24,11 +29,12 @@ function BookCard(props){
               :
               props.ele.volumeInfo.authors.map(auth => <label className='bookAuthor'>{auth}<br></br></label>)
             }
-            {props.ele.volumeInfo.industryIdentifiers.map(identifier =>
-              <>
-                <label className='bookISBN'>{identifier.type}: {identifier.identifier}</label><br></br>
-              </>
-            )}
+            <label className='bookISBN'>
+              ISBN10: {props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier}
+            </label>
+            <label className='bookISBN'>
+              ISBN13: {props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier}
+            </label>
           </div>
         </div>
         :

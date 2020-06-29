@@ -35,8 +35,17 @@ export default class Contents extends React.Component{
     loggedIn: false,
     results: {},
     modalIsOpen: false,
-    selectedBook: {}
+    selectedBook: {},
+    booksList: null
   }
+
+  fetchBooks= () => {
+    fetch('http://127.0.0.1:8000/books/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
+    .then(data => data.json())
+    .then(resp => {this.setState({booksList: {...resp}})})
+  }
+
+  componentDidMount = () => {sessionStorage.clear()}
 
   setUser = (user) => {
     this.setState({currentUser: user, loggedIn: true})
@@ -68,6 +77,7 @@ export default class Contents extends React.Component{
       <>
         <Router>
           <Switch>
+            {console.log(this.state.booksList)}
             <Route exact path='/' render={(routerProps) => 
               <Landing 
                 {...routerProps}
@@ -92,6 +102,7 @@ export default class Contents extends React.Component{
                 loggedIn={this.state.loggedIn}
                 setResults={this.setResults}
                 setSelectedBook={this.setSelectedBook}
+                fetchBooks={this.fetchBooks}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -102,10 +113,12 @@ export default class Contents extends React.Component{
                 setResults={this.setResults}
                 results={this.state.results}
                 setSelectedBook={this.setSelectedBook}
+                fetchBooks={this.fetchBooks}
               />
             } />
           </Switch>
         </Router>
+        {console.log(this.state.currentUser)}
         <Modal
            isOpen={this.state.modalIsOpen}
            onRequestClose={this.closeModal}
