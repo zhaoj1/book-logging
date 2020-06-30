@@ -102,6 +102,7 @@ export default class Contents extends React.Component{
                 {...routerProps}
                 currentUser={this.state.currentUser}
                 loggedIn={this.state.loggedIn}
+                booksList={this.state.booksList}
                 setResults={this.setResults}
                 setSelectedBook={this.setSelectedBook}
                 fetchBooks={this.fetchBooks}

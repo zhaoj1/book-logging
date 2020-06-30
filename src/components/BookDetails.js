@@ -20,6 +20,7 @@ export default class BookCard extends React.Component{
         title: this.props.selectedBook.volumeInfo.title, 
         api_id: this.props.selectedBook.id, 
         authors: authors,
+        imageLink: this.props.selectedBook.volumeInfo.imageLinks.thumbnail,
         isbn10: isbn10,
         isbn13: isbn13,
         owner: this.props.currentUser.id,

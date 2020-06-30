@@ -99,6 +99,24 @@ html, body, .App, #root {
   display: flex;
 }
 
+.profileLineItem{
+  width: 25%;
+  height: 70%;
+  border: solid black 1px;
+  display: flex;
+  flex-direction: column; 
+  margin: 3%;
+}
+
+.library{
+  flex-wrap: wrap;
+  overflow:scroll;
+}
+
+.library-books{
+  margin: auto;
+}
+
 .search-box{
   width: 20%;
 }
@@ -123,7 +141,7 @@ html, body, .App, #root {
   height: 400px;
   border: solid black 1px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   margin: 3%;
 }
 
