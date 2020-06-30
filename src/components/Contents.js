@@ -21,23 +21,25 @@ const modalStyle = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
-    width: '50%',
+    width: '65%',
     height: '50%',
   }
 }
 
 Modal.setAppElement('#root');
 
+const defState = {
+  currentUser: null,
+  loggedIn: false,
+  results: {},
+  modalIsOpen: false,
+  selectedBook: {},
+  booksList: null
+}
+
 export default class Contents extends React.Component{
 
-  state = {
-    currentUser: null,
-    loggedIn: false,
-    results: {},
-    modalIsOpen: false,
-    selectedBook: {},
-    booksList: null
-  }
+  state = defState
 
   fetchBooks= () => {
     fetch('http://127.0.0.1:8000/books/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
@@ -118,7 +120,6 @@ export default class Contents extends React.Component{
             } />
           </Switch>
         </Router>
-        {console.log(this.state.currentUser)}
         <Modal
            isOpen={this.state.modalIsOpen}
            onRequestClose={this.closeModal}
@@ -127,6 +128,7 @@ export default class Contents extends React.Component{
           <BookDetails
             selectedBook={this.state.selectedBook}
             currentUser={this.state.currentUser}
+            fetchBooks={this.fetchBooks}
           />
         </Modal>
       </>

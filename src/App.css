@@ -176,9 +176,13 @@ html, body, .App, #root {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin-right:10px;
 }
 
 .bookDetails-right{
   width: 60%;
   text-align: left;
+  margin-right:10px;
+  border: solid black 1px;
+  padding: 5px;
 }

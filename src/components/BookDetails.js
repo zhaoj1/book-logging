@@ -25,7 +25,7 @@ export default class BookCard extends React.Component{
         owner: this.props.currentUser.id,
         username: this.props.currentUser.username
       })
-    }).then(resp => console.log(resp))
+    }).then(this.props.fetchBooks())
   }
 
   render(){
@@ -61,9 +61,9 @@ export default class BookCard extends React.Component{
           Page Count: {this.props.selectedBook.volumeInfo.pageCount}<br></br>
           Category: {this.props.selectedBook.volumeInfo.mainCategory}
           {this.props.selectedBook.volumeInfo.categories.map(category => category).join(' ,')}<br></br>
-          <a href={this.props.selectedBook.volumeInfo.infoLink} target='blank'>Google Play Store</a>
+          <a href={this.props.selectedBook.volumeInfo.infoLink} target='blank'>Google Play Store</a><br></br><br></br>
+          <button onClick={this.saveBook}>Save Book</button>
         </div>
-        <button onClick={this.saveBook}>Save Book</button>
       </div>
     )
   }
