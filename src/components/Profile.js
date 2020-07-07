@@ -19,8 +19,7 @@ export default class Profile extends React.Component{
             </div>
             <div className='profile-lower'>
               <div className='library'>
-                {console.log(this.props.booksList)}
-                {this.props.booksList? 
+                {this.props.booksList !== undefined && this.props.booksList !== null ? 
                   this.props.booksList.books.map(book => 
                     <ProfileBookCard
                       ele={book}

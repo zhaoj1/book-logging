@@ -101,7 +101,7 @@ html, body, .App, #root {
 
 .profileLineItem{
   width: 25%;
-  height: 70%;
+  height: 300px;
   border: solid black 1px;
   display: flex;
   flex-direction: column; 
@@ -147,14 +147,11 @@ html, body, .App, #root {
 
 .bookCover{
   margin: auto;
-  margin-bottom: 3%;
-  height: 55%;
-  width: 95%;
 }
 
 .bookInfo{
   margin: auto;
-  height: 30%;
+  height: 40%;
   width: 90%;
   margin-bottom: 0;
   padding: 5%;

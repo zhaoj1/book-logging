@@ -6,7 +6,7 @@ function ProfileBookCard(props){
     <>
       {props.ele ?
         <div className='profileLineItem' >
-          <img className='bookCover' src={props.ele.imageLinks} />
+          <img className='bookCover' src={props.ele.imageLink} />
           <div className='bookInfo'>
             <label className='bookTitle'>
               {
