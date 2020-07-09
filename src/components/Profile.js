@@ -23,6 +23,7 @@ export default class Profile extends React.Component{
                   this.props.booksList.books.map(book => 
                     <ProfileBookCard
                       ele={book}
+                      setSelectedBook={this.props.setSelectedBook}
                     />
                   )
                   :
