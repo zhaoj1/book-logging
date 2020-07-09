@@ -8,6 +8,7 @@ import Login from './Login';
 import Profile from './Profile';
 import Results from './Results';
 import BookDetails from './BookDetails';
+import ProfileBookDetails from './ProfileBookDetails';
 
 const modalStyle = {
   overlay : {
@@ -33,6 +34,7 @@ const defState = {
   loggedIn: false,
   results: {},
   modalIsOpen: false,
+  modalType: null,
   selectedBook: {},
   booksList: null
 }
@@ -57,20 +59,18 @@ export default class Contents extends React.Component{
     this.setState({results: results})
   }
 
-  setSelectedBook = (book) => {
+  setSelectedBook = (book, page) => {
     this.setState({
       selectedBook: book,
-      modalIsOpen: true
+      modalIsOpen: true,
+      modalType: page
     })
   }
 
-  openModal = () => {
-    this.setState({modalIsOpen: true})
-  } 
-
   closeModal = () => {
     this.setState({
-      modalIsOpen: false
+      modalIsOpen: false,
+      modalType: null
     },() => this.setState({selectedBook: {}}))
   }
 
@@ -79,7 +79,6 @@ export default class Contents extends React.Component{
       <>
         <Router>
           <Switch>
-            {console.log(this.state.booksList)}
             <Route exact path='/' render={(routerProps) => 
               <Landing 
                 {...routerProps}
@@ -126,11 +125,20 @@ export default class Contents extends React.Component{
            onRequestClose={this.closeModal}
            style={modalStyle}
         >
-          <BookDetails
-            selectedBook={this.state.selectedBook}
-            currentUser={this.state.currentUser}
-            fetchBooks={this.fetchBooks}
-          />
+          {this.state.modalType == 'details' ?
+            <BookDetails
+              selectedBook={this.state.selectedBook}
+              currentUser={this.state.currentUser}
+              fetchBooks={this.fetchBooks}
+            />
+            :
+            <ProfileBookDetails
+              selectedBook={this.state.selectedBook}
+              currentUser={this.state.currentUser}
+              fetchBooks={this.fetchBooks}
+            />
+          }
+          
         </Modal>
       </>
     )

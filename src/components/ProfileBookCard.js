@@ -5,7 +5,10 @@ function ProfileBookCard(props){
   return(
     <>
       {props.ele ?
-        <div className='profileLineItem' >
+        <div 
+          className='profileLineItem' 
+          onClick={() => props.setSelectedBook(props.ele, 'profile')}
+        >
           <img className='bookCover' src={props.ele.imageLink} />
           <div className='bookInfo'>
             <label className='bookTitle'>

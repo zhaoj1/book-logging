@@ -7,7 +7,7 @@ function BookCard(props){
       {props.ele ?
         <div 
           className='resultsLineItem'
-          onClick={() => props.setSelectedBook(props.ele)}
+          onClick={() => props.setSelectedBook(props.ele, 'details')}
         >
           <img className='bookCover' src={
             props.ele.volumeInfo.imageLinks == undefined ?
