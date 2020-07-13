@@ -200,4 +200,14 @@ html, body, .App, #root {
   margin-right:10px;
   border: solid black 1px;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-around;
+  overflow: scroll;
+}
+
+.profileDetails-analytics{
+  height: 55%;
+  background-color: blue;
 }

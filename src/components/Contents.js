@@ -23,7 +23,7 @@ const modalStyle = {
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
     width: '65%',
-    height: '50%',
+    height: '80%',
   }
 }
 
@@ -130,13 +130,18 @@ export default class Contents extends React.Component{
               selectedBook={this.state.selectedBook}
               currentUser={this.state.currentUser}
               fetchBooks={this.fetchBooks}
+              closeModal={this.closeModal}
             />
             :
-            <ProfileBookDetails
-              selectedBook={this.state.selectedBook}
-              currentUser={this.state.currentUser}
-              fetchBooks={this.fetchBooks}
-            />
+            this.state.modalType == 'profile' ?
+              <ProfileBookDetails
+                selectedBook={this.state.selectedBook}
+                currentUser={this.state.currentUser}
+                fetchBooks={this.fetchBooks}
+                closeModal={this.closeModal}
+              />
+              :
+              null
           }
           
         </Modal>

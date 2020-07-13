@@ -8,6 +8,10 @@ export default class Profile extends React.Component{
     this.props.fetchBooks()
   }
 
+  componentDidUpdate = (prevProps) => {
+    if(prevProps.booksList !== this.props.booksList){this.props.fetchBooks()}
+  }
+
   render(){
     return(
       this.props.loggedIn ?

@@ -19,6 +19,7 @@ export default class Search extends React.Component{
           :
           <Redirect to='/' />
         }
+        <button onClick={() => this.props.history.push('/profile')}>Back</button>
       </div>
     )
   }

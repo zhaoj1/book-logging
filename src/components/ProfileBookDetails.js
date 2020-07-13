@@ -2,6 +2,27 @@ import React from 'react';
 
 export default class ProfileBookDetails extends React.Component{
 
+  // updatePages = () => {
+  //   fetch('http://127.0.0.1:8000/books/', {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Authorization': `JWT ${sessionStorage.getItem('token')}`,
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json"
+  //     },
+  //     body: {
+
+  //     }
+  //   })
+  // }
+
+  deleteBook = () => {
+    fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}`, {
+      method: 'DELETE',
+      headers: {'Authorization': `JWT ${sessionStorage.getItem('token')}`}
+    }).then(this.props.closeModal()).then(this.props.fetchBooks())
+  }
+
   render(){
     return(
       <div className='bookDetails'>
@@ -16,7 +37,7 @@ export default class ProfileBookDetails extends React.Component{
                   this.props.selectedBook.title
               }
             </label><br></br>
-            {this.props.selectedBook.authors}
+            {this.props.selectedBook.authors}<br></br>
             <label className='bookISBN'>
               ISBN10: {this.props.selectedBook.isbn10}
             </label><br></br>
@@ -30,7 +51,32 @@ export default class ProfileBookDetails extends React.Component{
               analytics
           </div>
           <div className='profileDetails-pages'>
-            {this.props.selectedBook.pagesRead} / {this.props.selectedBook.totalPages}
+            <h1>Progress</h1>
+            <p>Pages Read: {this.props.selectedBook.pagesRead} / {this.props.selectedBook.totalPages}</p>
+            <form>
+              <input
+                type='text' 
+                name='page' 
+                placeholder='Pages Read' 
+                className='input'
+                required
+              >
+              </input>
+              <input
+                type='date' 
+                name='dateRead' 
+                className='input'
+                required
+              >
+              </input><br></br>
+              <input
+                type='submit'
+                className='submitBtn'
+                value='Update'
+              >
+              </input>
+            </form>
+            <button onClick={this.deleteBook}>Delete</button>
           </div>
         </div>
       </div>
