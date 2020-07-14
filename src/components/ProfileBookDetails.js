@@ -2,19 +2,29 @@ import React from 'react';
 
 export default class ProfileBookDetails extends React.Component{
 
-  // updatePages = () => {
-  //   fetch('http://127.0.0.1:8000/books/', {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Authorization': `JWT ${sessionStorage.getItem('token')}`,
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     },
-  //     body: {
+  state = {
+    pagesRead: 0,
+    dateRead: null
+  }
 
-  //     }
-  //   })
-  // }
+  handleChange = (event) => {this.setState({[event.target.name]: event.target.value})}
+
+  createPages = (event) => {
+    event.preventDefault()
+
+    fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}/pages`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `JWT ${sessionStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: {
+        pagesRead: this.state.pagesRead,
+        dateRead: this.state.dateRead
+      }
+    })
+  }
 
   deleteBook = () => {
     fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}`, {
@@ -53,10 +63,13 @@ export default class ProfileBookDetails extends React.Component{
           <div className='profileDetails-pages'>
             <h1>Progress</h1>
             <p>Pages Read: {this.props.selectedBook.pagesRead} / {this.props.selectedBook.totalPages}</p>
-            <form>
+            <form
+              onSubmit={this.createPages}
+            >
               <input
                 type='text' 
-                name='page' 
+                name='pagesRead' 
+                onChange={this.handleChange}
                 placeholder='Pages Read' 
                 className='input'
                 required
@@ -65,6 +78,7 @@ export default class ProfileBookDetails extends React.Component{
               <input
                 type='date' 
                 name='dateRead' 
+                onChange={this.handleChange}
                 className='input'
                 required
               >

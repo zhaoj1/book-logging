@@ -31,7 +31,7 @@ function BookCard(props){
             }
             <label className='bookISBN'>
               ISBN10: {props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier}
-            </label>
+            </label><br></br>
             <label className='bookISBN'>
               ISBN13: {props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier}
             </label>
