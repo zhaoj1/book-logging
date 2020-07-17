@@ -9,7 +9,7 @@ export default class Profile extends React.Component{
   }
 
   componentDidUpdate = (prevProps) => {
-    if(prevProps.booksList !== this.props.booksList){this.props.fetchBooks()}
+    if(prevProps.modalIsOpen !== this.props.modalIsOpen){this.props.fetchBooks()}
   }
 
   render(){

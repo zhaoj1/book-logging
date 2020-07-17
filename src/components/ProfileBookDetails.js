@@ -12,17 +12,19 @@ export default class ProfileBookDetails extends React.Component{
   createPages = (event) => {
     event.preventDefault()
 
-    fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}/pages`, {
+    fetch(`http://127.0.0.1:8000/pages/`, {
       method: 'POST',
       headers: {
         'Authorization': `JWT ${sessionStorage.getItem('token')}`,
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: {
-        pagesRead: this.state.pagesRead,
-        dateRead: this.state.dateRead
-      }
+      body: JSON.stringify({
+        pagesRead: parseInt(this.state.pagesRead),
+        dateRead: this.state.dateRead,
+        book: this.props.selectedBook.id,
+        user: this.props.currentUser.id
+      })
     })
   }
 

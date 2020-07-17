@@ -77,6 +77,7 @@ export default class Contents extends React.Component{
   render(){
     return(
       <>
+      {console.log(this.state.booksList)}
         <Router>
           <Switch>
             <Route exact path='/' render={(routerProps) => 
@@ -102,6 +103,7 @@ export default class Contents extends React.Component{
                 currentUser={this.state.currentUser}
                 loggedIn={this.state.loggedIn}
                 booksList={this.state.booksList}
+                modalIsOpen={this.state.modalIsOpen}
                 setResults={this.setResults}
                 setSelectedBook={this.setSelectedBook}
                 fetchBooks={this.fetchBooks}
