@@ -39,6 +39,7 @@ export default class ProfileBookDetails extends React.Component{
     return(
       <div className='bookDetails'>
         <div className='bookDetails-left'>
+          {console.log(Date(this.state.dateRead))}
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
             <label className='bookTitle'>
