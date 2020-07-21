@@ -23,7 +23,8 @@ export default class ProfileBookDetails extends React.Component{
         pagesRead: parseInt(this.state.pagesRead),
         dateRead: this.state.dateRead,
         book: this.props.selectedBook.id,
-        user: this.props.currentUser.id
+        owner: this.props.currentUser.id,
+        username: this.props.currentUser.username,
       })
     })
   }
@@ -39,7 +40,6 @@ export default class ProfileBookDetails extends React.Component{
     return(
       <div className='bookDetails'>
         <div className='bookDetails-left'>
-          {console.log(Date(this.state.dateRead))}
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
             <label className='bookTitle'>
@@ -65,7 +65,10 @@ export default class ProfileBookDetails extends React.Component{
           </div>
           <div className='profileDetails-pages'>
             <h1>Progress</h1>
-            <p>Pages Read: {this.props.selectedBook.pagesRead} / {this.props.selectedBook.totalPages}</p>
+            <p>Pages Read: {this.props.pages.pages !== null ?
+                this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
+                :
+                null} / {this.props.selectedBook.totalPages}</p>
             <form
               onSubmit={this.createPages}
             >

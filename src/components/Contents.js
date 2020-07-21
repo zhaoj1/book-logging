@@ -36,7 +36,8 @@ const defState = {
   modalIsOpen: false,
   modalType: null,
   selectedBook: {},
-  booksList: null
+  booksList: null,
+  pages: null
 }
 
 export default class Contents extends React.Component{
@@ -47,6 +48,12 @@ export default class Contents extends React.Component{
     fetch('http://127.0.0.1:8000/books/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
     .then(data => data.json())
     .then(resp => {this.setState({booksList: {...resp}})})
+  }
+
+  fetchPages= () => {
+    fetch('http://127.0.0.1:8000/pages/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
+    .then(data => data.json())
+    .then(resp => {this.setState({pages: {...resp}})})
   }
 
   componentDidMount = () => {sessionStorage.clear()}
@@ -77,7 +84,6 @@ export default class Contents extends React.Component{
   render(){
     return(
       <>
-      {console.log(this.state.booksList)}
         <Router>
           <Switch>
             <Route exact path='/' render={(routerProps) => 
@@ -107,6 +113,8 @@ export default class Contents extends React.Component{
                 setResults={this.setResults}
                 setSelectedBook={this.setSelectedBook}
                 fetchBooks={this.fetchBooks}
+                pages={this.state.pages}
+                fetchPages={this.fetchPages}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -141,6 +149,8 @@ export default class Contents extends React.Component{
                 currentUser={this.state.currentUser}
                 fetchBooks={this.fetchBooks}
                 closeModal={this.closeModal}
+                pages={this.state.pages}
+                fetchPages={this.fetchPages}
               />
               :
               null

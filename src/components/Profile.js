@@ -5,11 +5,15 @@ import ProfileBookCard from './ProfileBookCard';
 export default class Profile extends React.Component{
  
   componentDidMount = () => {
-    this.props.fetchBooks()
+    this.props.fetchBooks();
+    this.props.fetchPages();
   }
 
   componentDidUpdate = (prevProps) => {
-    if(prevProps.modalIsOpen !== this.props.modalIsOpen){this.props.fetchBooks()}
+    if(prevProps.modalIsOpen !== this.props.modalIsOpen){
+      this.props.fetchBooks();
+      this.props.fetchPages();
+    }
   }
 
   render(){
