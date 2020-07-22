@@ -67,6 +67,7 @@ export default class ProfileBookDetails extends React.Component{
               width={300} 
               height={300}
               xType="time"
+              xDomain={[this.props.pages.pages[0], this.props.pages.pages[this.props.pages.pages.length-1]]}
             >
               <HorizontalGridLines />
               <VerticalGridLines />
