@@ -16,3 +16,4 @@ Django REST Framework
 [] Overall profile analytics     
 [] Analytics per saved books   
 [] Visual confirmations (saved books, updated pages read, etc)      
+[] Landing page     
