@@ -208,5 +208,18 @@ html, body, .App, #root {
 }
 
 .profileDetails-analytics{
-  height: 55%;
+  height: 45%;
+  display: flex;
+  justify-content: center;
+}
+
+.profileDetails-pages{
+  height: 50%;
+}
+
+.rv-xy-plot__inner{
+  margin: auto;
+  top: 50%;  
+  height: 100%;
+  width: 100%;
 }

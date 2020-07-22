@@ -64,14 +64,21 @@ export default class ProfileBookDetails extends React.Component{
           <div className='profileDetails-analytics'>
             <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
             <XYPlot 
-              width={300} 
-              height={300}
+              width={500} 
+              height={250}
               xType="time"
-              xDomain={[this.props.pages.pages[0], this.props.pages.pages[this.props.pages.pages.length-1]]}
+              xDomain={[new Date(this.props.pages.pages[0].dateRead), new Date(this.props.pages.pages[this.props.pages.pages.length-1].dateRead)]}
             >
               <HorizontalGridLines />
               <VerticalGridLines />
-              <XAxis />
+              <XAxis 
+                tickTotal={
+                  this.props.pages.pages.length < 10 ?
+                    this.props.pages.pages.length
+                    :
+                    10
+                }
+              />
               <YAxis />
               <LineSeries
                 data={
@@ -83,11 +90,10 @@ export default class ProfileBookDetails extends React.Component{
             </XYPlot>
           </div>
           <div className='profileDetails-pages'>
-            <h1>Progress</h1>
-            <p>Pages Read: {this.props.pages.pages !== null ?
+            <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null ?
                 this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
                 :
-                null} / {this.props.selectedBook.totalPages}</p>
+                null} / {this.props.selectedBook.totalPages}</h2>
             <form
               onSubmit={this.createPages}
             >
@@ -115,7 +121,7 @@ export default class ProfileBookDetails extends React.Component{
               >
               </input>
             </form>
-            <button onClick={this.deleteBook}>Delete</button>
+            <button onClick={this.deleteBook} className='submitBtn' >Delete</button>
           </div>
         </div>
       </div>
