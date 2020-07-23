@@ -44,16 +44,16 @@ export default class Contents extends React.Component{
 
   state = defState
 
-  fetchBooks= () => {
-    fetch('http://127.0.0.1:8000/books/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
-    .then(data => data.json())
-    .then(resp => {this.setState({booksList: {...resp}})})
+  fetchBooks = async () => {
+    const resp = await fetch('http://127.0.0.1:8000/books/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
+    const json = await resp.json()
+    this.setState({booksList: {...json}})
   }
 
-  fetchPages= () => {
-    fetch('http://127.0.0.1:8000/pages/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
-    .then(data => data.json())
-    .then(resp => {this.setState({pages: {...resp}})})
+  fetchPages = async () => {
+    const resp = await fetch('http://127.0.0.1:8000/pages/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
+    const json = await resp.json()
+    this.setState({pages: {...json}})
   }
 
   componentDidMount = () => {sessionStorage.clear()}

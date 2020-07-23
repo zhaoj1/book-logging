@@ -13,6 +13,12 @@ export default class ProfileBookDetails extends React.Component{
     this.updateData()
   }
 
+  componentDidUpdate = (prevProps) => {
+    if(prevProps.pages !== this.props.pages){
+      this.updateData()
+    }
+  }
+
   updateData = () => {
     let date = new Date()
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
@@ -44,9 +50,10 @@ export default class ProfileBookDetails extends React.Component{
 
   handleChange = (event) => {this.setState({[event.target.name]: event.target.value})}
 
-  createPages = (event) => {
+  createPages = async (event) => {
     event.preventDefault()
 
+    const resp = await 
     fetch(`http://127.0.0.1:8000/pages/`, {
       method: 'POST',
       headers: {
@@ -61,7 +68,11 @@ export default class ProfileBookDetails extends React.Component{
         owner: this.props.currentUser.id,
         username: this.props.currentUser.username,
       })
-    }).then(this.props.fetchPages())
+    })
+    if(resp.ok){
+      this.props.fetchPages();
+      this.calculateAnalytics();
+    }
   }
 
   deleteBook = () => {
@@ -96,6 +107,7 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
+          {console.log(this.props.selectedBook)}
           <div className='profileDetails-analytics'>
             <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
             <XYPlot 
