@@ -5,7 +5,41 @@ export default class ProfileBookDetails extends React.Component{
 
   state = {
     pagesRead: 0,
-    dateRead: null
+    dateRead: null,
+    analyticsData: null
+  }
+
+  componentDidMount = () => {
+    this.updateData()
+  }
+
+  updateData = () => {
+    let date = new Date()
+    this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
+      this.setState({ analyticsData : [{
+        x : date,
+        y : 0
+      }]})
+      :
+      this.calculateAnalytics()
+  }
+
+  calculateAnalytics = () => {
+    let dataSet = {};
+    let analyticsData = [];
+    this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
+      dataSet[ele.dateRead] ?
+        dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
+        :
+        dataSet[ele.dateRead] = ele.pagesRead
+    })
+    Object.keys(dataSet).map(key => {
+      let data = {}
+      data['x'] = new Date(key)
+      data['y'] = dataSet[key]
+      analyticsData.push(data)
+    })
+    this.setState({analyticsData : analyticsData})
   }
 
   handleChange = (event) => {this.setState({[event.target.name]: event.target.value})}
@@ -27,7 +61,7 @@ export default class ProfileBookDetails extends React.Component{
         owner: this.props.currentUser.id,
         username: this.props.currentUser.username,
       })
-    })
+    }).then(this.props.fetchPages())
   }
 
   deleteBook = () => {
@@ -40,6 +74,7 @@ export default class ProfileBookDetails extends React.Component{
   render(){
     return(
       <div className='bookDetails'>
+        {console.log(this.state.analyticsData)}
         <div className='bookDetails-left'>
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
@@ -82,9 +117,10 @@ export default class ProfileBookDetails extends React.Component{
               <YAxis />
               <LineSeries
                 data={
-                  this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
-                    return {x: new Date(ele.dateRead), y: ele.pagesRead}
-                  })
+                  // this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
+                  //   return {x: new Date(ele.dateRead), y: ele.pagesRead}
+                  // })
+                  this.state.analyticsData
                 }
               />
             </XYPlot>
