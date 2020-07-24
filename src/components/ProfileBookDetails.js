@@ -6,7 +6,8 @@ export default class ProfileBookDetails extends React.Component{
   state = {
     pagesRead: 0,
     dateRead: null,
-    analyticsData: null
+    analyticsData: null,
+    dateRange: []
   }
 
   componentDidMount = () => {
@@ -22,10 +23,16 @@ export default class ProfileBookDetails extends React.Component{
   updateData = () => {
     let date = new Date()
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
-      this.setState({ analyticsData : [{
-        x : date,
-        y : 0
-      }]})
+      this.setState({ 
+        analyticsData : [{
+          x : date,
+          y : 0
+        }],
+        dateRange : [
+          date,
+          date.setDate(date.getDate() + 7)
+        ] 
+      })
       :
       this.calculateAnalytics()
   }
@@ -45,7 +52,13 @@ export default class ProfileBookDetails extends React.Component{
       data['y'] = dataSet[key]
       analyticsData.push(data)
     })
-    this.setState({analyticsData : analyticsData})
+    this.setState({
+      analyticsData : analyticsData,
+      dateRange: [
+        new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00'), 
+        new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
+      ]
+    })
   }
 
   handleChange = (event) => {this.setState({[event.target.name]: event.target.value})}
@@ -85,8 +98,8 @@ export default class ProfileBookDetails extends React.Component{
   render(){
     return(
       <div className='bookDetails'>
-        {console.log(this.state.analyticsData)}
         <div className='bookDetails-left'>
+          {console.log(this.state.dateRange)}
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
             <label className='bookTitle'>
@@ -107,14 +120,16 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
-          {console.log(this.props.selectedBook)}
           <div className='profileDetails-analytics'>
             <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
             <XYPlot 
               width={500} 
               height={250}
               xType="time"
-              xDomain={[new Date(this.props.pages.pages[0].dateRead), new Date(this.props.pages.pages[this.props.pages.pages.length-1].dateRead)]}
+              xDomain={
+                // [new Date(this.props.pages.pages[0].dateRead), new Date(this.props.pages.pages[this.props.pages.pages.length-1].dateRead)]
+                this.state.dateRange
+              }
             >
               <HorizontalGridLines />
               <VerticalGridLines />
@@ -128,12 +143,7 @@ export default class ProfileBookDetails extends React.Component{
               />
               <YAxis />
               <LineSeries
-                data={
-                  // this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
-                  //   return {x: new Date(ele.dateRead), y: ele.pagesRead}
-                  // })
-                  this.state.analyticsData
-                }
+                data={this.state.analyticsData}
               />
             </XYPlot>
           </div>
