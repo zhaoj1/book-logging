@@ -1,5 +1,6 @@
 import React from 'react';
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries} from 'react-vis';
+import moment from 'moment';
 
 export default class ProfileBookDetails extends React.Component{
 
@@ -40,6 +41,8 @@ export default class ProfileBookDetails extends React.Component{
   calculateAnalytics = () => {
     let dataSet = {};
     let analyticsData = [];
+    let dateRange = []
+    let beginDate = new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00')
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
       dataSet[ele.dateRead] ?
         dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
@@ -52,12 +55,19 @@ export default class ProfileBookDetails extends React.Component{
       data['y'] = dataSet[key]
       analyticsData.push(data)
     })
-    this.setState({
-      analyticsData : analyticsData,
-      dateRange: [
-        new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00'), 
+    analyticsData.length <= 7 ?
+      dateRange = [
+        new Date(beginDate),
+        new Date(beginDate.setDate(beginDate.getDate() + 7))
+      ]
+      :
+      dateRange = [
+        new Date(beginDate), 
         new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
       ]
+    this.setState({
+      analyticsData : analyticsData,
+      dateRange: dateRange
     })
   }
 
@@ -126,20 +136,19 @@ export default class ProfileBookDetails extends React.Component{
               width={500} 
               height={250}
               xType="time"
-              xDomain={
-                // [new Date(this.props.pages.pages[0].dateRead), new Date(this.props.pages.pages[this.props.pages.pages.length-1].dateRead)]
-                this.state.dateRange
-              }
+              xDomain={this.state.dateRange}
             >
               <HorizontalGridLines />
               <VerticalGridLines />
               <XAxis 
                 tickTotal={
-                  this.props.pages.pages.length < 10 ?
-                    this.props.pages.pages.length
-                    :
-                    10
+                  // this.props.pages.pages.length < 10 ?
+                  //   this.props.pages.pages.length
+                  //   :
+                  //   10
+                  6
                 }
+                tickFormat={value => moment(value).format('MMM DD')}
               />
               <YAxis />
               <LineSeries
