@@ -8,7 +8,8 @@ export default class ProfileBookDetails extends React.Component{
     pagesRead: 0,
     dateRead: null,
     analyticsData: null,
-    dateRange: []
+    dateRange: [],
+    yRange: []
   }
 
   componentDidMount = () => {
@@ -51,23 +52,32 @@ export default class ProfileBookDetails extends React.Component{
     })
     Object.keys(dataSet).map(key => {
       let data = {}
-      data['x'] = new Date(key)
+      data['x'] = new Date(key + ' 00:00')
       data['y'] = dataSet[key]
       analyticsData.push(data)
     })
+    let origin = new Date(beginDate)
+    let originDate = origin.setDate(origin.getDate() - 1)
+    console.log(origin, originDate)
+    analyticsData.unshift({
+      x : new Date(originDate),
+      y : 0
+    })
+    console.log(analyticsData)
     analyticsData.length <= 7 ?
       dateRange = [
-        new Date(beginDate),
+        new Date(originDate),
         new Date(beginDate.setDate(beginDate.getDate() + 7))
       ]
       :
       dateRange = [
-        new Date(beginDate), 
+        new Date(originDate), 
         new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
       ]
     this.setState({
       analyticsData : analyticsData,
-      dateRange: dateRange
+      dateRange: dateRange,
+      yRange: [0, Math.max(...analyticsData.map(ele => ele.y)) + 1]
     })
   }
 
@@ -109,7 +119,6 @@ export default class ProfileBookDetails extends React.Component{
     return(
       <div className='bookDetails'>
         <div className='bookDetails-left'>
-          {console.log(this.state.dateRange)}
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
             <label className='bookTitle'>
@@ -137,17 +146,13 @@ export default class ProfileBookDetails extends React.Component{
               height={250}
               xType="time"
               xDomain={this.state.dateRange}
+              yDomain={this.state.yRange}
+              margin={{right:20}}
             >
               <HorizontalGridLines />
               <VerticalGridLines />
               <XAxis 
-                tickTotal={
-                  // this.props.pages.pages.length < 10 ?
-                  //   this.props.pages.pages.length
-                  //   :
-                  //   10
-                  6
-                }
+                tickTotal={5}
                 tickFormat={value => moment(value).format('MMM DD')}
               />
               <YAxis />

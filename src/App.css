@@ -217,6 +217,8 @@ html, body, .App, #root {
   height: 50%;
 }
 
+/* ------------------------------- chart --------------------------------------- */
+
 .rv-xy-plot__inner{
   margin: auto;
   top: 50%;  
