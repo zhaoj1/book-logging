@@ -79,22 +79,22 @@ export default class ProfileBookDetails extends React.Component{
         new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
       ]
 
-    // var i = dateRange[0]
-    // dateLabels.push(dateRange[0])
-    // while(i < dateRange[1]){
-    //   let date = dateRange[0]
-    //   let nextDate = date.setDate(date.getDate() + Math.round((dateRange[1] - dateRange[0]) / (1000 * 60 * 60 * 24)))
-    //   // dateLabels.push(nextDate)
-    //   console.log(date)
-    //   console.log(new Date(nextDate))
-    // }
-
-    // console.log(dateLabels)
+    var i = new Date(originDate).getTime()
+    console.log(i)
+    dateLabels.push(dateRange[0])
+    let labelDiff = Math.round((dateRange[1] - dateRange[0]) / 7)
+    while(i < dateRange[1].getTime()){
+      let nextDate = new Date(i)
+      nextDate.setDate(new Date(i).getDate() + labelDiff / (1000 * 60 * 60 * 24))
+      dateLabels.push(nextDate)
+      i += labelDiff
+    }
 
     this.setState({
       analyticsData : analyticsData,
       dateRange: dateRange,
-      yRange: [0, Math.max(...analyticsData.map(ele => ele.y)) + 1]
+      yRange: [0, Math.max(...analyticsData.map(ele => ele.y)) + 1],
+      dateLabels: dateLabels
     })
   }
 
@@ -171,6 +171,7 @@ export default class ProfileBookDetails extends React.Component{
               <XAxis 
                 tickTotal={7}
                 tickFormat={value => moment(value).format('MMM DD')}
+                tickValues={this.state.dateLabels}
               />
               <YAxis />
               <LineSeries
