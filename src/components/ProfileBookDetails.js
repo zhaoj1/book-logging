@@ -9,7 +9,8 @@ export default class ProfileBookDetails extends React.Component{
     dateRead: null,
     analyticsData: null,
     dateRange: [],
-    yRange: []
+    yRange: [],
+    dateLabels: []
   }
 
   componentDidMount = () => {
@@ -44,26 +45,29 @@ export default class ProfileBookDetails extends React.Component{
     let analyticsData = [];
     let dateRange = []
     let beginDate = new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00')
+    let origin = new Date(beginDate)
+    let originDate = origin.setDate(origin.getDate() - 1)
+    let dateLabels = []
+
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
       dataSet[ele.dateRead] ?
         dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
         :
         dataSet[ele.dateRead] = ele.pagesRead
     })
+
     Object.keys(dataSet).map(key => {
       let data = {}
       data['x'] = new Date(key + ' 00:00')
       data['y'] = dataSet[key]
       analyticsData.push(data)
     })
-    let origin = new Date(beginDate)
-    let originDate = origin.setDate(origin.getDate() - 1)
-    console.log(origin, originDate)
+    
     analyticsData.unshift({
       x : new Date(originDate),
       y : 0
     })
-    console.log(analyticsData)
+
     analyticsData.length <= 7 ?
       dateRange = [
         new Date(originDate),
@@ -74,6 +78,19 @@ export default class ProfileBookDetails extends React.Component{
         new Date(originDate), 
         new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
       ]
+
+    // var i = dateRange[0]
+    // dateLabels.push(dateRange[0])
+    // while(i < dateRange[1]){
+    //   let date = dateRange[0]
+    //   let nextDate = date.setDate(date.getDate() + Math.round((dateRange[1] - dateRange[0]) / (1000 * 60 * 60 * 24)))
+    //   // dateLabels.push(nextDate)
+    //   console.log(date)
+    //   console.log(new Date(nextDate))
+    // }
+
+    // console.log(dateLabels)
+
     this.setState({
       analyticsData : analyticsData,
       dateRange: dateRange,
@@ -152,7 +169,7 @@ export default class ProfileBookDetails extends React.Component{
               <HorizontalGridLines />
               <VerticalGridLines />
               <XAxis 
-                tickTotal={5}
+                tickTotal={7}
                 tickFormat={value => moment(value).format('MMM DD')}
               />
               <YAxis />
