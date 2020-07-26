@@ -29,12 +29,28 @@ function BookCard(props){
               :
               props.ele.volumeInfo.authors.map(auth => <label className='bookAuthor'>{auth}<br></br></label>)
             }
-            <label className='bookISBN'>
-              ISBN10: {props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier}
-            </label><br></br>
-            <label className='bookISBN'>
-              ISBN13: {props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier}
-            </label>
+            {props.ele.volumeInfo.industryIdentifiers == undefined ? 
+              null
+              :
+              <>
+                <label className='bookISBN'>
+                  ISBN10: {
+                    props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10') == undefined ? 
+                      'N/A'
+                      :
+                      props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier
+                  }
+                </label><br></br>
+                <label className='bookISBN'>
+                  ISBN13: {
+                    props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13') == undefined ?
+                      'N/A'
+                      :
+                      props.ele.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier
+                  }
+                </label>
+              </>
+            }
           </div>
         </div>
         :

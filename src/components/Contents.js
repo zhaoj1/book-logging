@@ -9,6 +9,7 @@ import Profile from './Profile';
 import Results from './Results';
 import BookDetails from './BookDetails';
 import ProfileBookDetails from './ProfileBookDetails';
+import Confirmation from './Confirmation';
 
 const modalStyle = {
   overlay : {
@@ -148,6 +149,7 @@ export default class Contents extends React.Component{
               currentUser={this.state.currentUser}
               fetchBooks={this.fetchBooks}
               closeModal={this.closeModal}
+              confirmationPopup={this.confirmationPopup}
             />
             :
             this.state.modalType == 'profile' ?
@@ -161,8 +163,9 @@ export default class Contents extends React.Component{
               />
               :
               this.state.modalType == 'confirmation' ?
-                <>
-                </>
+                <Confirmation 
+                  closeModal={this.closeModal}
+                />
                 :
                 null
           }

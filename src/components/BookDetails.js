@@ -28,7 +28,7 @@ export default class BookDetails extends React.Component{
         pagesRead: 0,
         totalPages: this.props.selectedBook.volumeInfo.pageCount
       })
-    }).then(this.props.fetchBooks())
+    }).then(this.props.fetchBooks()).then(this.props.confirmationPopup())
   }
 
   render(){
@@ -46,21 +46,48 @@ export default class BookDetails extends React.Component{
               }
             </label><br></br>
             {this.props.selectedBook.volumeInfo.authors == undefined ?
-              null
+              'N/A'
               : 
               this.props.selectedBook.volumeInfo.authors.map(auth => <label className='bookAuthor'>{auth}<br></br></label>)
             }
-            {this.props.selectedBook.volumeInfo.industryIdentifiers.map(identifier =>
-              <>
-                <label className='bookISBN'>{identifier.type}: {identifier.identifier}</label><br></br>
-              </>
-            )}
+            {this.props.selectedBook.volumeInfo.industryIdentifiers == undefined ? 
+              'N/A'
+              :
+              this.props.selectedBook.volumeInfo.industryIdentifiers.map(identifier =>
+                identifier == undefined ? 
+                  'N/A'
+                  :
+                  <>
+                    <label className='bookISBN'>{identifier.type}: {identifier.identifier}</label><br></br>
+                  </>
+              )
+            }
           </div>
         </div>
         <div className='bookDetails-right'>
-          Rating: {this.props.selectedBook.volumeInfo.averageRating} ({this.props.selectedBook.volumeInfo.ratingsCount} ratings)<br></br><br></br>
-          Publisher: {this.props.selectedBook.volumeInfo.publisher}<br></br><br></br>
-          Description:<br></br>{this.props.selectedBook.volumeInfo.description}<br></br><br></br>
+          Rating: {
+            this.props.selectedBook.volumeInfo.averageRating == undefined ? 
+              0
+              :
+              this.props.selectedBook.volumeInfo.averageRating
+          } ({
+            this.props.selectedBook.volumeInfo.ratingsCount == undefined ?
+              0
+              :
+              this.props.selectedBook.volumeInfo.ratingsCount
+          } ratings)<br></br><br></br>
+          Publisher: {
+          this.props.selectedBook.volumeInfo.publisher == undefined ?
+            'N/A'
+            :
+            this.props.selectedBook.volumeInfo.publisher
+          }<br></br><br></br>
+          Description:<br></br>{
+            this.props.selectedBook.volumeInfo.description == undefined ? 
+              'N/A'
+              :
+              this.props.selectedBook.volumeInfo.description
+          }<br></br><br></br>
           Page Count: {this.props.selectedBook.volumeInfo.pageCount}<br></br>
           Category: {this.props.selectedBook.volumeInfo.mainCategory}
           {this.props.selectedBook.volumeInfo.categories.map(category => category).join(' ,')}<br></br>

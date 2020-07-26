@@ -25,6 +25,7 @@ export default class Search extends React.Component{
     event.preventDefault();
     const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.queryParams}&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
     const json = await resp.json()
+    console.log(json)
     this.props.setResults(json)
     this.setState({searched: true})
   }
