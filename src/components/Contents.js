@@ -74,6 +74,13 @@ export default class Contents extends React.Component{
     })
   }
 
+  confirmationPopup = () => {
+    this.setState({
+      modalIsOpen: true,
+      modalType: 'confirmation'
+    })
+  }
+
   closeModal = () => {
     this.setState({
       modalIsOpen: false,
@@ -153,7 +160,11 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchPages}
               />
               :
-              null
+              this.state.modalType == 'confirmation' ?
+                <>
+                </>
+                :
+                null
           }
           
         </Modal>
