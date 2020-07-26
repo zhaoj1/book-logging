@@ -14,7 +14,7 @@ Django REST Framework
 
 [] Visual confirmations (saved books, updated pages read, etc)     
 [] Landing page     
-[] Visual for completion of saved book
+[] Visual for completion of saved book    
 [X] Analytics per saved books   
 [] Overall profile analytics     
 [] Styling + CSS    
