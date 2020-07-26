@@ -12,8 +12,9 @@ Django REST Framework
 
 ### To Do List
 
-[] Styling + CSS    
-[] Overall profile analytics     
-[X] Analytics per saved books   
-[] Visual confirmations (saved books, updated pages read, etc)      
+[] Visual confirmations (saved books, updated pages read, etc)     
 [] Landing page     
+[] Visual for completion of saved book
+[X] Analytics per saved books   
+[] Overall profile analytics     
+[] Styling + CSS    
