@@ -7,7 +7,7 @@ export default class ProfileBookDetails extends React.Component{
   state = {
     pagesRead: 0,
     dateRead: null,
-    analyticsData: null,
+    analyticsData: [],
     dateRange: [],
     yRange: [],
     dateLabels: []
@@ -32,7 +32,11 @@ export default class ProfileBookDetails extends React.Component{
         dateRange : [
           begDate,
           endDate
-        ] 
+        ],
+        dateLabels: [
+          begDate,
+          endDate
+        ]
       })
       :
       this.calculateAnalytics()
@@ -77,17 +81,8 @@ export default class ProfileBookDetails extends React.Component{
         new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
       ]
 
-      if(analyticsData.length <= 7){
-        var i = 1
-        dateLabels.push(dateRange[0])
-        while(i <= 7){
-          let nextDate = new Date(dateLabels[dateLabels.length - 1])
-          nextDate.setDate(new Date(dateLabels[dateLabels.length - 1]).getDate() + 1)
-          dateLabels.push(nextDate)
-          i++
-        }
-        console.log(dateLabels)
-      } else {
+// ---------------------------------------------------------------------------------------------------- //
+      if(analyticsData.length > 7){
         var i = new Date(originDate).getTime()
         dateLabels.push(dateRange[0])
         let labelDiff = Math.round((dateRange[1] - dateRange[0]) / 7)
@@ -97,9 +92,10 @@ export default class ProfileBookDetails extends React.Component{
           dateLabels.push(nextDate)
           i += labelDiff
         }
-        console.log(dateLabels)
       }
-      
+
+// ---------------------------------------------------------------------------------------------------- //
+
     this.setState({
       analyticsData : analyticsData,
       dateRange: dateRange,
@@ -148,6 +144,7 @@ export default class ProfileBookDetails extends React.Component{
         <div className='bookDetails-left'>
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
+            {console.log(this.state.analyticsData)}
             <label className='bookTitle'>
               {
                 this.props.selectedBook.title.length >= 25 ? 
@@ -179,9 +176,8 @@ export default class ProfileBookDetails extends React.Component{
               <HorizontalGridLines />
               <VerticalGridLines />
               <XAxis 
-                tickTotal={7}
                 tickFormat={value => moment(value).format('MMM DD')}
-                tickValues={this.state.dateLabels}
+                tickValues={[new Date(), new Date()]}
               />
               <YAxis />
               <LineSeries
