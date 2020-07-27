@@ -13,10 +13,6 @@ export default class ProfileBookDetails extends React.Component{
     dateLabels: []
   }
 
-  componentDidMount = () => {
-    this.updateData()
-  }
-
   componentDidUpdate = (prevProps) => {
     if(prevProps.pages !== this.props.pages){
       this.updateData()
@@ -24,16 +20,18 @@ export default class ProfileBookDetails extends React.Component{
   }
 
   updateData = () => {
-    let date = new Date()
+    let begDate = new Date()
+    let endDate = new Date()
+    endDate.setDate(endDate.getDate() + 7)
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
       this.setState({ 
         analyticsData : [{
-          x : date,
+          x : begDate,
           y : 0
         }],
         dateRange : [
-          date,
-          date.setDate(date.getDate() + 7)
+          begDate,
+          endDate
         ] 
       })
       :
@@ -79,17 +77,29 @@ export default class ProfileBookDetails extends React.Component{
         new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
       ]
 
-    var i = new Date(originDate).getTime()
-    console.log(i)
-    dateLabels.push(dateRange[0])
-    let labelDiff = Math.round((dateRange[1] - dateRange[0]) / 7)
-    while(i < dateRange[1].getTime()){
-      let nextDate = new Date(i)
-      nextDate.setDate(new Date(i).getDate() + labelDiff / (1000 * 60 * 60 * 24))
-      dateLabels.push(nextDate)
-      i += labelDiff
-    }
-
+      if(analyticsData.length <= 7){
+        var i = 1
+        dateLabels.push(dateRange[0])
+        while(i <= 7){
+          let nextDate = new Date(dateLabels[dateLabels.length - 1])
+          nextDate.setDate(new Date(dateLabels[dateLabels.length - 1]).getDate() + 1)
+          dateLabels.push(nextDate)
+          i++
+        }
+        console.log(dateLabels)
+      } else {
+        var i = new Date(originDate).getTime()
+        dateLabels.push(dateRange[0])
+        let labelDiff = Math.round((dateRange[1] - dateRange[0]) / 7)
+        while(i < dateRange[1].getTime()){
+          let nextDate = new Date(i)
+          nextDate.setDate(new Date(i).getDate() + labelDiff / (1000 * 60 * 60 * 24))
+          dateLabels.push(nextDate)
+          i += labelDiff
+        }
+        console.log(dateLabels)
+      }
+      
     this.setState({
       analyticsData : analyticsData,
       dateRange: dateRange,

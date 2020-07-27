@@ -4,8 +4,8 @@ export default class BookDetails extends React.Component{
 
   saveBook = () => {
     var authors = this.props.selectedBook.volumeInfo.authors == undefined ? '' : this.props.selectedBook.volumeInfo.authors.toString()
-    var isbn10 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier
-    var isbn13 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier
+    var isbn10 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined || !this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10') ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier
+    var isbn13 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined || !this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13') ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier
     var mainCategory = this.props.selectedBook.volumeInfo.mainCategory == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.mainCategory.toString()
     var categories = this.props.selectedBook.volumeInfo.categories == undefined ? '' : this.props.selectedBook.volumeInfo.categories.toString()
 
