@@ -25,10 +25,10 @@ export default class ProfileBookDetails extends React.Component{
     endDate.setDate(endDate.getDate() + 7)
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
       this.setState({ 
-        analyticsData : [{
-          x : begDate,
-          y : 0
-        }],
+        // analyticsData : [{
+        //   x : begDate,
+        //   y : 0
+        // }],
         dateRange : [
           begDate,
           endDate
@@ -144,7 +144,6 @@ export default class ProfileBookDetails extends React.Component{
         <div className='bookDetails-left'>
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
-            {console.log(this.state.analyticsData)}
             <label className='bookTitle'>
               {
                 this.props.selectedBook.title.length >= 25 ? 
@@ -165,6 +164,7 @@ export default class ProfileBookDetails extends React.Component{
         <div className='bookDetails-right'>
           <div className='profileDetails-analytics'>
             <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
+            
             <XYPlot 
               width={500} 
               height={250}
@@ -177,7 +177,7 @@ export default class ProfileBookDetails extends React.Component{
               <VerticalGridLines />
               <XAxis 
                 tickFormat={value => moment(value).format('MMM DD')}
-                tickValues={[new Date(), new Date()]}
+                tickValues={this.state.dateLabels}
               />
               <YAxis />
               <LineSeries
