@@ -45,11 +45,14 @@ export default class ProfileBookDetails extends React.Component{
   calculateAnalytics = () => {
     let dataSet = {};
     let analyticsData = [];
-    let dateRange = []
     let beginDate = new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00')
     let origin = new Date(beginDate)
     let originDate = origin.setDate(origin.getDate() - 1)
     let dateLabels = []
+    let dateRange = [
+      new Date(originDate),
+      new Date(beginDate.setDate(beginDate.getDate() + 7))
+    ]
 
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
       dataSet[ele.dateRead] ?
@@ -70,31 +73,21 @@ export default class ProfileBookDetails extends React.Component{
       y : 0
     })
 
-    analyticsData.length <= 7 ?
-      dateRange = [
-        new Date(originDate),
-        new Date(beginDate.setDate(beginDate.getDate() + 7))
-      ]
-      :
+    if(analyticsData[analyticsData.length-1].x.getTime() < dateRange[0].getTime() || analyticsData[analyticsData.length-1].x.getTime() > dateRange[1].getTime()){
+      var i = new Date(originDate).getTime()
+      dateLabels.push(dateRange[0])
+      let labelDiff = Math.round((dateRange[1] - dateRange[0]) / 7)
+      while(i < dateRange[1].getTime()){
+        let nextDate = new Date(i)
+        nextDate.setDate(new Date(i).getDate() + labelDiff / (1000 * 60 * 60 * 24))
+        dateLabels.push(nextDate)
+        i += labelDiff
+      }
       dateRange = [
         new Date(originDate), 
         new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
       ]
-
-// ---------------------------------------------------------------------------------------------------- //
-      if(analyticsData.length > 7){
-        var i = new Date(originDate).getTime()
-        dateLabels.push(dateRange[0])
-        let labelDiff = Math.round((dateRange[1] - dateRange[0]) / 7)
-        while(i < dateRange[1].getTime()){
-          let nextDate = new Date(i)
-          nextDate.setDate(new Date(i).getDate() + labelDiff / (1000 * 60 * 60 * 24))
-          dateLabels.push(nextDate)
-          i += labelDiff
-        }
-      }
-
-// ---------------------------------------------------------------------------------------------------- //
+    }
 
     this.setState({
       analyticsData : analyticsData,
@@ -142,6 +135,7 @@ export default class ProfileBookDetails extends React.Component{
     return(
       <div className='bookDetails'>
         <div className='bookDetails-left'>
+          {console.log(this.state.dateLabels)}
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
             <label className='bookTitle'>
@@ -177,7 +171,12 @@ export default class ProfileBookDetails extends React.Component{
               <VerticalGridLines />
               <XAxis 
                 tickFormat={value => moment(value).format('MMM DD')}
-                tickValues={this.state.dateLabels}
+                tickValues={
+                  this.state.dateLabels.length == 0 ?
+                    null
+                    :
+                    this.state.dateLabels
+                }
               />
               <YAxis />
               <LineSeries
