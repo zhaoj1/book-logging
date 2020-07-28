@@ -76,16 +76,21 @@ export default class ProfileBookDetails extends React.Component{
     if(analyticsData[analyticsData.length-1].x.getTime() < dateRange[0].getTime() || analyticsData[analyticsData.length-1].x.getTime() > dateRange[1].getTime()){
       var i = new Date(originDate).getTime()
       dateLabels.push(dateRange[0])
-      let labelDiff = Math.round((dateRange[1] - dateRange[0]) / 7)
+      let labelDiff = Math.round((dateRange[1] - analyticsData[analyticsData.length-1].x) / (7 * 1000 * 60 * 60 * 24))
+      console.log(dateRange)
+      console.log(labelDiff)
       while(i < dateRange[1].getTime()){
         let nextDate = new Date(i)
-        nextDate.setDate(new Date(i).getDate() + labelDiff / (1000 * 60 * 60 * 24))
+        nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
         dateLabels.push(nextDate)
-        i += labelDiff
+        i = nextDate
       }
+
+      console.log(dateLabels)
+      
       dateRange = [
         new Date(originDate), 
-        new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length-1].dateRead + ' 00:00')
+        dateLabels[dateLabels.length-1]
       ]
     }
 
@@ -135,7 +140,6 @@ export default class ProfileBookDetails extends React.Component{
     return(
       <div className='bookDetails'>
         <div className='bookDetails-left'>
-          {console.log(this.state.dateLabels)}
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
             <label className='bookTitle'>
@@ -170,7 +174,7 @@ export default class ProfileBookDetails extends React.Component{
               <HorizontalGridLines />
               <VerticalGridLines />
               <XAxis 
-                tickFormat={value => moment(value).format('MMM DD')}
+                tickFormat={value => moment(value).format('MM/DD')}
                 tickValues={
                   this.state.dateLabels.length == 0 ?
                     null
