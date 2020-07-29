@@ -75,23 +75,19 @@ export default class ProfileBookDetails extends React.Component{
 
     if(analyticsData[analyticsData.length-1].x.getTime() < dateRange[0].getTime() || analyticsData[analyticsData.length-1].x.getTime() > dateRange[1].getTime()){
       var i = new Date(originDate).getTime()
+      dateRange = [
+        new Date(originDate),
+        new Date(analyticsData[analyticsData.length-1].x)
+      ]
+
       dateLabels.push(dateRange[0])
-      let labelDiff = Math.round((dateRange[1] - analyticsData[analyticsData.length-1].x) / (7 * 1000 * 60 * 60 * 24))
-      console.log(dateRange)
-      console.log(labelDiff)
+      let labelDiff = Math.round((dateRange[1] - dateRange[0]) / (7 * 1000 * 60 * 60 * 24))
       while(i < dateRange[1].getTime()){
         let nextDate = new Date(i)
         nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
         dateLabels.push(nextDate)
         i = nextDate
       }
-
-      console.log(dateLabels)
-      
-      dateRange = [
-        new Date(originDate), 
-        dateLabels[dateLabels.length-1]
-      ]
     }
 
     this.setState({
@@ -162,7 +158,6 @@ export default class ProfileBookDetails extends React.Component{
         <div className='bookDetails-right'>
           <div className='profileDetails-analytics'>
             <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
-            
             <XYPlot 
               width={500} 
               height={250}
@@ -184,6 +179,7 @@ export default class ProfileBookDetails extends React.Component{
               />
               <YAxis />
               <LineSeries
+                animation
                 data={this.state.analyticsData}
               />
             </XYPlot>
