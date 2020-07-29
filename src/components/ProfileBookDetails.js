@@ -25,10 +25,6 @@ export default class ProfileBookDetails extends React.Component{
     endDate.setDate(endDate.getDate() + 7)
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
       this.setState({ 
-        // analyticsData : [{
-        //   x : begDate,
-        //   y : 0
-        // }],
         dateRange : [
           begDate,
           endDate
