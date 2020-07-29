@@ -10,7 +10,8 @@ export default class ProfileBookDetails extends React.Component{
     analyticsData: [],
     dateRange: [],
     yRange: [],
-    dateLabels: []
+    dateLabels: [],
+    chartView: true
   }
 
   componentDidUpdate = (prevProps) => {
@@ -128,6 +129,8 @@ export default class ProfileBookDetails extends React.Component{
     }).then(this.props.closeModal()).then(this.props.fetchBooks())
   }
 
+  toggleChart = () => {this.setState({chartView: !this.state.chartView})}
+
   render(){
     return(
       <div className='bookDetails'>
@@ -152,33 +155,38 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
-          <div className='profileDetails-analytics'>
-            <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
-            <XYPlot 
-              width={500} 
-              height={250}
-              xType="time"
-              xDomain={this.state.dateRange}
-              yDomain={this.state.yRange}
-              margin={{right:20}}
-            >
-              <HorizontalGridLines />
-              <VerticalGridLines />
-              <XAxis 
-                tickFormat={value => moment(value).format('MM/DD')}
-                tickValues={
-                  this.state.dateLabels.length == 0 ?
-                    null
-                    :
-                    this.state.dateLabels
-                }
-              />
-              <YAxis />
-              <LineSeries
-                animation
-                data={this.state.analyticsData}
-              />
-            </XYPlot>
+          <div className='profileDetails-analytics' onClick={this.toggleChart}>
+          <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
+            {
+              this.state.chartView ?
+                <XYPlot 
+                  width={500} 
+                  height={250}
+                  xType="time"
+                  xDomain={this.state.dateRange}
+                  yDomain={this.state.yRange}
+                  margin={{right:20}}
+                >
+                  <HorizontalGridLines />
+                  <VerticalGridLines />
+                  <XAxis 
+                    tickFormat={value => moment(value).format('MM/DD')}
+                    tickValues={
+                      this.state.dateLabels.length == 0 ?
+                        null
+                        :
+                        this.state.dateLabels
+                    }
+                  />
+                  <YAxis />
+                  <LineSeries
+                    animation
+                    data={this.state.analyticsData}
+                  />
+                </XYPlot>
+              :
+              'LIST VIEW'
+            }
           </div>
           <div className='profileDetails-pages'>
             <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null ?

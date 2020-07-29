@@ -12,10 +12,11 @@ Django REST Framework
 
 ### To Do List
 
-[] Visual confirmations (saved books, updated pages read, etc)     
+[X] Visual confirmations (saved books, updated pages read, etc)     
 [] Landing page     
 [] Visual for completion of saved book    
 [X] Analytics per saved books   
 [X] Analytics - empty data needs permanent fix    
+[] List of saved pages    
 [] Overall profile analytics     
 [] Styling + CSS    
