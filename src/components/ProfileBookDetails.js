@@ -1,6 +1,7 @@
 import React from 'react';
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries} from 'react-vis';
 import moment from 'moment';
+import ListLineItem from './ListLineItem'
 
 export default class ProfileBookDetails extends React.Component{
 
@@ -185,7 +186,13 @@ export default class ProfileBookDetails extends React.Component{
                   />
                 </XYPlot>
               :
-              'LIST VIEW'
+              <div className='listView'>
+                {this.state.analyticsData.map(ele => 
+                  <ListLineItem 
+                    data={ele}
+                  />
+                )}
+              </div>
             }
           </div>
           <div className='profileDetails-pages'>

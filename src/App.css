@@ -217,6 +217,13 @@ html, body, .App, #root {
   height: 50%;
 }
 
+.listView{
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  text-align: left;
+}
+
 /* ------------------------------- chart --------------------------------------- */
 
 .rv-xy-plot__inner{
