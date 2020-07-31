@@ -224,6 +224,12 @@ html, body, .App, #root {
   text-align: left;
 }
 
+.chartHint{
+  color: black;
+  background-color: white;
+  /* border: solid black 1px; */
+}
+
 /* ------------------------------- chart --------------------------------------- */
 
 .rv-xy-plot__inner{

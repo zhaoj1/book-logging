@@ -1,5 +1,5 @@
 import React from 'react';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries} from 'react-vis';
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries, Hint} from 'react-vis';
 import moment from 'moment';
 import ListLineItem from './ListLineItem'
 
@@ -12,7 +12,8 @@ export default class ProfileBookDetails extends React.Component{
     dateRange: [],
     yRange: [],
     dateLabels: [],
-    chartView: true
+    chartView: true,
+    selectedPointId: null,
   }
 
   componentDidUpdate = (prevProps) => {
@@ -94,6 +95,7 @@ export default class ProfileBookDetails extends React.Component{
       yRange: [0, Math.max(...analyticsData.map(ele => ele.y)) + 1],
       dateLabels: dateLabels
     })
+
   }
 
   handleChange = (event) => {this.setState({[event.target.name]: event.target.value})}
@@ -160,39 +162,58 @@ export default class ProfileBookDetails extends React.Component{
           <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
             {
               this.state.chartView ?
-                <XYPlot 
-                  width={500} 
-                  height={250}
-                  xType="time"
-                  xDomain={this.state.dateRange}
-                  yDomain={this.state.yRange}
-                  margin={{right:20}}
-                >
-                  <HorizontalGridLines />
-                  <VerticalGridLines />
-                  <XAxis 
-                    tickFormat={value => moment(value).format('MM/DD')}
-                    tickValues={
-                      this.state.dateLabels.length == 0 ?
-                        null
-                        :
-                        this.state.dateLabels
+                <>
+                  <XYPlot 
+                    width={500} 
+                    height={250}
+                    xType="time"
+                    xDomain={this.state.dateRange}
+                    yDomain={this.state.yRange}
+                    margin={{right:20}}
+
+                    onMouseLeave={() => this.setState({selectedPointId: null, crosshairValues: null})}
+                  >
+                    <HorizontalGridLines />
+                    <VerticalGridLines />
+                    <XAxis 
+                      tickFormat={value => moment(value).format('MM/DD')}
+                      tickValues={
+                        this.state.dateLabels.length == 0 ?
+                          null
+                          :
+                          this.state.dateLabels
+                      }
+                    />
+                    <YAxis />
+                    <LineSeries
+                      animation
+                      data={this.state.analyticsData}
+                      onNearestXY={(value)=> this.setState({selectedPointId: value})}
+                    />
+                    {this.state.selectedPointId == null ? 
+                      null
+                      :
+                      <Hint 
+                        value={this.state.selectedPointId}
+                      >
+                        <div className='chartHint'>
+                          <p>
+                            {moment(this.state.selectedPointId.x).format('MM/DD/YYYY')}<br></br>
+                            {this.state.selectedPointId.y} page(s)
+                          </p>
+                        </div>
+                      </Hint>
                     }
-                  />
-                  <YAxis />
-                  <LineSeries
-                    animation
-                    data={this.state.analyticsData}
-                  />
-                </XYPlot>
-              :
-              <div className='listView'>
-                {this.state.analyticsData.map(ele => 
-                  <ListLineItem 
-                    data={ele}
-                  />
-                )}
-              </div>
+                  </XYPlot>
+                </>
+                :
+                <div className='listView'>
+                  {this.state.analyticsData.map(ele => 
+                    <ListLineItem 
+                      data={ele}
+                    />
+                  )}
+                </div>
             }
           </div>
           <div className='profileDetails-pages'>

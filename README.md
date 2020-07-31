@@ -17,6 +17,6 @@ Django REST Framework
 [] Visual for completion of saved book    
 [X] Analytics per saved books   
 [X] Analytics - empty data needs permanent fix    
-[] List of saved pages    
+[X] List of saved pages    
 [] Overall profile analytics     
 [] Styling + CSS    
