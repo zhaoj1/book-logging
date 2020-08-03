@@ -1,5 +1,5 @@
 import React from 'react';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries, Hint} from 'react-vis';
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries, Hint, MarkSeries} from 'react-vis';
 import moment from 'moment';
 import ListLineItem from './ListLineItem'
 
@@ -170,8 +170,7 @@ export default class ProfileBookDetails extends React.Component{
                     xDomain={this.state.dateRange}
                     yDomain={this.state.yRange}
                     margin={{right:20}}
-
-                    onMouseLeave={() => this.setState({selectedPointId: null, crosshairValues: null})}
+                    onMouseLeave={() => this.setState({selectedPointId: null})}
                   >
                     <HorizontalGridLines />
                     <VerticalGridLines />
@@ -188,7 +187,7 @@ export default class ProfileBookDetails extends React.Component{
                     <LineSeries
                       animation
                       data={this.state.analyticsData}
-                      onNearestXY={(value)=> this.setState({selectedPointId: value})}
+                      onNearestX={(value)=> this.setState({selectedPointId: value})}
                     />
                     {this.state.selectedPointId == null ? 
                       null
@@ -203,6 +202,13 @@ export default class ProfileBookDetails extends React.Component{
                           </p>
                         </div>
                       </Hint>
+                    }
+                    {this.state.selectedPointId == null ? 
+                      null
+                      :
+                      <MarkSeries 
+                        data={[this.state.selectedPointId]}
+                      />
                     }
                   </XYPlot>
                 </>
