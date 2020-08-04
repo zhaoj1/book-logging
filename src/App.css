@@ -213,6 +213,7 @@ html, body, .App, #root {
 
 .profileDetails-pages{
   height: 50%;
+  text-align: center;
 }
 
 .listView{
