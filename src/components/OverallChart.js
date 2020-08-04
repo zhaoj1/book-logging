@@ -1,5 +1,5 @@
 import React from 'react';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries, Hint, MarkSeries} from 'react-vis';
+import {FlexibleXYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries, Hint, MarkSeries} from 'react-vis';
 import moment from 'moment';
 import ListLineItem from './ListLineItem'
 
@@ -12,7 +12,7 @@ export default class OverallChart extends React.Component{
           {
             this.props.chartView ?
               <>
-                <XYPlot 
+                <FlexibleXYPlot 
                   xType="time"
                   xDomain={this.props.dateRange}
                   yDomain={this.props.yRange}
@@ -57,7 +57,7 @@ export default class OverallChart extends React.Component{
                       data={[this.props.selectedPointId]}
                     />
                   }
-                </XYPlot>
+                </FlexibleXYPlot>
               </>
               :
               <div className='listView'>

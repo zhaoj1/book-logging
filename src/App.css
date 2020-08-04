@@ -83,7 +83,6 @@ html, body, .App, #root {
   height: 45%;
   width: 70%;
   margin: auto;
-  background-color: blue;
 }
 
 .profile-lower{
@@ -206,7 +205,7 @@ html, body, .App, #root {
 }
 
 .profileDetails-analytics{
-  height: 45%;
+  height: 100%;
   display: flex;
   justify-content: center;
 }
