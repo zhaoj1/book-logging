@@ -1,7 +1,5 @@
 import React from 'react';
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, LineSeries, Hint, MarkSeries} from 'react-vis';
-import moment from 'moment';
-import ListLineItem from './ListLineItem'
+import Chart from './Chart'
 
 export default class ProfileBookDetails extends React.Component{
 
@@ -134,6 +132,8 @@ export default class ProfileBookDetails extends React.Component{
 
   toggleChart = () => {this.setState({chartView: !this.state.chartView})}
 
+  setSelectedPoint = (data) => {this.setState({selectedPointId:data})}
+
   render(){
     return(
       <div className='bookDetails'>
@@ -158,70 +158,16 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
-          <div className='profileDetails-analytics' onClick={this.toggleChart}>
-          <link rel="stylesheet" href="https://unpkg.com/react-vis/dist/style.css"></link>
-            {
-              this.state.chartView ?
-                <>
-                  <XYPlot 
-                    width={500} 
-                    height={250}
-                    xType="time"
-                    xDomain={this.state.dateRange}
-                    yDomain={this.state.yRange}
-                    margin={{right:20}}
-                    onMouseLeave={() => this.setState({selectedPointId: null})}
-                  >
-                    <HorizontalGridLines />
-                    <VerticalGridLines />
-                    <XAxis 
-                      tickFormat={value => moment(value).format('MM/DD')}
-                      tickValues={
-                        this.state.dateLabels.length == 0 ?
-                          null
-                          :
-                          this.state.dateLabels
-                      }
-                    />
-                    <YAxis />
-                    <LineSeries
-                      animation
-                      data={this.state.analyticsData}
-                      onNearestX={(value)=> this.setState({selectedPointId: value})}
-                    />
-                    {this.state.selectedPointId == null ? 
-                      null
-                      :
-                      <Hint 
-                        value={this.state.selectedPointId}
-                      >
-                        <div className='chartHint'>
-                          <p>
-                            {moment(this.state.selectedPointId.x).format('MM/DD/YYYY')}<br></br>
-                            {this.state.selectedPointId.y} page(s)
-                          </p>
-                        </div>
-                      </Hint>
-                    }
-                    {this.state.selectedPointId == null ? 
-                      null
-                      :
-                      <MarkSeries 
-                        data={[this.state.selectedPointId]}
-                      />
-                    }
-                  </XYPlot>
-                </>
-                :
-                <div className='listView'>
-                  {this.state.analyticsData.map(ele => 
-                    <ListLineItem 
-                      data={ele}
-                    />
-                  )}
-                </div>
-            }
-          </div>
+          <Chart 
+            analyticsData={this.state.analyticsData}
+            dateRange={this.state.dateRange}
+            yRange={this.state.yRange}
+            dateLabels={this.state.dateLabels}
+            chartView={this.state.chartView}
+            selectedPointId={this.state.selectedPointId}
+            toggleChart={this.toggleChart}
+            setSelectedPoint={this.setSelectedPoint}
+          />
           <div className='profileDetails-pages'>
             <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null ?
                 this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
