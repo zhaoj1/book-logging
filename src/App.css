@@ -202,8 +202,6 @@ html, body, .App, #root {
   padding: 5px;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  justify-content: space-around;
   overflow: scroll;
 }
 

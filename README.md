@@ -18,5 +18,6 @@ Django REST Framework
 [X] Analytics per saved books   
 [X] Analytics - empty data needs permanent fix    
 [X] List of saved pages    
-[] Overall profile analytics     
+[X] Overall profile analytics     
 [] Styling + CSS    
+[] Saving book -> return to profile returns an error
