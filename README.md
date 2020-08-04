@@ -19,3 +19,4 @@ Django REST Framework
 [X] List of saved pages    
 [X] Overall profile analytics     
 [] Styling + CSS    
+[] Delete confirmation - refresh book list

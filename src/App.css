@@ -94,7 +94,7 @@ html, body, .App, #root {
   margin: auto;
   width: 60%;
   height: 90%;
-  background-color:red;
+  background-color:slategray;
   display: flex;
 }
 
@@ -102,6 +102,7 @@ html, body, .App, #root {
   width: 25%;
   height: 100%;
   border: solid black 1px;
+  background-color: white;
   display: flex;
   flex-direction: column; 
   margin: 3%;
