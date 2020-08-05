@@ -83,6 +83,8 @@ html, body, .App, #root {
   height: 45%;
   width: 70%;
   margin: auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .profile-lower{
@@ -119,6 +121,11 @@ html, body, .App, #root {
 
 .search-box{
   width: 20%;
+}
+
+.profile-overall-analytics{
+  width: 30%;
+  background-color: red;
 }
 
 /* ------------------------------- search --------------------------------------- */
@@ -207,6 +214,7 @@ html, body, .App, #root {
 
 .profileDetails-analytics{
   height: 100%;
+  width: 60%;
   display: flex;
   justify-content: center;
 }
@@ -230,9 +238,8 @@ html, body, .App, #root {
 
 /* ------------------------------- chart --------------------------------------- */
 
-.rv-xy-plot__inner{
+.rv-xy-plot__inner{  
   margin: auto;
-  top: 50%;  
   height: 100%;
   width: 100%;
 }

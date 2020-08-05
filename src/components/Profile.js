@@ -125,6 +125,9 @@ export default class Profile extends React.Component{
                 toggleChart={this.toggleChart}
                 setSelectedPoint={this.setSelectedPoint}
               />
+              <div className='profile-overall-analytics'>
+
+              </div>
             </div>
             <div className='profile-lower'>
               <div className='library'>

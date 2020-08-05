@@ -23,7 +23,8 @@ export default class ProfileBookDetails extends React.Component{
   updateData = () => {
     let begDate = new Date()
     let endDate = new Date()
-    endDate.setDate(endDate.getDate() + 7)
+    endDate.setDate(begDate.getDate() + 7)
+
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
       this.setState({ 
         dateRange : [
@@ -33,7 +34,12 @@ export default class ProfileBookDetails extends React.Component{
         dateLabels: [
           begDate,
           endDate
-        ]
+        ],
+        analyticsData: [{
+          x : new Date(begDate),
+          y : 0
+        }],
+        yRange:[0,1]
       })
       :
       this.calculateAnalytics()
@@ -65,10 +71,10 @@ export default class ProfileBookDetails extends React.Component{
       analyticsData.push(data)
     })
     
-    analyticsData.unshift({
-      x : new Date(originDate),
-      y : 0
-    })
+    // analyticsData.unshift({
+    //   x : new Date(originDate),
+    //   y : 0
+    // })
 
     if(analyticsData[analyticsData.length-1].x.getTime() < dateRange[0].getTime() || analyticsData[analyticsData.length-1].x.getTime() > dateRange[1].getTime()){
       var i = new Date(originDate).getTime()
@@ -77,7 +83,7 @@ export default class ProfileBookDetails extends React.Component{
         new Date(analyticsData[analyticsData.length-1].x)
       ]
 
-      dateLabels.push(dateRange[0])
+      // dateLabels.push(dateRange[0])
       let labelDiff = Math.round((dateRange[1] - dateRange[0]) / (7 * 1000 * 60 * 60 * 24))
       while(i < dateRange[1].getTime()){
         let nextDate = new Date(i)
@@ -85,6 +91,8 @@ export default class ProfileBookDetails extends React.Component{
         dateLabels.push(nextDate)
         i = nextDate
       }
+
+      dateRange[0] = analyticsData[0].x
     }
 
     this.setState({
@@ -123,11 +131,15 @@ export default class ProfileBookDetails extends React.Component{
     }
   }
 
-  deleteBook = () => {
-    fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}`, {
+  deleteBook = async () => {
+    const bookDeleted = await fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}`, {
       method: 'DELETE',
       headers: {'Authorization': `JWT ${sessionStorage.getItem('token')}`}
-    }).then(this.props.closeModal()).then(this.props.fetchBooks())
+    })
+    if(bookDeleted){
+      this.props.closeModal();
+      this.props.fetchBooks();
+    }
   }
 
   toggleChart = () => {this.setState({chartView: !this.state.chartView})}

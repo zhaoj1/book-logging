@@ -29,6 +29,7 @@ export default class OverallChart extends React.Component{
                         :
                         this.props.dateLabels
                     }
+                    tickLabelAngle={-45}
                   />
                   <YAxis />
                   <LineSeries
