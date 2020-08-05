@@ -1,5 +1,6 @@
 import React from 'react';
-import Chart from './Chart'
+import LineChart from './LineChart'
+import moment from 'moment';
 
 export default class ProfileBookDetails extends React.Component{
 
@@ -7,8 +8,6 @@ export default class ProfileBookDetails extends React.Component{
     pagesRead: 0,
     dateRead: null,
     analyticsData: [],
-    dateRange: [],
-    yRange: [],
     dateLabels: [],
     chartView: true,
     selectedPointId: null,
@@ -28,79 +27,82 @@ export default class ProfileBookDetails extends React.Component{
     this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
       this.setState({ 
         dateRange : [
-          begDate,
-          endDate
+          moment(begDate.format('MM/DD')),
+          moment(endDate.format('MM/DD'))
         ],
         dateLabels: [
-          begDate,
-          endDate
-        ],
-        analyticsData: [{
-          x : new Date(begDate),
-          y : 0
-        }],
-        yRange:[0,1]
+          moment(begDate.format('MM/DD')),
+          moment(endDate.format('MM/DD'))
+        ]
       })
       :
       this.calculateAnalytics()
   }
 
   calculateAnalytics = () => {
-    let dataSet = {};
-    let analyticsData = [];
-    let beginDate = new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00')
-    let origin = new Date(beginDate)
-    let originDate = origin.setDate(origin.getDate() - 1)
-    let dateLabels = []
-    let dateRange = [
-      new Date(originDate),
-      new Date(beginDate.setDate(beginDate.getDate() + 7))
-    ]
-
-    this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
-      dataSet[ele.dateRead] ?
-        dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
-        :
-        dataSet[ele.dateRead] = ele.pagesRead
-    })
-
-    Object.keys(dataSet).map(key => {
-      let data = {}
-      data['x'] = new Date(key + ' 00:00')
-      data['y'] = dataSet[key]
-      analyticsData.push(data)
-    })
+    // let dataSet = {};
+    // let analyticsData = [];
+    // let beginDate = new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00')
+    // let origin = new Date(beginDate)
+    // let originDate = origin.setDate(origin.getDate() - 1)
+    // let dateRange = [
+    //   new Date(originDate),
+    //   new Date(beginDate.setDate(beginDate.getDate() + 7))
+    // ]
+    // let i = 1
+    // let dateLabels = [
+    //   moment(new Date(originDate).format('MM/DD'))
+    // ]
+    // while(i <= 7){
+    //   let nextDate = new Date()
+    //   nextDate.setDate(nextDate.getDate() + i)
+    //   dateLabels.push(moment(nextDate).format('MM/DD'))
+    //   i++
+    // }
     
-    // analyticsData.unshift({
-    //   x : new Date(originDate),
-    //   y : 0
+
+    // this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
+    //   dataSet[ele.dateRead] ?
+    //     dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
+    //     :
+    //     dataSet[ele.dateRead] = ele.pagesRead
     // })
 
-    if(analyticsData[analyticsData.length-1].x.getTime() < dateRange[0].getTime() || analyticsData[analyticsData.length-1].x.getTime() > dateRange[1].getTime()){
-      var i = new Date(originDate).getTime()
-      dateRange = [
-        new Date(originDate),
-        new Date(analyticsData[analyticsData.length-1].x)
-      ]
+    // Object.keys(dataSet).map(key => {
+    //   let data = {}
+    //   data['x'] = new Date(key + ' 00:00')
+    //   data['y'] = dataSet[key]
+    //   analyticsData.push(data)
+    // })
+  
 
-      // dateLabels.push(dateRange[0])
-      let labelDiff = Math.round((dateRange[1] - dateRange[0]) / (7 * 1000 * 60 * 60 * 24))
-      while(i < dateRange[1].getTime()){
-        let nextDate = new Date(i)
-        nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
-        dateLabels.push(nextDate)
-        i = nextDate
-      }
+    // if(analyticsData[analyticsData.length-1].x.getTime() < dateRange[0].getTime() || analyticsData[analyticsData.length-1].x.getTime() > dateRange[1].getTime()){
+    //   i = new Date(originDate).getTime()
+    //   dateRange = [
+    //     new Date(originDate),
+    //     new Date(analyticsData[analyticsData.length-1].x)
+    //   ]
+    //   dateLabels = []
 
-      dateRange[0] = analyticsData[0].x
-    }
+    //   dateLabels.push(moment(analyticsData[0].x).format('MM/DD'))
+    //   let labelDiff = Math.round((dateRange[1] - dateRange[0]) / (7 * 1000 * 60 * 60 * 24))
+    //   while(i < dateRange[1].getTime()){
+    //     let nextDate = new Date(i)
+    //     nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
+    //     dateLabels.push(moment(nextDate).format('MM/DD'))
 
-    this.setState({
-      analyticsData : analyticsData,
-      dateRange: dateRange,
-      yRange: [0, Math.max(...analyticsData.map(ele => ele.y)) + 1],
-      dateLabels: dateLabels
-    })
+    //     i = nextDate
+    //   }
+
+    //   dateRange[0] = analyticsData[0].x
+    // }
+
+    // this.setState({
+    //   analyticsData : analyticsData,
+    //   dateRange: dateRange,
+    //   yRange: [0, Math.max(...analyticsData.map(ele => ele.y)) + 1],
+    //   dateLabels: dateLabels
+    // })
 
   }
 
@@ -170,15 +172,9 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
-          <Chart 
-            analyticsData={this.state.analyticsData}
-            dateRange={this.state.dateRange}
-            yRange={this.state.yRange}
+          <LineChart 
+            data={this.state.analyticsData}
             dateLabels={this.state.dateLabels}
-            chartView={this.state.chartView}
-            selectedPointId={this.state.selectedPointId}
-            toggleChart={this.toggleChart}
-            setSelectedPoint={this.setSelectedPoint}
           />
           <div className='profileDetails-pages'>
             <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null ?
