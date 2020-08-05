@@ -13,96 +13,64 @@ export default class ProfileBookDetails extends React.Component{
     selectedPointId: null,
   }
 
-  componentDidUpdate = (prevProps) => {
-    if(prevProps.pages !== this.props.pages){
-      this.updateData()
-    }
-  }
+  // componentDidUpdate = (prevProps) => {
+  //   if(prevProps.pages !== this.props.pages){
+  //     this.calculateAnalytics()
+  //   }
+  // }
 
-  updateData = () => {
-    let begDate = new Date()
-    let endDate = new Date()
-    endDate.setDate(begDate.getDate() + 7)
-
-    this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
-      this.setState({ 
-        dateRange : [
-          moment(begDate.format('MM/DD')),
-          moment(endDate.format('MM/DD'))
-        ],
-        dateLabels: [
-          moment(begDate.format('MM/DD')),
-          moment(endDate.format('MM/DD'))
-        ]
-      })
-      :
-      this.calculateAnalytics()
+  componentDidMount = () => {
+    this.calculateAnalytics();
   }
 
   calculateAnalytics = () => {
-    // let dataSet = {};
-    // let analyticsData = [];
-    // let beginDate = new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00')
-    // let origin = new Date(beginDate)
-    // let originDate = origin.setDate(origin.getDate() - 1)
-    // let dateRange = [
-    //   new Date(originDate),
-    //   new Date(beginDate.setDate(beginDate.getDate() + 7))
-    // ]
-    // let i = 1
-    // let dateLabels = [
-    //   moment(new Date(originDate).format('MM/DD'))
-    // ]
-    // while(i <= 7){
-    //   let nextDate = new Date()
-    //   nextDate.setDate(nextDate.getDate() + i)
-    //   dateLabels.push(moment(nextDate).format('MM/DD'))
-    //   i++
-    // }
-    
+    let analyticsData = [];
+    let today = new Date()
+    let bookPages = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)
+    let dateLabels = []
 
-    // this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
-    //   dataSet[ele.dateRead] ?
-    //     dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
-    //     :
-    //     dataSet[ele.dateRead] = ele.pagesRead
-    // })
+    if(bookPages.length == 0){
+      let i = 1
+      dateLabels.push(moment(today).format('MM/DD'))
+      console.log(dateLabels)
+      while(i <= 7){
+        let nextDate = new Date()
+        nextDate.setDate(nextDate.getDate() + 1)
+        dateLabels.push(moment(nextDate).format('MM/DD'))
+        i++
+      }
+    }else{
+      let i = new Date(bookPages[0].dateRead).getTime()
+      let endDate = new Date(bookPages[bookPages.length - 1].dateRead).getTime()
+      let labelDiff = Math.round((endDate - i) / (7 * 1000 * 60 * 60 * 24))
+      while(i <= endDate){
+        let nextDate = new Date(i)
+        nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
+        dateLabels.push(moment(nextDate).format('MM/DD'))
+        i = nextDate
+      }
+    }
 
-    // Object.keys(dataSet).map(key => {
-    //   let data = {}
-    //   data['x'] = new Date(key + ' 00:00')
-    //   data['y'] = dataSet[key]
-    //   analyticsData.push(data)
-    // })
-  
+    let dataSet = {}
 
-    // if(analyticsData[analyticsData.length-1].x.getTime() < dateRange[0].getTime() || analyticsData[analyticsData.length-1].x.getTime() > dateRange[1].getTime()){
-    //   i = new Date(originDate).getTime()
-    //   dateRange = [
-    //     new Date(originDate),
-    //     new Date(analyticsData[analyticsData.length-1].x)
-    //   ]
-    //   dateLabels = []
+    bookPages.map(ele => {
+      dataSet[ele.dateRead] ?
+        dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
+        :
+        dataSet[ele.dateRead] = ele.pagesRead
+    })
 
-    //   dateLabels.push(moment(analyticsData[0].x).format('MM/DD'))
-    //   let labelDiff = Math.round((dateRange[1] - dateRange[0]) / (7 * 1000 * 60 * 60 * 24))
-    //   while(i < dateRange[1].getTime()){
-    //     let nextDate = new Date(i)
-    //     nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
-    //     dateLabels.push(moment(nextDate).format('MM/DD'))
+    Object.keys(dataSet).map(key => {
+      let data = {}
+      data['x'] = new Date(key + ' 00:00')
+      data['y'] = dataSet[key]
+      analyticsData.push(data)
+    })
 
-    //     i = nextDate
-    //   }
-
-    //   dateRange[0] = analyticsData[0].x
-    // }
-
-    // this.setState({
-    //   analyticsData : analyticsData,
-    //   dateRange: dateRange,
-    //   yRange: [0, Math.max(...analyticsData.map(ele => ele.y)) + 1],
-    //   dateLabels: dateLabels
-    // })
+    this.setState({
+      dateLabels: dateLabels,
+      analyticsData: analyticsData
+    })
 
   }
 
