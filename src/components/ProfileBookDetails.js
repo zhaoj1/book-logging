@@ -1,5 +1,6 @@
 import React from 'react';
-import Chart from './Chart'
+import LineChart from './LineChart'
+import moment from 'moment';
 
 export default class ProfileBookDetails extends React.Component{
 
@@ -7,57 +8,60 @@ export default class ProfileBookDetails extends React.Component{
     pagesRead: 0,
     dateRead: null,
     analyticsData: [],
-    dateRange: [],
-    yRange: [],
     dateLabels: [],
     chartView: true,
     selectedPointId: null,
   }
 
-  componentDidUpdate = (prevProps) => {
-    if(prevProps.pages !== this.props.pages){
-      this.updateData()
-    }
+  componentDidMount = () => {
+    this.calculateAnalytics();
   }
-
-  updateData = () => {
-    let begDate = new Date()
-    let endDate = new Date()
-    endDate.setDate(begDate.getDate() + 7)
-
-    this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).length == 0 ?
-      this.setState({ 
-        dateRange : [
-          begDate,
-          endDate
-        ],
-        dateLabels: [
-          begDate,
-          endDate
-        ],
-        analyticsData: [{
-          x : new Date(begDate),
-          y : 0
-        }],
-        yRange:[0,1]
-      })
-      :
-      this.calculateAnalytics()
-  }
-
+  
   calculateAnalytics = () => {
-    let dataSet = {};
+    let firstEle, lastEle
     let analyticsData = [];
-    let beginDate = new Date(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)[0].dateRead + ' 00:00')
-    let origin = new Date(beginDate)
-    let originDate = origin.setDate(origin.getDate() - 1)
+    let today = new Date()
+    let bookPages = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)
     let dateLabels = []
-    let dateRange = [
-      new Date(originDate),
-      new Date(beginDate.setDate(beginDate.getDate() + 7))
-    ]
 
-    this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).map(ele => {
+    if(bookPages.length > 0){
+      firstEle = new Date(bookPages[0].dateRead)
+      lastEle = new Date(bookPages[bookPages.length - 1].dateRead)
+    }
+
+    if(bookPages.length == 0){
+      let i = 1
+      dateLabels.push(moment(today).format('MM/DD'))
+      while(i <= 7){
+        let nextDate = new Date()
+        nextDate.setDate(nextDate.getDate() + 1)
+        dateLabels.push(moment(nextDate).format('MM/DD'))
+        i++
+      }
+    }else if((lastEle.getTime() - firstEle.getTime()) / (1000 * 60 * 60 * 24) <= 7){
+      let i = 1
+      dateLabels.push(moment(firstEle).format('MM/DD'))
+      while(i <= 7){
+        let nextDate = firstEle
+        nextDate.setDate(nextDate.getDate() + 1)
+        dateLabels.push(moment(nextDate).format('MM/DD'))
+        i++
+      }
+    }else{
+      let i = new Date(bookPages[0].dateRead).getTime()
+      let endDate = new Date(bookPages[bookPages.length - 1].dateRead).getTime()
+      let labelDiff = Math.round((endDate - i) / (7 * 1000 * 60 * 60 * 24))
+      while(i <= endDate){
+        let nextDate = new Date(i)
+        nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
+        dateLabels.push(moment(nextDate).format('MM/DD'))
+        i = nextDate
+      }
+    }
+
+    let dataSet = {}
+
+    bookPages.map(ele => {
       dataSet[ele.dateRead] ?
         dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
         :
@@ -70,36 +74,10 @@ export default class ProfileBookDetails extends React.Component{
       data['y'] = dataSet[key]
       analyticsData.push(data)
     })
-    
-    // analyticsData.unshift({
-    //   x : new Date(originDate),
-    //   y : 0
-    // })
-
-    if(analyticsData[analyticsData.length-1].x.getTime() < dateRange[0].getTime() || analyticsData[analyticsData.length-1].x.getTime() > dateRange[1].getTime()){
-      var i = new Date(originDate).getTime()
-      dateRange = [
-        new Date(originDate),
-        new Date(analyticsData[analyticsData.length-1].x)
-      ]
-
-      // dateLabels.push(dateRange[0])
-      let labelDiff = Math.round((dateRange[1] - dateRange[0]) / (7 * 1000 * 60 * 60 * 24))
-      while(i < dateRange[1].getTime()){
-        let nextDate = new Date(i)
-        nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
-        dateLabels.push(nextDate)
-        i = nextDate
-      }
-
-      dateRange[0] = analyticsData[0].x
-    }
 
     this.setState({
-      analyticsData : analyticsData,
-      dateRange: dateRange,
-      yRange: [0, Math.max(...analyticsData.map(ele => ele.y)) + 1],
-      dateLabels: dateLabels
+      dateLabels: dateLabels,
+      analyticsData: analyticsData
     })
 
   }
@@ -170,18 +148,12 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
-          <Chart 
-            analyticsData={this.state.analyticsData}
-            dateRange={this.state.dateRange}
-            yRange={this.state.yRange}
+          <LineChart 
+            data={this.state.analyticsData}
             dateLabels={this.state.dateLabels}
-            chartView={this.state.chartView}
-            selectedPointId={this.state.selectedPointId}
-            toggleChart={this.toggleChart}
-            setSelectedPoint={this.setSelectedPoint}
           />
           <div className='profileDetails-pages'>
-            <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null ?
+            <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
                 this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
                 :
                 null} / {this.props.selectedBook.totalPages}</h2>

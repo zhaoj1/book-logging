@@ -31,6 +31,7 @@ export default class Chart extends React.Component{
                         :
                         this.props.dateLabels
                     }
+                    tickPadding={1}
                   />
                   <YAxis />
                   <LineSeries
