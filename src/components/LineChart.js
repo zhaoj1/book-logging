@@ -34,8 +34,7 @@ export default class LineChart extends Component {
         scales: {
           yAxes: [{
             ticks: {
-              maxRotation: 0,
-              minRotation: 0, 
+              min: 0,
               fontStyle: 'bold',
               precision: 0,
               suggestedMax: 5
