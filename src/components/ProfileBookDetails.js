@@ -13,43 +13,36 @@ export default class ProfileBookDetails extends React.Component{
     selectedPointId: null,
   }
 
-  // componentDidUpdate = (prevProps) => {
-  //   if(prevProps.pages !== this.props.pages){
-  //     this.calculateAnalytics()
-  //   }
-  // }
-
   componentDidMount = () => {
     this.calculateAnalytics();
   }
-
+  
   calculateAnalytics = () => {
     let analyticsData = [];
     let today = new Date()
     let bookPages = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id)
     let dateLabels = []
 
-    if(bookPages.length == 0){
-      let i = 1
-      dateLabels.push(moment(today).format('MM/DD'))
-      console.log(dateLabels)
-      while(i <= 7){
-        let nextDate = new Date()
-        nextDate.setDate(nextDate.getDate() + 1)
-        dateLabels.push(moment(nextDate).format('MM/DD'))
-        i++
-      }
-    }else{
-      let i = new Date(bookPages[0].dateRead).getTime()
-      let endDate = new Date(bookPages[bookPages.length - 1].dateRead).getTime()
-      let labelDiff = Math.round((endDate - i) / (7 * 1000 * 60 * 60 * 24))
-      while(i <= endDate){
-        let nextDate = new Date(i)
-        nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
-        dateLabels.push(moment(nextDate).format('MM/DD'))
-        i = nextDate
-      }
-    }
+    // if(bookPages.length == 0){
+    //   let i = 1
+    //   dateLabels.push(moment(today).format('MM/DD'))
+    //   while(i <= 7){
+    //     let nextDate = new Date()
+    //     nextDate.setDate(nextDate.getDate() + 1)
+    //     dateLabels.push(moment(nextDate).format('MM/DD'))
+    //     i++
+    //   }
+    // }else{
+    //   let i = new Date(bookPages[0].dateRead).getTime()
+    //   let endDate = new Date(bookPages[bookPages.length - 1].dateRead).getTime()
+    //   let labelDiff = Math.round((endDate - i) / (7 * 1000 * 60 * 60 * 24))
+    //   while(i <= endDate){
+    //     let nextDate = new Date(i)
+    //     nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
+    //     dateLabels.push(moment(nextDate).format('MM/DD'))
+    //     i = nextDate
+    //   }
+    // }
 
     let dataSet = {}
 
@@ -67,10 +60,12 @@ export default class ProfileBookDetails extends React.Component{
       analyticsData.push(data)
     })
 
-    this.setState({
-      dateLabels: dateLabels,
-      analyticsData: analyticsData
-    })
+    console.log(dateLabels, analyticsData)
+
+    // this.setState({
+    //   dateLabels: dateLabels,
+    //   analyticsData: analyticsData
+    // })
 
   }
 
@@ -145,7 +140,7 @@ export default class ProfileBookDetails extends React.Component{
             dateLabels={this.state.dateLabels}
           />
           <div className='profileDetails-pages'>
-            <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null ?
+            <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
                 this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
                 :
                 null} / {this.props.selectedBook.totalPages}</h2>

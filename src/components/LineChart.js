@@ -21,6 +21,7 @@ export default class LineChart extends Component {
       data: {
         labels: this.props.dateLabels, 
         datasets: [{
+          label: 'Pages Read',
           lineTension: 0,
           data: chartData,
           borderColor: [
@@ -47,13 +48,10 @@ export default class LineChart extends Component {
 
   componentDidUpdate(prevProps){
     if(prevProps !== this.props){
+      if(myChart){myChart.destroy()};
       this.setData(this.props);
       this.makeChart(chartData);
     }
-  }
-
-  componentWillUnmount(){
-    myChart.destroy()
   }
 
   render() {
