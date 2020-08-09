@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment';
+
 import Search from './Search';
 import ProfileBookCard from './ProfileBookCard';
 import OverallChart from './OverallChart';
@@ -7,8 +9,6 @@ export default class Profile extends React.Component{
 
   state = {
     analyticsData: [],
-    dateRange: [],
-    yRange: [],
     dateLabels: [],
     chartView: true,
     selectedPointId: null
@@ -24,7 +24,78 @@ export default class Profile extends React.Component{
       this.props.fetchBooks();
       this.props.fetchPages();
     }
+    if(prevProps.pages !== this.props.pages){
+      this.calculateAnalytics();
+    }
   }
+
+  calculateAnalytics = () => {
+    let firstEle, lastEle
+    let analyticsData = [];
+    let today = new Date()
+    let dateLabels = []
+
+    if(this.props.pages.pages.length > 0){
+      firstEle = new Date(this.props.pages.pages[0].dateRead)
+      lastEle = new Date(this.props.pages.pages[this.props.pages.pages.length - 1].dateRead)
+    }
+
+    if(this.props.pages.pages.length == 0){
+      let i = 1
+      dateLabels.push(moment(today).format('MM/DD'))
+      while(i <= 7){
+        let nextDate = new Date()
+        nextDate.setDate(nextDate.getDate() + 1)
+        dateLabels.push(moment(nextDate).format('MM/DD'))
+        i++
+      }
+    }else if((lastEle.getTime() - firstEle.getTime()) / (1000 * 60 * 60 * 24) <= 7){
+      let i = 1
+      dateLabels.push(moment(firstEle).format('MM/DD'))
+      while(i <= 7){
+        let nextDate = firstEle
+        nextDate.setDate(nextDate.getDate() + 1)
+        dateLabels.push(moment(nextDate).format('MM/DD'))
+        i++
+      }
+    }else{
+      let i = new Date(this.props.pages.pages[0].dateRead).getTime()
+      let endDate = new Date(this.props.pages.pages[this.props.pages.pages.length - 1].dateRead).getTime()
+      let labelDiff = Math.round((endDate - i) / (7 * 1000 * 60 * 60 * 24))
+      while(i <= endDate){
+        let nextDate = new Date(i)
+        nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
+        dateLabels.push(moment(nextDate).format('MM/DD'))
+        i = nextDate
+      }
+    }
+
+    let dataSet = {}
+
+    this.props.pages.pages.map(ele => {
+      dataSet[ele.dateRead] ?
+        dataSet[ele.dateRead] = dataSet[ele.dateRead] + ele.pagesRead
+        :
+        dataSet[ele.dateRead] = ele.pagesRead
+    })
+
+    Object.keys(dataSet).map(key => {
+      let data = {}
+      data['x'] = new Date(key + ' 00:00')
+      data['y'] = dataSet[key]
+      analyticsData.push(data)
+    })
+
+    this.setState({
+      dateLabels: dateLabels,
+      analyticsData: analyticsData
+    })
+
+  }
+
+  toggleChart = () => {this.setState({chartView: !this.state.chartView})}
+
+  setSelectedPoint = (data) => {this.setState({selectedPointId:data})}
 
   render(){
     return(
@@ -32,8 +103,14 @@ export default class Profile extends React.Component{
         this.props.currentUser ? 
           <div className='profile-page'>
             <h1>{this.props.currentUser.username}</h1>
+            {console.log(this.state)}
             <div className='profile-analytics'>
-              
+              <div className='chart-container'>
+                <OverallChart 
+                  data={this.state.analyticsData}
+                  dateLabels={this.state.dateLabels}
+                />
+              </div>
               <div className='profile-overall-analytics'>
 
               </div>

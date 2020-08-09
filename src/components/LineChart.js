@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Chart from "chart.js";
 
-let myChart 
-let chartData
+let myChart, chartData
 
 export default class LineChart extends Component {
 
@@ -55,7 +54,7 @@ export default class LineChart extends Component {
 
   render() {
     return (
-      <canvas id="myChart" width="500" height="300"></canvas>
+      <canvas id="myChart" ></canvas>
     )
   }
 

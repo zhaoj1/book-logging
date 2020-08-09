@@ -82,6 +82,10 @@ export default class ProfileBookDetails extends React.Component{
 
   }
 
+  toggleChart = () => {this.setState({chartView: !this.state.chartView})}
+
+  setSelectedPoint = (data) => {this.setState({selectedPointId:data})}
+
   handleChange = (event) => {this.setState({[event.target.name]: event.target.value})}
 
   createPages = async (event) => {
@@ -120,10 +124,6 @@ export default class ProfileBookDetails extends React.Component{
     }
   }
 
-  toggleChart = () => {this.setState({chartView: !this.state.chartView})}
-
-  setSelectedPoint = (data) => {this.setState({selectedPointId:data})}
-
   render(){
     return(
       <div className='bookDetails'>
@@ -148,10 +148,12 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
-          <LineChart 
-            data={this.state.analyticsData}
-            dateLabels={this.state.dateLabels}
-          />
+          <div className='chart-container'>
+            <LineChart 
+              data={this.state.analyticsData}
+              dateLabels={this.state.dateLabels}
+            />
+          </div>
           <div className='profileDetails-pages'>
             <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
                 this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
