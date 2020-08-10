@@ -81,7 +81,7 @@ html, body, .App, #root {
 
 .profile-analytics{
   height: 45%;
-  width: 70%;
+  width: 80%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -124,7 +124,7 @@ html, body, .App, #root {
 }
 
 .profile-overall-analytics{
-  width: 30%;
+  width: 25%;
   background-color: red;
 }
 
@@ -245,7 +245,13 @@ html, body, .App, #root {
 }
 
 .chart-container{
-  width: 100%;
+  width: 70%;
   height: 100%;
+  position: relative;
+}
+
+.details-chart-container{
+  width: 100%;
+  height: 50%;
   position: relative;
 }

@@ -103,7 +103,6 @@ export default class Profile extends React.Component{
         this.props.currentUser ? 
           <div className='profile-page'>
             <h1>{this.props.currentUser.username}</h1>
-            {console.log(this.state)}
             <div className='profile-analytics'>
               <div className='chart-container'>
                 <OverallChart 
@@ -112,7 +111,7 @@ export default class Profile extends React.Component{
                 />
               </div>
               <div className='profile-overall-analytics'>
-
+                {console.log(this.props.pages)}
               </div>
             </div>
             <div className='profile-lower'>

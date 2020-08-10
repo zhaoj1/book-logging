@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Chart from "chart.js";
+import moment from 'moment';
 
-let overallChart, chartData
+let overallChart, chartData, dateLabels
 
 export default class LineChart extends Component {
 
@@ -11,6 +12,11 @@ export default class LineChart extends Component {
         this.props.data
         :
         null
+    dateLabels = 
+      this.props.data.length > 0 ?
+        this.props.data.map(ele => moment(ele.x).format('MM/DD'))
+        :
+        null
   }
 
   makeChart(props){         
@@ -18,7 +24,7 @@ export default class LineChart extends Component {
     overallChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: this.props.dateLabels, 
+        labels: dateLabels, 
         datasets: [{
           label: 'Pages Read',
           lineTension: 0,

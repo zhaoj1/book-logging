@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import LineChart from './LineChart'
 
+let pagesRead
+
 export default class ProfileBookDetails extends React.Component{
 
   state = {
@@ -11,10 +13,16 @@ export default class ProfileBookDetails extends React.Component{
     dateLabels: [],
     chartView: true,
     selectedPointId: null,
+    error: null
   }
 
   componentDidMount = () => {
     this.calculateAnalytics();
+    
+    {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
+      pagesRead = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
+      :
+      pagesRead = 0}
   }
   
   calculateAnalytics = () => {
@@ -91,25 +99,30 @@ export default class ProfileBookDetails extends React.Component{
   createPages = async (event) => {
     event.preventDefault()
 
-    const resp = await 
-    fetch(`http://127.0.0.1:8000/pages/`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `JWT ${sessionStorage.getItem('token')}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        pagesRead: parseInt(this.state.pagesRead),
-        dateRead: this.state.dateRead,
-        book: this.props.selectedBook.id,
-        owner: this.props.currentUser.id,
-        username: this.props.currentUser.username,
+    if(pagesRead + this.state.pagesRead >= this.props.selectedBook.totalPages){
+      this.setState({error: 'Please enter a valid number of pages.'})
+    }else{
+      const resp = await 
+      fetch(`http://127.0.0.1:8000/pages/`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `JWT ${sessionStorage.getItem('token')}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          pagesRead: parseInt(this.state.pagesRead),
+          dateRead: this.state.dateRead,
+          book: this.props.selectedBook.id,
+          owner: this.props.currentUser.id,
+          username: this.props.currentUser.username,
+        })
       })
-    })
-    if(resp.ok){
-      this.props.fetchPages();
-      this.calculateAnalytics();
+      if(resp.ok){
+        this.props.fetchPages();
+        this.calculateAnalytics();
+        this.setState({error:null})
+      }
     }
   }
 
@@ -148,17 +161,14 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
-          <div className='chart-container'>
+          <div className='details-chart-container'>
             <LineChart 
               data={this.state.analyticsData}
               dateLabels={this.state.dateLabels}
             />
           </div>
           <div className='profileDetails-pages'>
-            <h2 className='pages_read'>Pages Read: {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
-                this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
-                :
-                null} / {this.props.selectedBook.totalPages}</h2>
+            <h2 className='pages_read'>Pages Read: {pagesRead} / {this.props.selectedBook.totalPages}</h2>
             <form
               onSubmit={this.createPages}
             >
@@ -186,7 +196,12 @@ export default class ProfileBookDetails extends React.Component{
               >
               </input>
             </form>
-            <button onClick={this.deleteBook} className='submitBtn' >Delete</button>
+            <button onClick={this.deleteBook} className='submitBtn' >Delete</button><br></br>
+            {this.state.error == null ?
+              null
+              :
+              <label className='errorMsg'>{this.state.error}</label>
+            }
           </div>
         </div>
       </div>
