@@ -1,6 +1,6 @@
 import React from 'react';
-import LineChart from './LineChart'
 import moment from 'moment';
+import LineChart from './LineChart'
 
 export default class ProfileBookDetails extends React.Component{
 
