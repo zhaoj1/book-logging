@@ -19,7 +19,7 @@ export default class LineChart extends Component {
         null
   }
 
-  makeChart(props){         
+  makeChart(){         
     const ctx = document.getElementById("myChart");
     myChart = new Chart(ctx, {
       type: 'line',
@@ -54,7 +54,7 @@ export default class LineChart extends Component {
     if(prevProps !== this.props){
       if(myChart){myChart.destroy()};
       this.setData();
-      this.makeChart(chartData);
+      this.makeChart();
     }
   }
 
