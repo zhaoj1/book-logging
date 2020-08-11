@@ -14,24 +14,46 @@ html, body, .App, #root {
   height: 100%;
 }
 
+.register-page{
+  padding: 5% 0 5% 0;
+}
+
 .logo, .app-description, .app-features{
   margin: auto;
   margin-bottom: 5%;
-  width: 50%;
-  font-size: 20px;
-  animation: slide-in 1s ease;
-}
-
-.logo, .app-description{
+  width: 70%;
   font-size: 40px;
+  animation: slide-in 1s ease;
 }
 
 .logo{
   background-color: red;
   width: 100%;
-  height: 300px;
   margin-bottom: 0;
-  padding: 2% 0 2% 0;
+  padding: 3% 0 3% 0;
+  position: fixed;
+  z-index: -1;
+}
+
+.landing-contents{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.landing-left{
+  width: 65%;
+  margin: 7% auto 1% 1%;
+  background-color:blue;
+}
+
+.landing-right{
+  right: 0;
+  top: 20%;
+  width: 30%;
+  position: fixed;
+  margin: auto;
+  background-color: green;
 }
 
 .features-line-item{
