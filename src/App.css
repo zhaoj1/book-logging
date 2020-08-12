@@ -14,7 +14,7 @@ html, body, .App, #root {
   height: 100%;
 }
 
-.register-page{
+.login-page, .register-page{
   padding: 5% 0 5% 0;
 }
 
@@ -23,6 +23,9 @@ html, body, .App, #root {
   margin-bottom: 5%;
   width: 70%;
   font-size: 40px;
+}
+
+.app-description, .app-features{
   animation: slide-in 1s ease;
 }
 
@@ -44,15 +47,18 @@ html, body, .App, #root {
 .landing-left{
   width: 65%;
   margin: 7% auto 1% 1%;
+  padding-top: 2%;
+  border-radius: 10px;
   background-color:blue;
 }
 
 .landing-right{
-  right: 0;
+  right: 1%;
   top: 20%;
   width: 30%;
   position: fixed;
   margin: auto;
+  border-radius: 10px;
   background-color: green;
 }
 
@@ -170,9 +176,17 @@ html, body, .App, #root {
 
 /* ------------------------------- results --------------------------------------- */
 
+.results-page{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2%;
+}
+
 .results{
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
+  justify-content: center;
 }
 
 .resultsLineItem{
@@ -211,6 +225,10 @@ html, body, .App, #root {
 .bookISBN{
   font-size: 13px;
   margin-top: 4px;
+}
+
+.back-btn{
+  margin: auto;
 }
 
 /* ------------------------------- details --------------------------------------- */
@@ -266,6 +284,12 @@ html, body, .App, #root {
 .chartHint{
   color: black;
   background-color: white;
+}
+
+.details-btn{
+  width: 50%;
+  font-size: 20px;
+  margin: auto;
 }
 
 /* ------------------------------- chart --------------------------------------- */

@@ -92,7 +92,8 @@ export default class BookDetails extends React.Component{
           Category: {this.props.selectedBook.volumeInfo.mainCategory}
           {this.props.selectedBook.volumeInfo.categories.map(category => category).join(' ,')}<br></br>
           <a href={this.props.selectedBook.volumeInfo.infoLink} target='blank'>Google Play Store</a><br></br><br></br>
-          <button onClick={this.saveBook}>Save Book</button>
+          <button className='details-btn' onClick={this.saveBook}>Save Book</button><br></br>
+          <button className='details-btn' onClick={this.props.closeModal}>Back</button>
         </div>
       </div>
     )

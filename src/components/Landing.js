@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, {useEffect} from 'react';
 import Zoom from 'react-reveal/Zoom';
 import Register from './Register';
 
