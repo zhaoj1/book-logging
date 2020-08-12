@@ -4,6 +4,10 @@ import BookCard from './BookCard';
 
 export default class Search extends React.Component{
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  }
+
   render(){
     return(
       <div className='results-page'>

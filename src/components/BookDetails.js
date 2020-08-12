@@ -89,8 +89,17 @@ export default class BookDetails extends React.Component{
               this.props.selectedBook.volumeInfo.description
           }<br></br><br></br>
           Page Count: {this.props.selectedBook.volumeInfo.pageCount}<br></br>
-          Category: {this.props.selectedBook.volumeInfo.mainCategory}
-          {this.props.selectedBook.volumeInfo.categories.map(category => category).join(' ,')}<br></br>
+          Category: {
+            this.props.selectedBook.volumeInfo.mainCategory == undefined ?
+            'N/A'
+            :
+            this.props.selectedBook.volumeInfo.mainCategory
+          } {
+            this.props.selectedBook.volumeInfo.categories == undefined ?
+            'N/A'
+            :
+            this.props.selectedBook.volumeInfo.categories.map(category => category).join(' ,')
+          }<br></br>
           <a href={this.props.selectedBook.volumeInfo.infoLink} target='blank'>Google Play Store</a><br></br><br></br>
           <button className='details-btn' onClick={this.saveBook}>Save Book</button><br></br>
           <button className='details-btn' onClick={this.props.closeModal}>Back</button>

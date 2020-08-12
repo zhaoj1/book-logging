@@ -17,6 +17,7 @@ export default class Profile extends React.Component{
   componentDidMount = () => {
     this.props.fetchBooks();
     this.props.fetchPages();
+    window.scrollTo(0, 0);
   }
 
   componentDidUpdate = (prevProps) => {
