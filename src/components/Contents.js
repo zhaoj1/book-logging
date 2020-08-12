@@ -100,10 +100,12 @@ export default class Contents extends React.Component{
               />
             } />
             <Route exact path='/register' render={(routerProps) => 
-              <Register 
-                {...routerProps}
-                setUser={this.setUser}
-              />
+              <div className='wrapper'>
+                <Register 
+                  {...routerProps}
+                  setUser={this.setUser}
+                />
+              </div>
             } />
             <Route exact path='/login' render={(routerProps) => 
               <Login 

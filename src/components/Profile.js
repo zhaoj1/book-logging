@@ -111,7 +111,7 @@ export default class Profile extends React.Component{
                 />
               </div>
               <div className='profile-overall-analytics'>
-                {console.log(this.props.pages)}
+                analytics
               </div>
             </div>
             <div className='profile-lower'>
