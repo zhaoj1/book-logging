@@ -6,7 +6,6 @@ function Landing(){
 
   return(
     <div className='landing' >
-      <div className='logo' >LOGO</div>
       <div className='landing-contents'>
         <div className='landing-left'>
           <div className='app-description' >

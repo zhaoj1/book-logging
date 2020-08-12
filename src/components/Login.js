@@ -43,41 +43,43 @@ export default class Login extends React.Component{
  
   render(){
     return(
-      <div className='login-page'>
-        <form onSubmit={this.handleLogin} >
-          <input 
-            type='text' 
-            name='username' 
-            placeholder='Username' 
-            className='input'
-            value={this.state.username} 
-            onChange={this.handleChange}
-            required
-          ></input>
-          <input 
-            type='password' 
-            name='password' 
-            placeholder='Password' 
-            className='input'
-            value={this.state.password} 
-            onChange={this.handleChange}
-            required
-          ></input><br></br>
-          <input 
-            className='submitBtn' 
-            type='submit' 
-            value="Login"
-          ></input>
-        </form>
-        <label>
-          Don't have an account? <Link to='/register'>Register</Link>
-        </label>
-        {
-          this.state.error ? 
-            <p className='errorMsg'>{this.state.errorMsg}</p>
-            :
-            null
-        }
+      <div className='wrapper'>
+        <div className='login-page'>
+          <form onSubmit={this.handleLogin} >
+            <input 
+              type='text' 
+              name='username' 
+              placeholder='Username' 
+              className='input'
+              value={this.state.username} 
+              onChange={this.handleChange}
+              required
+            ></input>
+            <input 
+              type='password' 
+              name='password' 
+              placeholder='Password' 
+              className='input'
+              value={this.state.password} 
+              onChange={this.handleChange}
+              required
+            ></input><br></br>
+            <input 
+              className='submitBtn' 
+              type='submit' 
+              value="Login"
+            ></input>
+          </form>
+          <label>
+            Don't have an account? <Link to='/register'>Register</Link>
+          </label>
+          {
+            this.state.error ? 
+              <p className='errorMsg'>{this.state.errorMsg}</p>
+              :
+              null
+          }
+        </div>
       </div>
     )
   }
