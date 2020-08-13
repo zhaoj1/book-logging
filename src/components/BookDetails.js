@@ -28,7 +28,7 @@ export default class BookDetails extends React.Component{
         pagesRead: 0,
         totalPages: this.props.selectedBook.volumeInfo.pageCount
       })
-    }).then(this.props.fetchBooks()).then(this.props.confirmationPopup())
+    }).then(this.props.fetchBooks()).then(this.props.confirmationPopup('confirmation'))
   }
 
   render(){

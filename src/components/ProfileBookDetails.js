@@ -126,16 +126,16 @@ export default class ProfileBookDetails extends React.Component{
     }
   }
 
-  deleteBook = async () => {
-    const bookDeleted = await fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}`, {
-      method: 'DELETE',
-      headers: {'Authorization': `JWT ${sessionStorage.getItem('token')}`}
-    })
-    if(bookDeleted){
-      this.props.closeModal();
-      this.props.fetchBooks();
-    }
-  }
+  // deleteBook = async () => {
+  //   const bookDeleted = await fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}`, {
+  //     method: 'DELETE',
+  //     headers: {'Authorization': `JWT ${sessionStorage.getItem('token')}`}
+  //   })
+  //   if(bookDeleted){
+  //     this.props.closeModal();
+  //     this.props.fetchBooks();
+  //   }
+  // }
 
   render(){
     return(
@@ -196,7 +196,7 @@ export default class ProfileBookDetails extends React.Component{
               >
               </input>
             </form>
-            <button onClick={this.deleteBook} className='submitBtn' >Delete</button><br></br>
+            <button onClick={() => this.props.confirmationPopup('delete')} className='submitBtn' >Delete</button><br></br>
             {this.state.error == null ?
               null
               :

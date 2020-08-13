@@ -342,6 +342,7 @@ html, body, .App, #root {
   width: 50%;
   font-size: 20px;
   margin: auto;
+  margin-bottom: 1%;
 }
 
 /* ------------------------------- chart --------------------------------------- */

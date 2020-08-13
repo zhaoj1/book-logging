@@ -10,6 +10,7 @@ import Results from './Results';
 import BookDetails from './BookDetails';
 import ProfileBookDetails from './ProfileBookDetails';
 import Confirmation from './Confirmation';
+import DeleteConfirm from './DeleteConfirm';
 
 const modalStyle = {
   overlay : {
@@ -75,11 +76,12 @@ export default class Contents extends React.Component{
     })
   }
 
-  confirmationPopup = () => {
+  confirmationPopup = (type) => {
     this.setState({
       modalIsOpen: true,
-      modalType: 'confirmation'
+      modalType: type
     })
+    console.log(this.state.modalType)
   }
 
   closeModal = () => {
@@ -162,6 +164,7 @@ export default class Contents extends React.Component{
                 closeModal={this.closeModal}
                 pages={this.state.pages}
                 fetchPages={this.fetchPages}
+                confirmationPopup={this.confirmationPopup}
               />
               :
               this.state.modalType == 'confirmation' ?
@@ -169,7 +172,15 @@ export default class Contents extends React.Component{
                   closeModal={this.closeModal}
                 />
                 :
-                null
+                this.state.modalType == 'delete' ? 
+                  <DeleteConfirm 
+                    selectedBook={this.state.selectedBook}
+                    fetchBooks={this.fetchBooks}
+                    closeModal={this.closeModal}
+                    confirmationPopup={this.confirmationPopup}
+                  />
+                  :
+                  null
           }
           
         </Modal>
