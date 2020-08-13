@@ -106,26 +106,24 @@ export default class Profile extends React.Component{
             <h1>{this.props.currentUser.username}</h1>
             <div className='profile-analytics'>
               <div className='chart-container'>
-                <OverallChart 
-                  data={this.state.analyticsData}
-                  dateLabels={this.state.dateLabels}
-                />
-              </div>
-              <div className='profile-overall-analytics'>
-                analytics
-              </div>
-            </div>
-            <div className='profile-lower'>
-              <div className='library'>
-                {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
-                  this.props.booksList.books.map(book => 
-                    <ProfileBookCard
-                      ele={book}
-                      setSelectedBook={this.props.setSelectedBook}
-                    />
-                  )
+                {this.state.chartView ? 
+                  <OverallChart 
+                    data={this.state.analyticsData}
+                    dateLabels={this.state.dateLabels}
+                  />
                   :
-                  null
+                  <div className='library'>
+                    {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
+                      this.props.booksList.books.map(book => 
+                        <ProfileBookCard
+                          ele={book}
+                          setSelectedBook={this.props.setSelectedBook}
+                        />
+                      )
+                      :
+                      null
+                    }
+                  </div>
                 }
               </div>
               <div className='search-box'>
