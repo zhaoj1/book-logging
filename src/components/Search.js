@@ -5,6 +5,7 @@ export default class Search extends React.Component{
 
   state = {
     queryParams: '',
+    authorQuery: '',
     searched: false
   }
 
@@ -23,9 +24,8 @@ export default class Search extends React.Component{
 
   searchAPI = async (event) => {
     event.preventDefault();
-    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.queryParams}&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
+    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.queryParams}+author:${this.state.authorQuery}&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
     const json = await resp.json()
-    console.log(json)
     this.props.setResults(json)
     this.setState({searched: true})
   }
@@ -33,15 +33,22 @@ export default class Search extends React.Component{
   render(){
     return(
       <div className='search'>
-        <p>Search</p>
         <form onSubmit={this.searchAPI}>
           <input 
             type='text' 
             name='queryParams' 
-            className='input'
+            className='search-input'
+            placeholder='Search'
             value={this.state.queryParams} 
             onChange={this.handleChange}
-            required
+          ></input><br></br>
+          <input 
+            type='text' 
+            name='authorQuery' 
+            className='search-input'
+            placeholder='Author'
+            value={this.state.authorQuery} 
+            onChange={this.handleChange}
           ></input><br></br>
           <input 
             className='submitBtn' 

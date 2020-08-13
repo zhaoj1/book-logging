@@ -163,7 +163,7 @@ html, body, .App, #root {
 
 .profileLineItem{
   width: 25%;
-  height: 100%;
+  height: 125%;
   border: solid black 1px;
   background-color: white;
   display: flex;
@@ -171,6 +171,7 @@ html, body, .App, #root {
   margin: 3%;
   transition: all .25s ease-in-out;
 }
+
 .profileLineItem:hover{
   transform: scale(1.2);
 }
@@ -187,7 +188,18 @@ html, body, .App, #root {
 }
 
 .search-box{
-  width: 20%;
+  width: 30%;
+}
+
+.search{
+  width: 90%
+}
+
+.search-input{
+  margin: auto;
+  margin-bottom: 10px;
+  width: 90%;
+  font-size: 20px;
 }
 
 .profile-overall-analytics{
