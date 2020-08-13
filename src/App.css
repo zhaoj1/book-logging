@@ -149,17 +149,22 @@ html, body, .App, #root {
   justify-content: center;
   height: 80%;
   justify-content: space-around;
-  padding-top: 8%;
+  padding-top: 10%;
   z-index: 1;
 }
 
 .profile-analytics{
-  height: 90%;
-  width: 90%;
+  height: 45%;
+  width: 80%;
   margin: auto;
+  margin-bottom: 2%;
   display: flex;
   justify-content: space-between;
-  background-color: yellow;
+}
+
+.profile-lower{
+  display: flex;
+  height: 45%;
 }
 
 .library, .search-box{
@@ -172,7 +177,7 @@ html, body, .App, #root {
 
 .profileLineItem{
   width: 25%;
-  height: 125%;
+  height: 150%;
   border: solid black 1px;
   background-color: white;
   display: flex;
@@ -190,6 +195,7 @@ html, body, .App, #root {
   overflow:scroll;
   height: 80%;
   padding: 2% 0 2% 2%;
+  margin-bottom: 1%;
 }
 
 .library-books{
@@ -198,7 +204,7 @@ html, body, .App, #root {
 
 .search-box{
   width: 20%;
-  height: 50%;
+  height: 100%;
 }
 
 .search{
@@ -358,6 +364,7 @@ html, body, .App, #root {
   height: 100%;
   position: relative;
   display: flex;
+  margin: auto;
 }
 
 .details-chart-container{

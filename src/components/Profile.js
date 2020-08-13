@@ -10,8 +10,8 @@ export default class Profile extends React.Component{
   state = {
     analyticsData: [],
     dateLabels: [],
-    chartView: true,
-    selectedPointId: null
+    selectedPointId: null,
+    view: 'chart'
   }
  
   componentDidMount = () => {
@@ -94,7 +94,7 @@ export default class Profile extends React.Component{
 
   }
 
-  toggleChart = () => {this.setState({chartView: !this.state.chartView})}
+  changeView = (view) => {this.setState({view: view})}
 
   setSelectedPoint = (data) => {this.setState({selectedPointId:data})}
 
@@ -106,24 +106,23 @@ export default class Profile extends React.Component{
             <h1>{this.props.currentUser.username}</h1>
             <div className='profile-analytics'>
               <div className='chart-container'>
-                {this.state.chartView ? 
-                  <OverallChart 
-                    data={this.state.analyticsData}
-                    dateLabels={this.state.dateLabels}
-                  />
+                <OverallChart 
+                  data={this.state.analyticsData}
+                  dateLabels={this.state.dateLabels}
+                />
+              </div>
+            </div>
+            <div className='profile-lower'>
+              <div className='library'>
+                {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
+                  this.props.booksList.books.map(book => 
+                    <ProfileBookCard
+                      ele={book}
+                      setSelectedBook={this.props.setSelectedBook}
+                    />
+                  )
                   :
-                  <div className='library'>
-                    {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
-                      this.props.booksList.books.map(book => 
-                        <ProfileBookCard
-                          ele={book}
-                          setSelectedBook={this.props.setSelectedBook}
-                        />
-                      )
-                      :
-                      null
-                    }
-                  </div>
+                  null
                 }
               </div>
               <div className='search-box'>

@@ -37,7 +37,7 @@ export default class LineChart extends Component {
       },
       options: {
         responsive: true,
-        // maintainAspectRatio: false,
+        maintainAspectRatio: false,
         scales: {
           yAxes: [{
             ticks: {
