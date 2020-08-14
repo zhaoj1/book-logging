@@ -111,8 +111,6 @@ export default class Profile extends React.Component{
                   dateLabels={this.state.dateLabels}
                 />
               </div>
-            </div>
-            <div className='profile-lower'>
               <div className='library'>
                 {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
                   this.props.booksList.books.map(book => 
@@ -125,11 +123,11 @@ export default class Profile extends React.Component{
                   null
                 }
               </div>
-              <div className='search-box'>
-                <Search 
-                  setResults={this.props.setResults}
-                />
-              </div> 
+            </div>
+            <div className='profile-lower'>
+              <Search 
+                setResults={this.props.setResults}
+              />
             </div>
           </div>
           :

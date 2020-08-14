@@ -33,7 +33,10 @@ export default class Search extends React.Component{
   render(){
     return(
       <div className='search'>
-        <form onSubmit={this.searchAPI}>
+        <form 
+        className='search-form'
+          onSubmit={this.searchAPI}
+        >
           <input 
             type='text' 
             name='queryParams' 
@@ -41,7 +44,7 @@ export default class Search extends React.Component{
             placeholder='Search'
             value={this.state.queryParams} 
             onChange={this.handleChange}
-          ></input><br></br>
+          ></input>
           <input 
             type='text' 
             name='authorQuery' 
@@ -49,13 +52,13 @@ export default class Search extends React.Component{
             placeholder='Author'
             value={this.state.authorQuery} 
             onChange={this.handleChange}
-          ></input><br></br>
+          ></input>
           <input 
             className='submitBtn' 
             type='submit' 
             value="Search"
-          ></input><br></br>
-          <img src='https://books.google.com/googlebooks/images/poweredby.png' />
+          ></input>
+          <img src='https://books.google.com/googlebooks/images/poweredby.png' width='62' height='30' />
         </form>
         {this.state.searched ? 
           <Redirect to='/results' />
