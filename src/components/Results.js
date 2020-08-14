@@ -1,8 +1,9 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
 import BookCard from './BookCard';
+import Search from './Search';
 
-export default class Search extends React.Component{
+export default class Results extends React.Component{
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
@@ -11,6 +12,11 @@ export default class Search extends React.Component{
   render(){
     return(
       <div className='results-page'>
+        <div className='search-box'>
+          <Search 
+            setResults={this.props.setResults}
+          />
+        </div>
         {this.props.loggedIn ? 
           <div className='results'>
             {this.props.results.items.map(ele => 
