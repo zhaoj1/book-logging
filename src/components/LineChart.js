@@ -44,6 +44,11 @@ export default class LineChart extends Component {
               precision: 0,
               suggestedMax: 5
             }
+          }],
+          xAxes: [{
+            ticks: {
+              minRotation: 45
+            }
           }]
         },
       }

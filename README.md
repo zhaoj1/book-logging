@@ -19,7 +19,6 @@ Django REST Framework
 [X] Delete confirmation - refresh book list    
 [X] Revamp chart (possibly transition to different library)    
 [] Adjust chart (currently rerenders on entering data and will not update on post)    
-[] Profile analytics (toggle with chart)    
 [] Visual for completion of saved book    
 [] Styling + CSS    
 [] Landing page     
