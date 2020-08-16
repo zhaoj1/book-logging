@@ -81,7 +81,6 @@ export default class Contents extends React.Component{
       modalIsOpen: true,
       modalType: type
     })
-    console.log(this.state.modalType)
   }
 
   closeModal = () => {

@@ -39,7 +39,6 @@ export default class Login extends React.Component{
     sessionStorage.setItem('token', input.token)
     this.props.setUser(input.user)
     this.props.history.push('/profile')
-    console.log(input)
   }
  
   render(){

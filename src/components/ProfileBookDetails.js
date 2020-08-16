@@ -126,17 +126,6 @@ export default class ProfileBookDetails extends React.Component{
     }
   }
 
-  // deleteBook = async () => {
-  //   const bookDeleted = await fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}`, {
-  //     method: 'DELETE',
-  //     headers: {'Authorization': `JWT ${sessionStorage.getItem('token')}`}
-  //   })
-  //   if(bookDeleted){
-  //     this.props.closeModal();
-  //     this.props.fetchBooks();
-  //   }
-  // }
-
   render(){
     return(
       <div className='bookDetails'>
