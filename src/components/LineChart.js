@@ -6,17 +6,30 @@ let myChart, chartData, dateLabels
 
 export default class LineChart extends Component {
 
+  state = {
+    chartData: [],
+    dateLabels: []
+  }
+
   setData(){
-    chartData = 
-      this.props.data.length > 0 ?
-        this.props.data
-        :
-        null
-    dateLabels = 
-      this.props.data.length > 0 ?
-        this.props.data.map(ele => moment(ele.x).format('MM/DD'))
-        :
-        null
+    this.setState({
+      chartData: this.props.data,
+      dateLabels: this.props.data.map(ele => moment(ele.x).format('MM/DD'))
+    }, () => this.makeChart())
+    // chartData = 
+    //   this.props.data.length > 0 ?
+    //     this.props.data
+    //     :
+    //     null
+    // dateLabels = 
+    //   this.props.data.length > 0 ?
+    //     this.props.data.map(ele => moment(ele.x).format('MM/DD'))
+    //     :
+    //     null
+  }
+
+  componentDidMount = () => {
+    this.setData()
   }
 
   makeChart(){         
@@ -24,11 +37,11 @@ export default class LineChart extends Component {
     myChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: dateLabels,
+        labels: this.state.dateLabels,
         datasets: [{
           label: 'Pages Read',
           lineTension: 0,
-          data: chartData,
+          data: this.state.chartData,
           borderColor: [
             'rgb(0,0,0)'
           ],
@@ -59,13 +72,12 @@ export default class LineChart extends Component {
     if(prevProps !== this.props){
       if(myChart){myChart.destroy()};
       this.setData();
-      this.makeChart();
     }
   }
 
   render() {
     return (
-      <canvas id="myChart" ></canvas>
+    <canvas id="myChart" >{console.log(this.props)}</canvas>
     )
   }
 

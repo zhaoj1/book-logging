@@ -24,6 +24,12 @@ export default class ProfileBookDetails extends React.Component{
       :
       pagesRead = 0}
   }
+
+  componentDidUpdate = (prevProps) => {
+    if(prevProps !== this.props){
+      this.calculateAnalytics();
+    }
+  }
   
   calculateAnalytics = () => {
     let firstEle, lastEle
@@ -120,7 +126,6 @@ export default class ProfileBookDetails extends React.Component{
       })
       if(resp.ok){
         this.props.fetchPages();
-        this.calculateAnalytics();
         this.setState({error:null})
       }
     }
