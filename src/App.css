@@ -305,6 +305,7 @@ html, body, .App, #root {
 
 .back-btn{
   margin: auto;
+  font-size: 20px;
 }
 
 /* ------------------------------- details --------------------------------------- */

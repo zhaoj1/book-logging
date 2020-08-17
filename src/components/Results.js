@@ -60,11 +60,17 @@ export default class Results extends React.Component{
     return(
       <div className='results-page'>
         <div className='search-box'>
-          {console.log(this.props.results)}
           <Search 
             setResults={this.props.setResults}
+            defaultSearch={this.props.defaultSearch}
           />
         </div>
+        <button 
+          onClick={this.backToProfile} 
+          className='back-btn'
+        >
+          Return to Profile
+        </button>
         {this.props.loggedIn ? 
           <div className='results-container'>
             <button 
@@ -99,7 +105,6 @@ export default class Results extends React.Component{
           :
           <Redirect to='/' />
         }
-        <button onClick={this.backToProfile} className='back-btn'>Back</button>
       </div>
     )
   }

@@ -9,17 +9,16 @@ export default class Search extends React.Component{
     searched: false
   }
 
-  componentDidMount = () => {
-    this.setState({
-      queryParams: '',
-      searched: false
-    })
-  }
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     })
+  }
+
+  componentDidMount = () => {
+    if(this.props.defaultSearch){
+      this.setState({queryParams: this.props.defaultSearch})
+    }
   }
 
   searchAPI = async (event) => {
@@ -29,6 +28,7 @@ export default class Search extends React.Component{
     if(json.totalItems == 0){
       alert('No results found.')
     }else{
+      if(this.props.setDefaultSearch){this.props.setDefaultSearch(this.state.queryParams)}
       this.props.setResults(json)
       this.setState({searched: true})
     }

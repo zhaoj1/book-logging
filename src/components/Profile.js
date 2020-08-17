@@ -127,6 +127,7 @@ export default class Profile extends React.Component{
             <div className='profile-lower'>
               <Search 
                 setResults={this.props.setResults}
+                setDefaultSearch={this.props.setDefaultSearch}
               />
             </div>
           </div>

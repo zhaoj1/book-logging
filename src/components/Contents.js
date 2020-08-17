@@ -39,7 +39,8 @@ const defState = {
   modalType: null,
   selectedBook: {},
   booksList: null,
-  pages: null
+  pages: null,
+  defaultSearch: ''
 }
 
 export default class Contents extends React.Component{
@@ -63,6 +64,8 @@ export default class Contents extends React.Component{
   setUser = (user) => {this.setState({currentUser: user, loggedIn: true})}
 
   setResults = (results) => {this.setState({results: results})}
+
+  setDefaultSearch = (query) => {this.setState({defaultSearch: query})}
 
   setSelectedBook = (book, page) => {
     this.setState({
@@ -123,6 +126,7 @@ export default class Contents extends React.Component{
                 fetchBooks={this.fetchBooks}
                 pages={this.state.pages}
                 fetchPages={this.fetchPages}
+                setDefaultSearch={this.setDefaultSearch}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -134,6 +138,7 @@ export default class Contents extends React.Component{
                 results={this.state.results}
                 setSelectedBook={this.setSelectedBook}
                 fetchBooks={this.fetchBooks}
+                defaultSearch={this.state.defaultSearch}
               />
             } />
           </Switch>
