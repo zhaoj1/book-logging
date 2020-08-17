@@ -34,7 +34,7 @@ Modal.setAppElement('#root');
 const defState = {
   currentUser: null,
   loggedIn: false,
-  results: {},
+  results: [],
   modalIsOpen: false,
   modalType: null,
   selectedBook: {},
@@ -60,13 +60,9 @@ export default class Contents extends React.Component{
 
   componentDidMount = () => {sessionStorage.clear()}
 
-  setUser = (user) => {
-    this.setState({currentUser: user, loggedIn: true})
-  }
+  setUser = (user) => {this.setState({currentUser: user, loggedIn: true})}
 
-  setResults = (results) => {
-    this.setState({results: results})
-  }
+  setResults = (results) => {this.setState({results: results})}
 
   setSelectedBook = (book, page) => {
     this.setState({
@@ -98,6 +94,7 @@ export default class Contents extends React.Component{
             <Route exact path='/' render={(routerProps) => 
               <Landing 
                 {...routerProps}
+                setUser={this.setUser}
               />
             } />
             <Route exact path='/register' render={(routerProps) => 

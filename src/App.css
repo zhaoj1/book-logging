@@ -40,7 +40,11 @@ html, body, .App, #root {
 }
 
 .login-page, .register-page{
-  padding: 5% 0 5% 0;
+  padding: 2% 0 2% 0;
+  background-color: rgb(170,170,210);
+  width: 50%;
+  border-radius: 15px;
+  margin: auto;
 }
 
 .logo, .app-description, .app-features{
@@ -56,7 +60,7 @@ html, body, .App, #root {
 
 .logo{
   text-align: center;
-  background-color: red;
+  background-color: rgb(120,120,210);
   width: 100%;
   margin-bottom: 0;
   padding: 2% 0 2% 0;
@@ -78,18 +82,16 @@ html, body, .App, #root {
   border-radius: 10px;
   height: 110%;
   overflow: scroll;
-  background-color:blue;
+  background-color: rgb(240,240,270);
   z-index: 3;
 }
 
 .landing-right{
-  right: 1%;
+  left: 58%;
   top: 20%;
-  width: 30%;
+  width: 50%;
   position: fixed;
   margin: auto;
-  border-radius: 10px;
-  background-color: green;
 }
 
 .features-line-item{
@@ -121,7 +123,7 @@ html, body, .App, #root {
 .input{
   margin: auto;
   margin-bottom: 10px;
-  width: 50%;
+  width: 80%;
   font-size: 20px;
 }
 
@@ -157,6 +159,9 @@ html, body, .App, #root {
   margin-bottom: 2%;
   display: flex;
   justify-content: space-between;
+  background-color: rgb(240,240,270);
+  border-radius: 10px;
+  padding: 2%;
 }
 
 .profile-lower{
@@ -206,7 +211,8 @@ html, body, .App, #root {
   display: flex;
   width: 80%;
   height: 100%;
-  background-color: slategray;
+  /* background-color: rgb(220,220,240);
+  border-radius: 10px; */
 }
 
 .search-form{
@@ -214,6 +220,7 @@ html, body, .App, #root {
   width: 90%;
   display: flex;
   justify-content: space-between;
+  padding-top: 8px;
 }
 
 .search-input{
@@ -236,11 +243,21 @@ html, body, .App, #root {
   padding-top: 8%;
 }
 
+.results-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .results{
   display: flex;
-  flex-wrap: wrap;
-  margin: auto;
+  flex-wrap: wrap; 
   justify-content: center;
+}
+
+.results-btn{
+  flex: 1;
+  margin: 0 1% 0 1%;
 }
 
 .resultsLineItem{

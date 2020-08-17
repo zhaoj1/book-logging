@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Zoom from 'react-reveal/Zoom';
 import Register from './Register';
 
-function Landing(){
+function Landing(props){
 
   return(
     <div className='landing' >
@@ -32,7 +32,10 @@ function Landing(){
           </div>
         </div>
         <div className='landing-right'>
-          <Register />
+          <Register 
+            history={props.history}
+            setUser={props.setUser}
+          />
         </div>
       </div>
     </div>
