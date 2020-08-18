@@ -8,7 +8,7 @@ import Login from './Login';
 import Profile from './Profile';
 import Results from './Results';
 import BookDetails from './BookDetails';
-import ProfileBookDetails from './ProfileBookDetails';
+import ProfileBookAnalytics from './ProfileBookAnalytics';
 import Confirmation from './Confirmation';
 import DeleteConfirm from './DeleteConfirm';
 
@@ -158,7 +158,7 @@ export default class Contents extends React.Component{
             />
             :
             this.state.modalType == 'profile' ?
-              <ProfileBookDetails
+              <ProfileBookAnalytics
                 selectedBook={this.state.selectedBook}
                 currentUser={this.state.currentUser}
                 fetchBooks={this.fetchBooks}

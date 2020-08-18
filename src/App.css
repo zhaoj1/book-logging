@@ -164,6 +164,10 @@ html, body, .App, #root {
   padding: 2%;
 }
 
+.profile-details{
+  
+}
+
 .profile-lower{
   display: flex;
   height: 15%;
@@ -349,13 +353,6 @@ html, body, .App, #root {
 .profileDetails-pages{
   height: 50%;
   text-align: center;
-}
-
-.listView{
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-  text-align: left;
 }
 
 .chartHint{

@@ -6,8 +6,6 @@ export default class BookDetails extends React.Component{
     var authors = this.props.selectedBook.volumeInfo.authors == undefined ? '' : this.props.selectedBook.volumeInfo.authors.toString()
     var isbn10 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined || !this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10') ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier
     var isbn13 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined || !this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13') ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier
-    var mainCategory = this.props.selectedBook.volumeInfo.mainCategory == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.mainCategory.toString()
-    var categories = this.props.selectedBook.volumeInfo.categories == undefined ? '' : this.props.selectedBook.volumeInfo.categories.toString()
 
     fetch('http://127.0.0.1:8000/books/', {
       method: 'POST',
@@ -37,14 +35,7 @@ export default class BookDetails extends React.Component{
         <div className='bookDetails-left'>
           <img className='bookCover' src={this.props.selectedBook.volumeInfo.imageLinks.thumbnail} />
           <div className='bookInfo'>
-            <label className='bookTitle'>
-              {
-                this.props.selectedBook.volumeInfo.title.length >= 25 ? 
-                  this.props.selectedBook.volumeInfo.title.slice(0, 22) + '...'
-                  :
-                  this.props.selectedBook.volumeInfo.title
-              }
-            </label><br></br>
+            <label className='bookTitle'>{this.props.selectedBook.volumeInfo.title}</label><br></br>
             {this.props.selectedBook.volumeInfo.authors == undefined ?
               'N/A'
               : 
@@ -90,11 +81,6 @@ export default class BookDetails extends React.Component{
           }<br></br><br></br>
           Page Count: {this.props.selectedBook.volumeInfo.pageCount}<br></br>
           Category: {
-            this.props.selectedBook.volumeInfo.mainCategory == undefined ?
-            'N/A'
-            :
-            this.props.selectedBook.volumeInfo.mainCategory
-          } {
             this.props.selectedBook.volumeInfo.categories == undefined ?
             'N/A'
             :
