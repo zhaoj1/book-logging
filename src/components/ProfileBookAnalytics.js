@@ -14,11 +14,13 @@ export default class ProfileBookAnalytics extends React.Component{
     dateLabels: [],
     chartView: true,
     selectedPointId: null,
-    error: null
+    error: null,
+    bookDetails: {}
   }
 
   componentDidMount = () => {
     this.calculateAnalytics();
+    this.searchBook()
     
     {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
       pagesRead = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
@@ -30,6 +32,12 @@ export default class ProfileBookAnalytics extends React.Component{
     if(prevProps !== this.props){
       this.calculateAnalytics();
     }
+  }
+
+  searchBook = async () => {
+    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.props.selectedBook.api_id}&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
+    const json = await resp.json()
+    this.setState({bookDetails:json.items[0].volumeInfo})
   }
   
   calculateAnalytics = () => {
@@ -167,7 +175,7 @@ export default class ProfileBookAnalytics extends React.Component{
             :
             <div className='profile-details'>
               <ProfileBookDetails
-                selectedBook={this.props.selectedBook}
+                bookDetails={this.state.bookDetails}
               />
             </div>
           }
