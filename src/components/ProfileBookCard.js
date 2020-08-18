@@ -19,7 +19,14 @@ function ProfileBookCard(props){
                   props.ele.title
               }
             </label><br></br>
-            {props.ele.authors}<br></br>
+            {props.ele.authors.split(',').length <= 2 ? 
+                props.ele.authors.split(',').map(auth => <label className='bookAuthor'>{auth}<br></br></label>)
+                :
+                <>
+                  <label className='bookAuthor'>{props.ele.authors.split(',')[0]}</label><br></br>
+                  <label className='bookAuthor'>{props.ele.authors.split(',')[1]}</label><br></br>
+                  <label className='bookAuthor'>+ {props.ele.authors.split(',').length - 2} other(s)</label><br></br>
+                </>}
             <label className='bookISBN'>
               ISBN10: {props.ele.isbn10}
             </label><br></br>

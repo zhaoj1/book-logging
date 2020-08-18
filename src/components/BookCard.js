@@ -27,7 +27,14 @@ function BookCard(props){
             {props.ele.volumeInfo.authors == undefined ?
               null
               :
-              props.ele.volumeInfo.authors.map(auth => <label className='bookAuthor'>{auth}<br></br></label>)
+              props.ele.volumeInfo.authors.length <= 2 ? 
+                props.ele.volumeInfo.authors.map(auth => <label className='bookAuthor'>{auth}<br></br></label>)
+                :
+                <>
+                  <label className='bookAuthor'>{props.ele.volumeInfo.authors[0]}</label><br></br>
+                  <label className='bookAuthor'>{props.ele.volumeInfo.authors[1]}</label><br></br>
+                  <label className='bookAuthor'>+ {props.ele.volumeInfo.authors.length - 2} other(s)</label><br></br>
+                </>
             }
             {props.ele.volumeInfo.industryIdentifiers == undefined ? 
               null

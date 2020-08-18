@@ -65,6 +65,7 @@ export default class ProfileBookDetails extends React.Component{
       let i = new Date(bookPages[0].dateRead).getTime()
       let endDate = new Date(bookPages[bookPages.length - 1].dateRead).getTime()
       let labelDiff = Math.round((endDate - i) / (7 * 1000 * 60 * 60 * 24))
+
       while(i <= endDate){
         let nextDate = new Date(i)
         nextDate.setDate(new Date(i).getDate() + Math.round(labelDiff))
@@ -137,15 +138,16 @@ export default class ProfileBookDetails extends React.Component{
         <div className='bookDetails-left'>
           <img className='bookCover' src={this.props.selectedBook.imageLink} />
           <div className='bookInfo'>
-            <label className='bookTitle'>
-              {
-                this.props.selectedBook.title.length >= 25 ? 
-                  this.props.selectedBook.title.slice(0, 22) + '...'
-                  :
-                  this.props.selectedBook.title
-              }
-            </label><br></br>
-            {this.props.selectedBook.authors}<br></br>
+            <label className='bookTitle'>{this.props.selectedBook.title}</label><br></br>
+            {/* {this.props.selectedBook.authors}<br></br> */}
+            {this.props.selectedBook.authors.split(',').length <= 2 ? 
+                this.props.selectedBook.authors.split(',').map(auth => <label className='bookAuthor'>{auth}<br></br></label>)
+                :
+                <>
+                  <label className='bookAuthor'>{this.props.selectedBook.authors.split(',')[0]}</label><br></br>
+                  <label className='bookAuthor'>{this.props.selectedBook.authors.split(',')[1]}</label><br></br>
+                  <label className='bookAuthor'>+ {this.props.selectedBook.authors.split(',').length - 2} other(s)</label><br></br>
+                </>}
             <label className='bookISBN'>
               ISBN10: {this.props.selectedBook.isbn10}
             </label><br></br>
@@ -155,12 +157,24 @@ export default class ProfileBookDetails extends React.Component{
           </div>
         </div>
         <div className='bookDetails-right'>
-          <div className='details-chart-container'>
-            <LineChart 
-              data={this.state.analyticsData}
-              dateLabels={this.state.dateLabels}
-            />
-          </div>
+          {this.state.chartView?
+            <div 
+              className='details-chart-container' 
+              onClick={this.toggleChart}
+            >
+              <LineChart 
+                data={this.state.analyticsData}
+                dateLabels={this.state.dateLabels}
+              />
+            </div>
+            :
+            <div 
+              className='details-list'
+              onClick={this.toggleChart}
+            >
+            </div>
+          }
+          
           <div className='profileDetails-pages'>
             <h2 className='pages_read'>Pages Read: {pagesRead} / {this.props.selectedBook.totalPages}</h2>
             <form

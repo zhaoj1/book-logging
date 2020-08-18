@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import Chart from "chart.js";
 import moment from 'moment';
 
-let myChart, chartData, dateLabels
+let myChart
 
 export default class LineChart extends Component {
 
   state = {
     chartData: [],
-    dateLabels: []
+    dateLabels: [],
   }
 
   setData(){
@@ -16,16 +16,6 @@ export default class LineChart extends Component {
       chartData: this.props.data,
       dateLabels: this.props.data.map(ele => moment(ele.x).format('MM/DD'))
     }, () => this.makeChart())
-    // chartData = 
-    //   this.props.data.length > 0 ?
-    //     this.props.data
-    //     :
-    //     null
-    // dateLabels = 
-    //   this.props.data.length > 0 ?
-    //     this.props.data.map(ele => moment(ele.x).format('MM/DD'))
-    //     :
-    //     null
   }
 
   componentDidMount = () => {
@@ -77,7 +67,7 @@ export default class LineChart extends Component {
 
   render() {
     return (
-    <canvas id="myChart" >{console.log(this.props)}</canvas>
+    <canvas id="myChart" ></canvas>
     )
   }
 
