@@ -190,14 +190,46 @@ html, body, .App, #root {
 
 .booklist-toggle-btn-left{
   border: none;
-  background-color: rgba(200,200,200, 0.95);
+  background-color: rgb(180,180,180);
   margin: auto;
+  height: 64px;
+  width: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.booklist-toggle-btn-left:hover{
+  background-color: rgb(140,140,140);
+}
+
+.booklist-toggle-btn-left:disabled{
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .booklist-toggle-btn-right{
   border: none;
-  background-color: rgba(200,200,200, 0.95);
+  background-color: rgb(180,180,180);
   margin: auto;
+  height: 64px;
+  width: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.booklist-toggle-btn-right:hover{
+  background-color: rgb(140,140,140);
+}
+
+.booklist-toggle-btn-right:disabled{
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .profile-booklist{
@@ -206,6 +238,7 @@ html, body, .App, #root {
   text-align: left;
   width: 100%;
   justify-content: center;
+  height: 100%;
 }
 
 .profile-booklist-left{
@@ -223,6 +256,22 @@ html, body, .App, #root {
   margin-right: 1%;
   padding-left: 2%;
   background-color: white;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.profile-booklist-book-title{
+  border: solid black 1px;
+  margin-right: 1%;
+  padding-left: 2%;
+  background-color: white;
+  font-size: 20px;
+  cursor: default;
+}
+
+.profile-booklist-book-title:hover{
+  background-color: rgb(100,100,100);
+  color: whitesmoke;
 }
 
 .profileLineItem{
@@ -242,6 +291,12 @@ html, body, .App, #root {
 
 .library-books{
   margin: auto;
+}
+
+.list-view{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* ------------------------------- search --------------------------------------- */

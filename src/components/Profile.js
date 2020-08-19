@@ -5,6 +5,9 @@ import Search from './Search';
 import ProfileBookCard from './ProfileBookCard';
 import OverallChart from './OverallChart';
 
+import listBtn from '../imgs/listBtn.png'
+import panelsBtn from '../imgs/panelsBtn.png'
+
 export default class Profile extends React.Component{
 
   state = {
@@ -119,47 +122,73 @@ export default class Profile extends React.Component{
                   <button 
                     className='booklist-toggle-btn-left'
                     onClick={this.toggleList}
-                  >toggle</button>
+                    disabled={this.state.list?false:true}
+                    style={{'background-image':`url(${panelsBtn})`}} 
+                  ></button>
                   <button 
                     className='booklist-toggle-btn-right'
                     onClick={this.toggleList}
-                  >toggle</button>
+                    disabled={this.state.list?true:false}
+                    style={{'background-image':`url(${listBtn})`}} 
+                  ></button>
                 </div>
                 <div className='library'>
                   {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
                     this.state.list ? 
-                      <div className='profile-booklist'>
-                        <div className='profile-booklist-left'>
-                          <div className='profile-booklist-line-item'>Books Saved</div>
-                          <div className='profile-booklist-line-item'>Books Completed</div>
-                          <div className='profile-booklist-line-item'>Pages per day/week/month</div><br></br>
-                          {this.props.booksList.books.map(book => 
-                            <div className='profile-booklist-line-item'>
-                              {book.title.length >= 25 ?
-                                book.title.slice(0, 22) + '...'
-                                :
-                                book.title
-                              }
-                            </div>
-                          )}
-                        </div>
-                        <div className='profile-booklist-right'>
-                          <div className='profile-booklist-line-item'>
-                            {this.props.booksList.books.length}
+                      <div className='list-view'>
+                        <h2
+                          style={{
+                            'color':'whitesmoke',
+                          }}
+                        >ANALYTICS</h2>
+                        <div className='profile-booklist'>
+                          <div className='profile-booklist-left'>
+                            <div className='profile-booklist-line-item'>Books Saved</div>
+                            <div className='profile-booklist-line-item'>Books Completed</div>
+                            <div className='profile-booklist-line-item'>Pages per day/week/month</div><br></br>
+                            <div 
+                              className='profile-booklist-line-item'
+                              style={{
+                                'color':'whitesmoke',
+                                'background-color':'rgb(50,50,100)'
+                              }}
+                            >Title</div>
+                            {this.props.booksList.books.map(book => 
+                              <div 
+                                className='profile-booklist-book-title'
+                                onClick={() => this.props.setSelectedBook(book, 'profile')}
+                              >
+                                {book.title.length >= 25 ?
+                                  book.title.slice(0, 22) + '...'
+                                  :
+                                  book.title
+                                }
+                              </div>
+                            )}
                           </div>
-                          <div className='profile-booklist-line-item'>
-                            #
-                          </div>
-                          <div className='profile-booklist-line-item'>
-                            #
-                          </div><br></br>
-                          {this.props.booksList.books.map(book =>
+                          <div className='profile-booklist-right'>
                             <div className='profile-booklist-line-item'>
-                              {this.props.pages.pages.filter(page => page.book == book.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)}
+                              {this.props.booksList.books.length}
                             </div>
-                          )}
-                          {console.log(this.props.booksList)}
-                          {console.log(this.props.pages.pages)}
+                            <div className='profile-booklist-line-item'>
+                              #
+                            </div>
+                            <div className='profile-booklist-line-item'>
+                              #
+                            </div><br></br>
+                            <div 
+                              className='profile-booklist-line-item'
+                              style={{
+                                'color':'whitesmoke',
+                                'background-color':'rgb(50,50,100)'
+                              }}
+                            >Pages Read</div>
+                            {this.props.booksList.books.map(book =>
+                              <div className='profile-booklist-line-item'>
+                                {this.props.pages.pages.filter(page => page.book == book.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                       :
