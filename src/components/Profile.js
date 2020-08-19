@@ -11,7 +11,8 @@ export default class Profile extends React.Component{
     analyticsData: [],
     dateLabels: [],
     selectedPointId: null,
-    view: 'chart'
+    view: 'chart',
+    list: false
   }
  
   componentDidMount = () => {
@@ -96,6 +97,8 @@ export default class Profile extends React.Component{
 
   changeView = (view) => {this.setState({view: view})}
 
+  toggleList = () => {this.setState({list: !this.state.list})}
+
   setSelectedPoint = (data) => {this.setState({selectedPointId:data})}
 
   render(){
@@ -111,17 +114,65 @@ export default class Profile extends React.Component{
                   dateLabels={this.state.dateLabels}
                 />
               </div>
-              <div className='library'>
-                {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
-                  this.props.booksList.books.map(book => 
-                    <ProfileBookCard
-                      ele={book}
-                      setSelectedBook={this.props.setSelectedBook}
-                    />
-                  )
-                  :
-                  null
-                }
+              <div className='profile-analytics-right'>
+                <div className='profile-buttons-container'>
+                  <button 
+                    className='booklist-toggle-btn-left'
+                    onClick={this.toggleList}
+                  >toggle</button>
+                  <button 
+                    className='booklist-toggle-btn-right'
+                    onClick={this.toggleList}
+                  >toggle</button>
+                </div>
+                <div className='library'>
+                  {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
+                    this.state.list ? 
+                      <div className='profile-booklist'>
+                        <div className='profile-booklist-left'>
+                          <div className='profile-booklist-line-item'>Books Saved</div>
+                          <div className='profile-booklist-line-item'>Books Completed</div>
+                          <div className='profile-booklist-line-item'>Pages per day/week/month</div><br></br>
+                          {this.props.booksList.books.map(book => 
+                            <div className='profile-booklist-line-item'>
+                              {book.title.length >= 25 ?
+                                book.title.slice(0, 22) + '...'
+                                :
+                                book.title
+                              }
+                            </div>
+                          )}
+                        </div>
+                        <div className='profile-booklist-right'>
+                          <div className='profile-booklist-line-item'>
+                            {this.props.booksList.books.length}
+                          </div>
+                          <div className='profile-booklist-line-item'>
+                            #
+                          </div>
+                          <div className='profile-booklist-line-item'>
+                            #
+                          </div><br></br>
+                          {this.props.booksList.books.map(book =>
+                            <div className='profile-booklist-line-item'>
+                              {this.props.pages.pages.filter(page => page.book == book.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)}
+                            </div>
+                          )}
+                          {console.log(this.props.booksList)}
+                          {console.log(this.props.pages.pages)}
+                        </div>
+                      </div>
+                      :
+                      this.props.booksList.books.map(book => 
+                        <ProfileBookCard
+                          ele={book}
+                          setSelectedBook={this.props.setSelectedBook}
+                        />
+                      )
+                    :
+                    null
+                  }
+                </div>
               </div>
             </div>
             <div className='profile-lower'>

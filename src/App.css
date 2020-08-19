@@ -164,21 +164,65 @@ html, body, .App, #root {
   padding: 2%;
 }
 
-.profile-details{
-  
-}
-
 .profile-lower{
   display: flex;
   height: 15%;
 }
 
-.library{
-  margin: auto;
+.profile-analytics-right{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   width: 50%;
-  height: 90%;
+}
+
+.library{
+  margin-top: 2%;
+  width: 100%;
+  height: 100%;
   background-color:slategray;
   display: flex;
+  flex-wrap: wrap;
+  overflow:scroll;
+  padding: 2% 0 2% 2%;
+  margin-bottom: 1%;
+}
+
+.booklist-toggle-btn-left{
+  border: none;
+  background-color: rgba(200,200,200, 0.95);
+  margin: auto;
+}
+
+.booklist-toggle-btn-right{
+  border: none;
+  background-color: rgba(200,200,200, 0.95);
+  margin: auto;
+}
+
+.profile-booklist{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  width: 100%;
+  justify-content: center;
+}
+
+.profile-booklist-left{
+  width: 45%;
+  height: 100%;
+}
+
+.profile-booklist-right{
+  width: 45%;
+  height: 100%;
+}
+
+.profile-booklist-line-item{
+  border: solid black 1px;
+  margin-right: 1%;
+  padding-left: 2%;
+  background-color: white;
 }
 
 .profileLineItem{
@@ -194,14 +238,6 @@ html, body, .App, #root {
 
 .profileLineItem:hover{
   transform: scale(1.2);
-}
-
-.library{
-  flex-wrap: wrap;
-  overflow:scroll;
-  height: 80%;
-  padding: 2% 0 2% 2%;
-  margin-bottom: 1%;
 }
 
 .library-books{
@@ -361,7 +397,7 @@ html, body, .App, #root {
 }
 
 .details-btn{
-  width: 50%;
+  width: 35%;
   font-size: 20px;
   margin: auto;
   margin-bottom: 1%;
