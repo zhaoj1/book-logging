@@ -28,7 +28,13 @@ export default class Register extends React.Component{
       .then(data => data.json())
       .then(resp => 
         resp.token?
-          this.login(resp)
+          resp.id == null?
+            this.setState({
+              error: true,
+              errorMsg: 'Password must be at least 7 characters long.'
+            })
+            :
+            this.login(resp)
           :
           this.setState({
             error: true,
