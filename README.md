@@ -19,7 +19,7 @@ Django REST Framework
 [X] Delete confirmation - refresh book list    
 [X] Revamp chart (possibly transition to different library)    
 [X] Adjust chart     
-[] Visual for completion of saved book    
+[X] Visual for completion of saved book    
 [] Styling + CSS    
 [] Landing page     
 
