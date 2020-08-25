@@ -39,6 +39,20 @@ export default class ProfileBookAnalytics extends React.Component{
     const json = await resp.json()
     this.setState({bookDetails:json.items[0].volumeInfo})
   }
+
+  completeBook = () => {
+    fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}/patch/`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `JWT ${sessionStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ 
+        completed: true
+      })
+    })
+  }
   
   calculateAnalytics = () => {
     let firstEle, lastEle
@@ -115,7 +129,7 @@ export default class ProfileBookAnalytics extends React.Component{
   createPages = async (event) => {
     event.preventDefault()
 
-    if(pagesRead + this.state.pagesRead >= this.props.selectedBook.totalPages){
+    if(pagesRead + parseInt(this.state.pagesRead) > this.props.selectedBook.totalPages){
       this.setState({error: 'Please enter a valid number of pages.'})
     }else{
       const resp = await 
@@ -135,8 +149,17 @@ export default class ProfileBookAnalytics extends React.Component{
         })
       })
       if(resp.ok){
-        this.props.fetchPages();
-        this.setState({error:null})
+        const fetch = await this.props.fetchPages();
+        if(fetch.ok){
+          if(pagesRead + parseInt(this.state.pagesRead) == this.props.selectedBook.totalPages){
+            this.completeBook()
+          }
+          this.setState({
+            error:null,
+            pagesRead: 0,
+            dateRead: null,
+          })
+        }
       }
     }
   }
@@ -188,33 +211,37 @@ export default class ProfileBookAnalytics extends React.Component{
           </button>
           <div className='profileDetails-pages'>
             <h2 className='pages_read'>Pages Read: {pagesRead} / {this.props.selectedBook.totalPages}</h2>
-            <form
-              onSubmit={this.createPages}
-            >
-              <input
-                type='text' 
-                name='pagesRead' 
-                onChange={this.handleChange}
-                placeholder='Pages Read' 
-                className='input'
-                required
+            {this.props.selectedBook.completed == false ?
+              <form
+                onSubmit={this.createPages}
               >
-              </input>
-              <input
-                type='date' 
-                name='dateRead' 
-                onChange={this.handleChange}
-                className='input'
-                required
-              >
-              </input><br></br>
-              <input
-                type='submit'
-                className='submitBtn'
-                value='Update'
-              >
-              </input>
-            </form>
+                <input
+                  type='text' 
+                  name='pagesRead' 
+                  onChange={this.handleChange}
+                  placeholder='Pages Read' 
+                  className='input'
+                  required
+                >
+                </input>
+                <input
+                  type='date' 
+                  name='dateRead' 
+                  onChange={this.handleChange}
+                  className='input'
+                  required
+                >
+                </input><br></br>
+                <input
+                  type='submit'
+                  className='submitBtn'
+                  value='Update'
+                >
+                </input>
+              </form>
+              :
+              <h1>Book Completed</h1>
+            }
             <button onClick={() => this.props.confirmationPopup('delete')} className='submitBtn' >Delete</button><br></br>
             {this.state.error == null ?
               null

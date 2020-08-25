@@ -57,6 +57,7 @@ export default class Contents extends React.Component{
     const resp = await fetch('http://127.0.0.1:8000/pages/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
     const json = await resp.json()
     this.setState({pages: {...json}})
+    return resp
   }
 
   componentDidMount = () => {sessionStorage.clear()}

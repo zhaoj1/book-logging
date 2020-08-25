@@ -3,9 +3,13 @@ import React from 'react';
 export default class BookDetails extends React.Component{
 
   saveBook = () => {
-    var authors = this.props.selectedBook.volumeInfo.authors == undefined ? '' : this.props.selectedBook.volumeInfo.authors.toString()
-    var isbn10 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined || !this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10') ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier
-    var isbn13 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined || !this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13') ? '' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier
+    var authors = this.props.selectedBook.volumeInfo.authors == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.authors.toString()
+    var isbn10 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined || !this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10') ? 'N/A' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_10').identifier
+    var isbn13 = this.props.selectedBook.volumeInfo.industryIdentifiers == undefined || !this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13') ? 'N/A' : this.props.selectedBook.volumeInfo.industryIdentifiers.find(ele => ele.type == 'ISBN_13').identifier
+    var title = this.props.selectedBook.volumeInfo.title == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.title
+    var api_id = this.props.selectedBook.volumeInfo.id == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.id
+    var imageLink = this.props.selectedBook.volumeInfo.imageLinks.thumbnail == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.imageLinks.thumbnail
+    var totalPages = this.props.selectedBook.volumeInfo.pageCount == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.pageCount
 
     fetch('http://127.0.0.1:8000/books/', {
       method: 'POST',
@@ -15,16 +19,16 @@ export default class BookDetails extends React.Component{
         "Accept": "application/json"
       },
       body: JSON.stringify({ 
-        title: this.props.selectedBook.volumeInfo.title, 
-        api_id: this.props.selectedBook.id, 
+        title: title, 
+        api_id: api_id, 
         authors: authors,
-        imageLink: this.props.selectedBook.volumeInfo.imageLinks.thumbnail,
+        imageLink: imageLink,
         isbn10: isbn10,
         isbn13: isbn13,
         owner: this.props.currentUser.id,
         username: this.props.currentUser.username,
-        pagesRead: 0,
-        totalPages: this.props.selectedBook.volumeInfo.pageCount
+        totalPages: totalPages,
+        completed: false
       })
     }).then(this.props.fetchBooks()).then(this.props.confirmationPopup('confirmation'))
   }

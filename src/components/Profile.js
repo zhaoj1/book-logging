@@ -171,7 +171,9 @@ export default class Profile extends React.Component{
                               {this.props.booksList.books.length}
                             </div>
                             <div className='profile-booklist-line-item'>
-                              #
+                              {this.props.booksList ?  
+                                this.props.booksList.books.filter(ele => ele.completed == true).length : 0
+                              }
                             </div>
                             <div className='profile-booklist-line-item'>
                               #
