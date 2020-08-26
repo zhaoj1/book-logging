@@ -20,7 +20,7 @@ export default class Register extends React.Component{
   handleRegister = (event) => {
     event.preventDefault()
     this.state.password == this.state.passwordConfirm ?
-      fetch('http://127.0.0.1:8000/core/users/',{
+      fetch('https://book-logging.herokuapp.com/core/users/',{
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({username: this.state.username, password: this.state.password})

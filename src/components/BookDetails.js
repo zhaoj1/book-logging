@@ -11,7 +11,7 @@ export default class BookDetails extends React.Component{
     var imageLink = this.props.selectedBook.volumeInfo.imageLinks.thumbnail == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.imageLinks.thumbnail
     var totalPages = this.props.selectedBook.volumeInfo.pageCount == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.pageCount
 
-    fetch('http://127.0.0.1:8000/books/', {
+    fetch('https://book-logging.herokuapp.com/books/', {
       method: 'POST',
       headers: {
         'Authorization': `JWT ${sessionStorage.getItem('token')}`,

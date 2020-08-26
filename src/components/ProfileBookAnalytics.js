@@ -41,7 +41,7 @@ export default class ProfileBookAnalytics extends React.Component{
   }
 
   completeBook = () => {
-    fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}/patch/`, {
+    fetch(`https://book-logging.herokuapp.com/books/${this.props.selectedBook.id}/patch/`, {
       method: 'PATCH',
       headers: {
         'Authorization': `JWT ${sessionStorage.getItem('token')}`,
@@ -133,7 +133,7 @@ export default class ProfileBookAnalytics extends React.Component{
       this.setState({error: 'Please enter a valid number of pages.'})
     }else{
       const resp = await 
-      fetch(`http://127.0.0.1:8000/pages/`, {
+      fetch(`https://book-logging.herokuapp.com/pages/`, {
         method: 'POST',
         headers: {
           'Authorization': `JWT ${sessionStorage.getItem('token')}`,

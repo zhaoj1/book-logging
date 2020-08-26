@@ -3,7 +3,7 @@ import React from 'react';
 export default class DeleteConfirm extends React.Component{
 
   deleteBook = async () => {
-    const bookDeleted = await fetch(`http://127.0.0.1:8000/books/${this.props.selectedBook.id}`, {
+    const bookDeleted = await fetch(`https://book-logging.herokuapp.com/books/${this.props.selectedBook.id}`, {
       method: 'DELETE',
       headers: {'Authorization': `JWT ${sessionStorage.getItem('token')}`}
     })
