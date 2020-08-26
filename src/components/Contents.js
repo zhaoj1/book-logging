@@ -48,13 +48,13 @@ export default class Contents extends React.Component{
   state = defState
 
   fetchBooks = async () => {
-    const resp = await fetch('http://127.0.0.1:8000/books/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
+    const resp = await fetch('https://book-logging.herokuapp.com/books/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
     const json = await resp.json()
     this.setState({booksList: {...json}})
   }
 
   fetchPages = async () => {
-    const resp = await fetch('http://127.0.0.1:8000/pages/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
+    const resp = await fetch('https://book-logging.herokuapp.com/pages/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
     const json = await resp.json()
     this.setState({pages: {...json}})
     return resp
@@ -93,6 +93,7 @@ export default class Contents extends React.Component{
   render(){
     return(
       <>
+      {console.log(this.state.currentUser)}
         <Router>
           <Switch>
             <Route exact path='/' render={(routerProps) => 
