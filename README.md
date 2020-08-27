@@ -19,9 +19,8 @@ Django REST Framework
 [X] Delete confirmation - refresh book list    
 [X] Revamp chart (possibly transition to different library)    
 [X] Adjust chart     
-[X] Visual for completion of saved book    
+[] Visual for completion of saved book    
 [] Profile book details - pages read not updating on post      
-[] Profile book analytics - pages read per {time period}     
 [] Logout     
 [] Styling + CSS    
 [] Landing page     
