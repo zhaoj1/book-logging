@@ -43,8 +43,6 @@ export default class Search extends React.Component{
   render(){
     return(
       <div className='search'>
-        {console.log(this.props.defaultSearch)}
-        {console.log(this.props.defaultAuthor)}
         <form 
         className='search-form'
           onSubmit={this.searchAPI}

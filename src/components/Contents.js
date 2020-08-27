@@ -12,6 +12,8 @@ import ProfileBookAnalytics from './ProfileBookAnalytics';
 import Confirmation from './Confirmation';
 import DeleteConfirm from './DeleteConfirm';
 
+import background from '../imgs/background.png'
+
 const modalStyle = {
   overlay : {
     backgroundColor: 'rgba(0, 0, 0, 0.75)'
@@ -191,6 +193,7 @@ export default class Contents extends React.Component{
           }
           
         </Modal>
+        <div className='contents' style={{'background-image':`url(${background})`}}></div>
       </>
     )
   }
