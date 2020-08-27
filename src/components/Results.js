@@ -63,6 +63,7 @@ export default class Results extends React.Component{
           <Search 
             setResults={this.props.setResults}
             defaultSearch={this.props.defaultSearch}
+            defaultAuthor={this.props.defaultAuthor}
           />
         </div>
         <button 

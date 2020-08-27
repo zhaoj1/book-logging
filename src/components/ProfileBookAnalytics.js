@@ -8,7 +8,7 @@ let pagesRead
 export default class ProfileBookAnalytics extends React.Component{
 
   state = {
-    pagesRead: 0,
+    pagesRead: null,
     dateRead: null,
     analyticsData: [],
     dateLabels: [],
@@ -31,6 +31,10 @@ export default class ProfileBookAnalytics extends React.Component{
   componentDidUpdate = (prevProps) => {
     if(prevProps !== this.props){
       this.calculateAnalytics();
+      {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
+        pagesRead = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
+        :
+        pagesRead = 0}
     }
   }
 
@@ -154,11 +158,7 @@ export default class ProfileBookAnalytics extends React.Component{
           if(pagesRead + parseInt(this.state.pagesRead) == this.props.selectedBook.totalPages){
             this.completeBook()
           }
-          this.setState({
-            error:null,
-            pagesRead: 0,
-            dateRead: null,
-          })
+          this.setState({error:null})
         }
       }
     }
@@ -219,6 +219,7 @@ export default class ProfileBookAnalytics extends React.Component{
                   type='text' 
                   name='pagesRead' 
                   onChange={this.handleChange}
+                  value={this.state.pagesRead}
                   placeholder='Pages Read' 
                   className='input'
                   required
@@ -228,6 +229,7 @@ export default class ProfileBookAnalytics extends React.Component{
                   type='date' 
                   name='dateRead' 
                   onChange={this.handleChange}
+                  value={this.state.dateRead}
                   className='input'
                   required
                 >

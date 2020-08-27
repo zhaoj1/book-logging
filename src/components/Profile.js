@@ -144,8 +144,7 @@ export default class Profile extends React.Component{
                         <div className='profile-booklist'>
                           <div className='profile-booklist-left'>
                             <div className='profile-booklist-line-item'>Books Saved</div>
-                            <div className='profile-booklist-line-item'>Books Completed</div>
-                            <div className='profile-booklist-line-item'>Pages per day/week/month</div><br></br>
+                            <div className='profile-booklist-line-item'>Books Completed</div><br></br>
                             <div 
                               className='profile-booklist-line-item'
                               style={{
@@ -174,9 +173,6 @@ export default class Profile extends React.Component{
                               {this.props.booksList ?  
                                 this.props.booksList.books.filter(ele => ele.completed == true).length : 0
                               }
-                            </div>
-                            <div className='profile-booklist-line-item'>
-                              #
                             </div><br></br>
                             <div 
                               className='profile-booklist-line-item'
@@ -210,6 +206,7 @@ export default class Profile extends React.Component{
               <Search 
                 setResults={this.props.setResults}
                 setDefaultSearch={this.props.setDefaultSearch}
+                setDefaultAuthor={this.props.setDefaultAuthor}
               />
             </div>
           </div>

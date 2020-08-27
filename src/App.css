@@ -2,6 +2,7 @@ html, body, .App, #root {
   height: 100%;
   padding: 0;
   margin: 0;
+  background-color: rgb(230,230,250);
 }
 
 .wrapper {
@@ -41,13 +42,14 @@ html, body, .App, #root {
 
 .login-page, .register-page{
   padding: 2% 0 2% 0;
-  background-color: rgb(170,170,210);
+  background-color: rgb(245,245,245);
   width: 50%;
   border-radius: 15px;
   margin: auto;
 }
 
-.logo, .app-description, .app-features{
+/* .logo, .app-description, .app-features{ */
+.logo{
   margin: auto;
   margin-bottom: 5%;
   width: 70%;
@@ -60,30 +62,34 @@ html, body, .App, #root {
 
 .logo{
   text-align: center;
-  background-color: rgb(120,120,210);
   width: 100%;
   margin-bottom: 0;
-  padding: 2% 0 2% 0;
+  padding: 1% 0 1% 0;
   position: fixed;
   z-index: 2;
+  background-color: rgb(230,230,250);
 }
 
 .landing-contents{
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 75%;
+  height: 70%; */
+  height: 70%;
+  margin-top: 8%;
+  margin-bottom: 1%;
+  width: 60%;
+  padding: 2%;
+  font-size: 24px;
 }
 
 .landing-left{
   width: 65%;
-  margin: 6% auto 1% 1%;
-  padding-top: 2%;
+  margin: 8% auto 1% 1%;
+  padding-top: 1%;
   border-radius: 10px;
   height: 110%;
   overflow: scroll;
-  background-color: rgb(240,240,270);
-  z-index: 3;
 }
 
 .landing-right{
@@ -159,7 +165,7 @@ html, body, .App, #root {
   margin-bottom: 2%;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(240,240,270);
+  background-color: rgb(245,245,245);
   border-radius: 10px;
   padding: 2%;
 }
@@ -180,7 +186,7 @@ html, body, .App, #root {
   margin-top: 2%;
   width: 100%;
   height: 100%;
-  background-color:slategray;
+  background-color:rgb(170,170,190);
   display: flex;
   flex-wrap: wrap;
   overflow:scroll;
@@ -276,7 +282,7 @@ html, body, .App, #root {
 
 .profileLineItem{
   width: 40%;
-  height: 90%;
+  height: 100%;
   border: solid black 1px;
   background-color: white;
   display: flex;
@@ -335,7 +341,7 @@ html, body, .App, #root {
   display: flex;
   flex-direction: column;
   padding-bottom: 2%;
-  padding-top: 8%;
+  padding-top: 9%;
 }
 
 .results-container{
@@ -363,6 +369,7 @@ html, body, .App, #root {
   flex-direction: column; 
   margin: 3%;
   transition: all .25s ease-in-out;
+  background-color: white;
 }
 
 .resultsLineItem:hover{
@@ -379,7 +386,7 @@ html, body, .App, #root {
   width: 90%;
   margin-bottom: 0;
   padding: 5%;
-  background-color: rgb(220,220,240);
+  background-color: rgb(200,200,230);
   border-top: solid black 1px;
 }
 
@@ -482,4 +489,34 @@ html, body, .App, #root {
 
 .chartjs-render-monitor{
   margin: auto;
+}
+
+/* ------------------------------- footer --------------------------------------- */
+
+.footer{
+  margin-top: 10px;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(160,160,200);
+  padding: 5px;
+}
+
+.footer-left{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.footer-text{
+  margin: auto;
+}
+
+.myLinks{
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.myLinks:hover{
+  transform: scale(1.3);
 }

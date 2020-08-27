@@ -40,7 +40,8 @@ const defState = {
   selectedBook: {},
   booksList: null,
   pages: null,
-  defaultSearch: ''
+  defaultSearch: '',
+  defaultAuthor: ''
 }
 
 export default class Contents extends React.Component{
@@ -68,6 +69,8 @@ export default class Contents extends React.Component{
 
   setDefaultSearch = (query) => {this.setState({defaultSearch: query})}
 
+  setDefaultAuthor = (query) => {this.setState({defaultAuthor: query})}
+
   setSelectedBook = (book, page) => {
     this.setState({
       selectedBook: book,
@@ -93,7 +96,6 @@ export default class Contents extends React.Component{
   render(){
     return(
       <>
-      {console.log(this.state.currentUser)}
         <Router>
           <Switch>
             <Route exact path='/' render={(routerProps) => 
@@ -129,6 +131,7 @@ export default class Contents extends React.Component{
                 pages={this.state.pages}
                 fetchPages={this.fetchPages}
                 setDefaultSearch={this.setDefaultSearch}
+                setDefaultAuthor={this.setDefaultAuthor}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -141,6 +144,7 @@ export default class Contents extends React.Component{
                 setSelectedBook={this.setSelectedBook}
                 fetchBooks={this.fetchBooks}
                 defaultSearch={this.state.defaultSearch}
+                defaultAuthor={this.state.defaultAuthor}
               />
             } />
           </Switch>

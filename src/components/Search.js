@@ -16,8 +16,11 @@ export default class Search extends React.Component{
   }
 
   componentDidMount = () => {
-    if(this.props.defaultSearch){
-      this.setState({queryParams: this.props.defaultSearch})
+    if(this.props.defaultSearch || this.props.defaultAuthor){
+      this.setState({
+        queryParams: this.props.defaultSearch,
+        authorQuery: this.props.defaultAuthor
+      })
     }
   }
 
@@ -28,7 +31,10 @@ export default class Search extends React.Component{
     if(json.totalItems == 0){
       alert('No results found.')
     }else{
-      if(this.props.setDefaultSearch){this.props.setDefaultSearch(this.state.queryParams)}
+      if(this.props.setDefaultSearch){
+        this.props.setDefaultSearch(this.state.queryParams)
+        this.props.setDefaultAuthor(this.state.authorQuery)
+      }
       this.props.setResults(json)
       this.setState({searched: true})
     }
@@ -37,6 +43,8 @@ export default class Search extends React.Component{
   render(){
     return(
       <div className='search'>
+        {console.log(this.props.defaultSearch)}
+        {console.log(this.props.defaultAuthor)}
         <form 
         className='search-form'
           onSubmit={this.searchAPI}
