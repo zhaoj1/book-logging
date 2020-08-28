@@ -10,7 +10,8 @@ React.js
 Django REST Framework    
 [Google Books API](https://developers.google.com/books)    
 [Chart.js](https://www.chartjs.org/)    
-[Moment.js](https://momentjs.com/)
+[Moment.js](https://momentjs.com/)    
+[GIMP](https://www.gimp.org/)
 
 ### To Do List
 
