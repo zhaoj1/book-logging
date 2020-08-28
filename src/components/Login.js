@@ -45,7 +45,7 @@ export default class Login extends React.Component{
     return(
       <div className='wrapper'>
         <div className='login-page'>
-          <form onSubmit={this.handleLogin} >
+          <form className='login-form' onSubmit={this.handleLogin} >
             <input 
               type='text' 
               name='username' 

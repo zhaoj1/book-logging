@@ -22,7 +22,7 @@ Django REST Framework
 [] Visual for completion of saved book    
 [] Profile book details - pages read not updating on post      
 [] Logout     
-[] Styling + CSS    
+[X] Styling + CSS    
 [] Landing page     
 
 ### Future Endeavors

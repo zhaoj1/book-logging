@@ -57,7 +57,7 @@ export default class Register extends React.Component{
   render(){
     return(
       <div className='register-page'>
-        <form onSubmit={this.handleRegister} >
+        <form className='login-form' onSubmit={this.handleRegister} >
           <input 
             type='text' 
             name='username' 

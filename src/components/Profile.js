@@ -109,7 +109,7 @@ export default class Profile extends React.Component{
       this.props.loggedIn ?
         this.props.currentUser ? 
           <div className='profile-page'>
-            <h1>{this.props.currentUser.username}</h1>
+            <h1 className='username'>{this.props.currentUser.username}</h1>
             <div className='profile-analytics'>
               <div className='chart-container'>
                 <OverallChart 

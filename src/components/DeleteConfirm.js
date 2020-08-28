@@ -15,13 +15,13 @@ export default class DeleteConfirm extends React.Component{
 
   render(){
     return(
-      <div className='wrapper'>
         <div className='confirmation'>
-          <h1>Are you sure?</h1>
-          <button className='details-btn' onClick={this.deleteBook}>Yes</button><br></br>
-          <button className='details-btn' onClick={() => this.props.confirmationPopup('profile')}>No</button>
+          <div className='confirmation-contents'>
+            <h1>Are you sure?</h1>
+            <button className='details-btn' onClick={this.deleteBook}>Yes</button><br></br>
+            <button className='details-btn' onClick={() => this.props.confirmationPopup('profile')}>No</button>
+          </div>
         </div>
-      </div>
     )
   }
 }
