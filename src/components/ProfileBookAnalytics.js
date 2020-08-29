@@ -155,7 +155,7 @@ export default class ProfileBookAnalytics extends React.Component{
       if(resp.ok){
         const fetch = await this.props.fetchPages();
         if(fetch.ok){
-          if(pagesRead + parseInt(this.state.pagesRead) == this.props.selectedBook.totalPages){
+          if(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0) == this.props.selectedBook.totalPages){
             this.completeBook()
           }
           this.setState({error:null})
