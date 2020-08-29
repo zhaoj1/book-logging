@@ -44,8 +44,8 @@ export default class ProfileBookAnalytics extends React.Component{
     this.setState({bookDetails:json.items[0].volumeInfo})
   }
 
-  completeBook = () => {
-    fetch(`https://book-logging.herokuapp.com/books/${this.props.selectedBook.id}/patch/`, {
+  completeBook = async () => {
+    const postBook = await fetch(`https://book-logging.herokuapp.com/books/${this.props.selectedBook.id}/patch/`, {
       method: 'PATCH',
       headers: {
         'Authorization': `JWT ${sessionStorage.getItem('token')}`,
@@ -56,6 +56,7 @@ export default class ProfileBookAnalytics extends React.Component{
         completed: true
       })
     })
+    if(postBook){this.props.fetchBook()}
   }
   
   calculateAnalytics = () => {
@@ -154,11 +155,11 @@ export default class ProfileBookAnalytics extends React.Component{
       })
       if(resp.ok){
         const fetch = await this.props.fetchPages();
-        if(fetch.ok){
+        if(fetch){
           if(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0) == this.props.selectedBook.totalPages){
-            this.completeBook()
+            const complete = await this.props.completeBook()
+            if(complete){this.setState({error:null})}
           }
-          this.setState({error:null})
         }
       }
     }

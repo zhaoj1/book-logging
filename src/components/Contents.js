@@ -173,6 +173,7 @@ export default class Contents extends React.Component{
                 closeModal={this.closeModal}
                 pages={this.state.pages}
                 fetchPages={this.fetchPages}
+                fetchPages={this.fetchBooks}
                 confirmationPopup={this.confirmationPopup}
               />
               :
