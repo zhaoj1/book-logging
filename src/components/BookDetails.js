@@ -9,7 +9,7 @@ export default class BookDetails extends React.Component{
     var title = this.props.selectedBook.volumeInfo.title == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.title
     var api_id = this.props.selectedBook.volumeInfo.id == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.id
     var imageLink = this.props.selectedBook.volumeInfo.imageLinks.thumbnail == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.imageLinks.thumbnail
-    var totalPages = this.props.selectedBook.volumeInfo.pageCount == undefined ? 'N/A' : this.props.selectedBook.volumeInfo.pageCount
+    var totalPages = this.props.selectedBook.volumeInfo.pageCount == undefined ? 0 : this.props.selectedBook.volumeInfo.pageCount
 
     fetch('https://book-logging.herokuapp.com/books/', {
       method: 'POST',
