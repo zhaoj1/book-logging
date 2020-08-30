@@ -207,7 +207,6 @@ export default class Profile extends React.Component{
                 setResults={this.props.setResults}
                 setDefaultSearch={this.props.setDefaultSearch}
                 setDefaultAuthor={this.props.setDefaultAuthor}
-                setError={this.props.setError}
               />
             </div>
           </div>

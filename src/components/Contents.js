@@ -11,7 +11,6 @@ import BookDetails from './BookDetails';
 import ProfileBookAnalytics from './ProfileBookAnalytics';
 import Confirmation from './Confirmation';
 import DeleteConfirm from './DeleteConfirm';
-import Error from './Error';
 
 import background from '../imgs/background.png'
 
@@ -46,7 +45,6 @@ const defState = {
   defaultSearch: '',
   defaultAuthor: '',
   loading: false,
-  error: ''
 }
 
 export default class Contents extends React.Component{
@@ -94,17 +92,11 @@ export default class Contents extends React.Component{
   closeModal = () => {
     this.setState({
       modalIsOpen: false,
-      modalType: null,
-      error: ''
+      modalType: null
     },() => this.setState({selectedBook: {}}))
   }
 
   toggleLoading = () => {this.setState({loading: !this.state.loading})}
-
-  setError = (error) => {
-    this.confirmationPopup('error')
-    this.setState({error: error})
-  }
 
   render(){
     return(
@@ -151,7 +143,6 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchPages}
                 setDefaultSearch={this.setDefaultSearch}
                 setDefaultAuthor={this.setDefaultAuthor}
-                setError={this.setError}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -165,7 +156,6 @@ export default class Contents extends React.Component{
                 fetchBooks={this.fetchBooks}
                 defaultSearch={this.state.defaultSearch}
                 defaultAuthor={this.state.defaultAuthor}
-                setError={this.setError}
               />
             } />
           </Switch>
@@ -209,13 +199,7 @@ export default class Contents extends React.Component{
                     confirmationPopup={this.confirmationPopup}
                   />
                   :
-                  this.state.modalType == 'error' ?
-                    <Error 
-                      error={this.state.error}
-                      closeModal={this.closeModal}
-                    />
-                    :
-                    null
+                  null
           }
           
         </Modal>
