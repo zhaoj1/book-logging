@@ -115,7 +115,7 @@ export default class Profile extends React.Component{
         this.props.currentUser ? 
           <div className='profile-page'>
             <h1 className='username'>{this.props.currentUser.username}</h1>
-            <button onClick={this.props.logout}>logout</button>
+            <button className='logout-btn' onClick={this.props.logout}>logout</button>
             <div className='profile-analytics'>
               <div className='chart-container'>
                 <OverallChart 
