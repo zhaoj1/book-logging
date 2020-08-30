@@ -11,6 +11,7 @@ import BookDetails from './BookDetails';
 import ProfileBookAnalytics from './ProfileBookAnalytics';
 import Confirmation from './Confirmation';
 import DeleteConfirm from './DeleteConfirm';
+import Error from './Error';
 
 import background from '../imgs/background.png'
 
