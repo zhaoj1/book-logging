@@ -102,7 +102,7 @@ export default class Contents extends React.Component{
   toggleLoading = () => {this.setState({loading: !this.state.loading})}
 
   setError = (error) => {
-    this.confirmationPopup()
+    this.confirmationPopup('error')
     this.setState({error: error})
   }
 
