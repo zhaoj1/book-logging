@@ -60,7 +60,7 @@ export default class Register extends React.Component{
     return(
       <div className='register-page'>
         {this.props.loading ? 
-          <>Loading...</>
+          <h1 className='loading'>Loading...</h1>
           :
           <form className='login-form' onSubmit={this.handleRegister} >
             <input 

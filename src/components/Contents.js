@@ -143,8 +143,6 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchPages}
                 setDefaultSearch={this.setDefaultSearch}
                 setDefaultAuthor={this.setDefaultAuthor}
-                toggleLoading={this.toggleLoading}
-                loading={this.state.loading}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -158,8 +156,6 @@ export default class Contents extends React.Component{
                 fetchBooks={this.fetchBooks}
                 defaultSearch={this.state.defaultSearch}
                 defaultAuthor={this.state.defaultAuthor}
-                toggleLoading={this.toggleLoading}
-                loading={this.state.loading}
               />
             } />
           </Switch>

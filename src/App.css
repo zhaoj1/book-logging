@@ -21,10 +21,6 @@ html, body, .App, #root {
 }
 
 .wrapper {
-  /* position: absolute; */
-  /* top: 40%;
-  left: 50%; */
-  /* transform: translate(-50%,-60%); */
   display: flex;
   height: 100%;
   width: 100%;
@@ -162,6 +158,10 @@ html, body, .App, #root {
 .errorMsg{
   color: red;
   font-weight: bold;
+}
+
+.loading{
+  margin: auto;
 }
 
 /* ------------------------------- profile --------------------------------------- */
