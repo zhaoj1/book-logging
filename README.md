@@ -16,5 +16,4 @@ Django REST Framework (Backend)
 ### Contact
 
 Justin Zhao | justinzhao265@gmail.com || [GitHub](https://github.com/zhaoj1) | [LinkedIn](https://www.linkedin.com/in/justin-zh/)
-
-note - Profile book details - pages read not updating on post         
+     
