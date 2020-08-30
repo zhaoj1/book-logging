@@ -18,7 +18,8 @@ export default class Login extends React.Component{
 
   handleLogin = (event) => {
     event.preventDefault()
-      fetch('https://book-logging.herokuapp.com/token-auth/',{
+    this.props.toggleLoading()
+    fetch('https://book-logging.herokuapp.com/token-auth/',{
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(this.state)
@@ -38,6 +39,7 @@ export default class Login extends React.Component{
   login = (input) => {
     sessionStorage.setItem('token', input.token)
     this.props.setUser(input.user)
+    this.props.toggleLoading()
     this.props.history.push('/profile')
   }
  
@@ -45,31 +47,35 @@ export default class Login extends React.Component{
     return(
       <div className='wrapper'>
         <div className='login-page'>
-          <form className='login-form' onSubmit={this.handleLogin} >
-            <input 
-              type='text' 
-              name='username' 
-              placeholder='Username' 
-              className='input'
-              value={this.state.username} 
-              onChange={this.handleChange}
-              required
-            ></input>
-            <input 
-              type='password' 
-              name='password' 
-              placeholder='Password' 
-              className='input'
-              value={this.state.password} 
-              onChange={this.handleChange}
-              required
-            ></input><br></br>
-            <input 
-              className='submitBtn' 
-              type='submit' 
-              value="Login"
-            ></input>
-          </form>
+          {this.props.loading?
+            <>Loading...</>
+            :
+            <form className='login-form' onSubmit={this.handleLogin} >
+              <input 
+                type='text' 
+                name='username' 
+                placeholder='Username' 
+                className='input'
+                value={this.state.username} 
+                onChange={this.handleChange}
+                required
+              ></input>
+              <input 
+                type='password' 
+                name='password' 
+                placeholder='Password' 
+                className='input'
+                value={this.state.password} 
+                onChange={this.handleChange}
+                required
+              ></input><br></br>
+              <input 
+                className='submitBtn' 
+                type='submit' 
+                value="Login"
+              ></input>
+            </form>
+          }
           <label>
             Don't have an account? <Link to='/register'>Register</Link>
           </label>

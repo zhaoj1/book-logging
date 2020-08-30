@@ -43,7 +43,8 @@ const defState = {
   booksList: null,
   pages: null,
   defaultSearch: '',
-  defaultAuthor: ''
+  defaultAuthor: '',
+  loading: false
 }
 
 export default class Contents extends React.Component{
@@ -95,6 +96,8 @@ export default class Contents extends React.Component{
     },() => this.setState({selectedBook: {}}))
   }
 
+  toggleLoading = () => {this.setState({loading: !this.state.loading})}
+
   render(){
     return(
       <>
@@ -104,6 +107,8 @@ export default class Contents extends React.Component{
               <Landing 
                 {...routerProps}
                 setUser={this.setUser}
+                toggleLoading={this.toggleLoading}
+                loading={this.state.loading}
               />
             } />
             <Route exact path='/register' render={(routerProps) => 
@@ -111,6 +116,8 @@ export default class Contents extends React.Component{
                 <Register 
                   {...routerProps}
                   setUser={this.setUser}
+                  toggleLoading={this.toggleLoading}
+                  loading={this.state.loading}
                 />
               </div>
             } />
@@ -118,6 +125,8 @@ export default class Contents extends React.Component{
               <Login 
                 {...routerProps}
                 setUser={this.setUser}
+                toggleLoading={this.toggleLoading}
+                loading={this.state.loading}
               />
             } />
             <Route exact path='/profile' render={(routerProps) => 
@@ -134,6 +143,8 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchPages}
                 setDefaultSearch={this.setDefaultSearch}
                 setDefaultAuthor={this.setDefaultAuthor}
+                toggleLoading={this.toggleLoading}
+                loading={this.state.loading}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -147,6 +158,8 @@ export default class Contents extends React.Component{
                 fetchBooks={this.fetchBooks}
                 defaultSearch={this.state.defaultSearch}
                 defaultAuthor={this.state.defaultAuthor}
+                toggleLoading={this.toggleLoading}
+                loading={this.state.loading}
               />
             } />
           </Switch>
