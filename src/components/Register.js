@@ -93,7 +93,7 @@ export default class Register extends React.Component{
             <input 
               className='submitBtn' 
               type='submit' 
-              value="Create Account"
+              value="Register"
             ></input>
           </form>
         }     

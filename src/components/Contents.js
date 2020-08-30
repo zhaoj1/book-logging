@@ -103,6 +103,7 @@ export default class Contents extends React.Component{
       currentUser: null,
       loggedIn: false
     })
+    alert('Successfully logged out.')
   }
 
   render(){

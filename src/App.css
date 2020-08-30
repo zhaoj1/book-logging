@@ -153,6 +153,14 @@ html, body, .App, #root {
   margin: auto;
   margin-bottom: 10px;
   font-size: 20px;
+  background-color: rgb(235,235,250);
+  border-radius: 7px;
+}
+
+.submitBtn:hover{
+  color: white;
+  background-color: rgb(65,65,120);
+  border-radius: 7px;
 }
 
 .errorMsg{
