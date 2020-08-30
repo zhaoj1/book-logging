@@ -20,6 +20,8 @@ function Landing(props){
         <Register 
           history={props.history}
           setUser={props.setUser}
+          toggleLoading={props.toggleLoading}
+          loading={props.loading}
         />
       </div>
     </div>
