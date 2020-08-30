@@ -104,12 +104,18 @@ export default class Profile extends React.Component{
 
   setSelectedPoint = (data) => {this.setState({selectedPointId:data})}
 
+  handleLogout = () => {
+    this.props.logout()
+    {this.props.history.push('/')}
+  }
+
   render(){
     return(
       this.props.loggedIn ?
         this.props.currentUser ? 
           <div className='profile-page'>
             <h1 className='username'>{this.props.currentUser.username}</h1>
+            <button onClick={this.props.logout}>logout</button>
             <div className='profile-analytics'>
               <div className='chart-container'>
                 <OverallChart 

@@ -98,6 +98,13 @@ export default class Contents extends React.Component{
 
   toggleLoading = () => {this.setState({loading: !this.state.loading})}
 
+  logout = () => {
+    this.setState({
+      currentUser: null,
+      loggedIn: false
+    })
+  }
+
   render(){
     return(
       <>
@@ -143,6 +150,7 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchPages}
                 setDefaultSearch={this.setDefaultSearch}
                 setDefaultAuthor={this.setDefaultAuthor}
+                logout={this.logout}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
