@@ -29,7 +29,7 @@ export default class Search extends React.Component{
     const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.queryParams}+author:${this.state.authorQuery}&maxResults=40&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
     const json = await resp.json()
     if(json.totalItems == 0){
-      alert('No results found.')
+      this.props.setError('No results found.')
     }else{
       if(this.props.setDefaultSearch){
         this.props.setDefaultSearch(this.state.queryParams)

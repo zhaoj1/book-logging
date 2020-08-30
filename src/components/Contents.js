@@ -44,7 +44,8 @@ const defState = {
   pages: null,
   defaultSearch: '',
   defaultAuthor: '',
-  loading: false
+  loading: false,
+  error: ''
 }
 
 export default class Contents extends React.Component{
@@ -92,11 +93,17 @@ export default class Contents extends React.Component{
   closeModal = () => {
     this.setState({
       modalIsOpen: false,
-      modalType: null
+      modalType: null,
+      error: ''
     },() => this.setState({selectedBook: {}}))
   }
 
   toggleLoading = () => {this.setState({loading: !this.state.loading})}
+
+  setError = (error) => {
+    this.confirmationPopup()
+    this.setState({error: error})
+  }
 
   render(){
     return(
@@ -143,6 +150,7 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchPages}
                 setDefaultSearch={this.setDefaultSearch}
                 setDefaultAuthor={this.setDefaultAuthor}
+                setError={this.setError}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
@@ -156,6 +164,7 @@ export default class Contents extends React.Component{
                 fetchBooks={this.fetchBooks}
                 defaultSearch={this.state.defaultSearch}
                 defaultAuthor={this.state.defaultAuthor}
+                setError={this.setError}
               />
             } />
           </Switch>
@@ -199,7 +208,13 @@ export default class Contents extends React.Component{
                     confirmationPopup={this.confirmationPopup}
                   />
                   :
-                  null
+                  this.state.modalType == 'error' ?
+                    <Error 
+                      error={this.state.error}
+                      closeModal={this.closeModal}
+                    />
+                    :
+                    null
           }
           
         </Modal>
