@@ -157,7 +157,7 @@ html, body, .App, #root {
 
 .errorMsg{
   color: red;
-  font-weight: bold;
+  font-weight: bold;  
 }
 
 .loading{
@@ -339,10 +339,8 @@ html, body, .App, #root {
 .search{
   margin: auto;
   display: flex;
-  width: 80%;
-  height: 100%;
-  background-color: rgba(240,240,250, 0.95);
-  border-radius: 10px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .search-form{
@@ -362,6 +360,16 @@ html, body, .App, #root {
 
 .search-box{
   height: 60px;
+}
+
+.search-container{
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(240,240,250, 0.95);
+  border-radius: 10px;
+  width: 80%;
+  margin: auto;
+  text-align: center;
 }
 
 /* ------------------------------- results --------------------------------------- */

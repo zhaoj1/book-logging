@@ -51,41 +51,46 @@ export default class Search extends React.Component{
 
   render(){
     return(
-      <div className='search'>
-        <form 
-        className='search-form'
-          onSubmit={this.searchAPI}
-        >
-          <input 
-            type='text' 
-            name='queryParams' 
-            className='search-input'
-            placeholder='Search'
-            value={this.state.queryParams} 
-            onChange={this.handleChange}
-          ></input>
-          <input 
-            type='text' 
-            name='authorQuery' 
-            className='search-input'
-            placeholder='Author'
-            value={this.state.authorQuery} 
-            onChange={this.handleChange}
-          ></input>
-          <input 
-            className='submitBtn' 
-            type='submit' 
-            value="Search"
-          ></input>
-          <img src='https://books.google.com/googlebooks/images/poweredby.png' width='62' height='30' />
-        </form>
+      <div className='search-container'>
+        <div className='search'>
+          <form 
+          className='search-form'
+            onSubmit={this.searchAPI}
+          >
+            <input 
+              type='text' 
+              name='queryParams' 
+              className='search-input'
+              placeholder='Search'
+              value={this.state.queryParams} 
+              onChange={this.handleChange}
+            ></input>
+            <input 
+              type='text' 
+              name='authorQuery' 
+              className='search-input'
+              placeholder='Author'
+              value={this.state.authorQuery} 
+              onChange={this.handleChange}
+            ></input>
+            <input 
+              className='submitBtn' 
+              type='submit' 
+              value="Search"
+            ></input>
+            <img src='https://books.google.com/googlebooks/images/poweredby.png' width='62' height='30' />
+          </form>
+          {this.state.searched ? 
+            <Redirect to='/results' />
+            :
+            null
+          }
+        </div>
         {this.state.error? 
-          <label className='errorMsg'>{this.state.errorMsg}</label>
-          :
-          null
-        }
-        {this.state.searched ? 
-          <Redirect to='/results' />
+          <p 
+            className='errorMsg'
+            style={{'margin-top':0}}
+          >{this.state.errorMsg}</p>
           :
           null
         }
