@@ -348,6 +348,14 @@ html, body, .App, #root {
   margin-bottom: 1%;
   font-size: 20px;
   width: 10%;
+  background-color: rgb(235,235,250);
+  border-radius: 7px;
+}
+
+.logout-btn:hover{
+  color: white;
+  background-color: rgb(65,65,120);
+  border-radius: 7px;
 }
 
 /* ------------------------------- search --------------------------------------- */
@@ -469,6 +477,14 @@ html, body, .App, #root {
   margin: auto;
   margin-top: 1%;
   font-size: 20px;
+  background-color: rgb(235,235,250);
+  border-radius: 7px;
+}
+
+.back-btn:hover{
+  color: white;
+  background-color: rgb(65,65,120);
+  border-radius: 7px;
 }
 
 /* ------------------------------- details --------------------------------------- */
@@ -525,6 +541,14 @@ html, body, .App, #root {
   font-size: 20px;
   margin: auto;
   margin-bottom: 5%;
+  background-color: rgb(235,235,250);
+  border-radius: 7px;
+}
+
+.details-btn:hover{
+  color: white;
+  background-color: rgb(65,65,120);
+  border-radius: 7px;
 }
 
 .ReactModal__Content{

@@ -62,44 +62,46 @@ export default class Register extends React.Component{
         {this.props.loading ? 
           <h1 className='loading'>Loading...</h1>
           :
-          <form className='login-form' onSubmit={this.handleRegister} >
-            <input 
-              type='text' 
-              name='username' 
-              placeholder='Username' 
-              className='input'
-              value={this.state.username} 
-              onChange={this.handleChange}
-              required
-            ></input>
-            <input 
-              type='password' 
-              name='password' 
-              placeholder='Password' 
-              className='input'
-              value={this.state.password} 
-              onChange={this.handleChange}
-              required
-            ></input>
-            <input 
-              type='password' 
-              name='passwordConfirm' 
-              placeholder='Confirm Password' 
-              className='input'
-              value={this.state.passwordConfirm} 
-              onChange={this.handleChange}
-              required
-            ></input><br></br>
-            <input 
-              className='submitBtn' 
-              type='submit' 
-              value="Register"
-            ></input>
-          </form>
+          <>
+            <form className='login-form' onSubmit={this.handleRegister} >
+              <input 
+                type='text' 
+                name='username' 
+                placeholder='Username' 
+                className='input'
+                value={this.state.username} 
+                onChange={this.handleChange}
+                required
+              ></input>
+              <input 
+                type='password' 
+                name='password' 
+                placeholder='Password' 
+                className='input'
+                value={this.state.password} 
+                onChange={this.handleChange}
+                required
+              ></input>
+              <input 
+                type='password' 
+                name='passwordConfirm' 
+                placeholder='Confirm Password' 
+                className='input'
+                value={this.state.passwordConfirm} 
+                onChange={this.handleChange}
+                required
+              ></input><br></br>
+              <input 
+                className='submitBtn' 
+                type='submit' 
+                value="Register"
+              ></input>
+            </form>
+            <label>
+              Already have an account? <Link to='/login'>Login</Link>
+            </label>
+          </>
         }     
-        <label>
-          Already have an account? <Link to='/login'>Login</Link>
-        </label>
         {
           this.state.error ? 
             <p className='errorMsg'>{this.state.errorMsg}</p>
