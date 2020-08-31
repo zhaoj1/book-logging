@@ -3,7 +3,7 @@ import moment from 'moment';
 import LineChart from './LineChart'
 import ProfileBookDetails from './ProfileBookDetails'
 
-let pagesRead
+// let pagesRead
 
 export default class ProfileBookAnalytics extends React.Component{
 
@@ -15,7 +15,8 @@ export default class ProfileBookAnalytics extends React.Component{
     chartView: true,
     selectedPointId: null,
     error: null,
-    bookDetails: {}
+    bookDetails: {},
+    pages: 0
   }
 
   componentDidMount = () => {
@@ -23,19 +24,16 @@ export default class ProfileBookAnalytics extends React.Component{
     this.searchBook()
     
     {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
-      pagesRead = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
+      // pagesRead = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
+      this.setState({pages: this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)})
       :
-      pagesRead = 0}
+      // pagesRead = 0
+      this.setState({pages: 0})
+    }
   }
 
   componentDidUpdate = (prevProps) => {
-    if(prevProps !== this.props){
-      this.calculateAnalytics();
-      {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
-        pagesRead = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
-        :
-        pagesRead = 0}
-    }
+    if(prevProps !== this.props){this.calculateAnalytics();}
   }
 
   searchBook = async () => {
@@ -56,7 +54,7 @@ export default class ProfileBookAnalytics extends React.Component{
         completed: true
       })
     })
-    if(postBook){this.props.fetchBook()}
+    if(postBook){this.props.fetchBooks()}
   }
   
   calculateAnalytics = () => {
@@ -134,11 +132,10 @@ export default class ProfileBookAnalytics extends React.Component{
   createPages = async (event) => {
     event.preventDefault()
 
-    if(pagesRead + parseInt(this.state.pagesRead) > this.props.selectedBook.totalPages){
+    if(this.state.pages + parseInt(this.state.pagesRead) > this.props.selectedBook.totalPages){
       this.setState({error: 'Please enter a valid number of pages.'})
     }else{
-      const resp = await 
-      fetch(`https://book-logging.herokuapp.com/pages/`, {
+      const resp = await fetch(`https://book-logging.herokuapp.com/pages/`, {
         method: 'POST',
         headers: {
           'Authorization': `JWT ${sessionStorage.getItem('token')}`,
@@ -154,16 +151,18 @@ export default class ProfileBookAnalytics extends React.Component{
         })
       })
       if(resp.ok){
-        const fetch = await this.props.fetchPages();
-        if(fetch.ok){
-          if(this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0) == this.props.selectedBook.totalPages){
-            const complete = await this.completeBook()
-            if(complete.ok){this.setState({error:null})}
-          }
-        }
+        this.props.fetchPages(()=>{this.calculateAnalytics()});
+        this.setState({
+          error: null,
+          pages: parseInt(this.state.pages) + parseInt(this.state.pagesRead)
+        })
       }
+      if(this.state.pages + this.state.pagesRead == this.props.selectedBook.totalPages){
+        this.completeBook(() => {this.setState({error:null})})
+      } 
     }
   }
+
 
   render(){
     return(
@@ -211,7 +210,7 @@ export default class ProfileBookAnalytics extends React.Component{
             }
           </button>
           <div className='profileDetails-pages'>
-            <h2 className='pages_read'>Pages Read: {pagesRead} / {this.props.selectedBook.totalPages}</h2>
+            <h2 className='pages_read'>Pages Read: {this.state.pages} / {this.props.selectedBook.totalPages}</h2>
             {this.props.selectedBook.completed == false ?
               <form
                 onSubmit={this.createPages}

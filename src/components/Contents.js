@@ -193,6 +193,7 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchPages}
                 fetchPages={this.fetchBooks}
                 confirmationPopup={this.confirmationPopup}
+                setSelectedBook={this.setSelectedBook}
               />
               :
               this.state.modalType == 'confirmation' ?
