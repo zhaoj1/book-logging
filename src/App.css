@@ -236,6 +236,8 @@ html, body, .App, #root {
   flex-direction: column;
   height: 100%;
   width: 50%;
+  background-color:rgb(170,170,190);
+  border-radius: 5px;
 }
 
 .username{
@@ -245,17 +247,22 @@ html, body, .App, #root {
   border-radius: 10px;
 }
 
+.library-title{
+  color: rgb(250,250,250);
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 2%;
+}
+
 .library{
   margin-top: 2%;
   width: 100%;
   height: 100%;
-  background-color:rgb(170,170,190);
   display: flex;
   flex-wrap: wrap;
   overflow:scroll;
   padding: 2% 0 2% 2%;
   margin-bottom: 1%;
-  border-radius: 5px;
 }
 
 .booklist-toggle-btn-left{

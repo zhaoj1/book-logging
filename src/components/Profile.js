@@ -5,9 +5,6 @@ import Search from './Search';
 import ProfileBookCard from './ProfileBookCard';
 import OverallChart from './OverallChart';
 
-import listBtn from '../imgs/listBtn.png'
-import panelsBtn from '../imgs/panelsBtn.png'
-
 export default class Profile extends React.Component{
 
   state = {
@@ -146,8 +143,8 @@ export default class Profile extends React.Component{
                 </div>
               </div>
               <div className='profile-analytics-right'>
+                <label className='library-title'>Saved Books</label>
                 <div className='library'>
-                  <h2>Saved Books</h2>
                   {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
                       this.props.booksList.books.map(book => 
                         <ProfileBookCard
