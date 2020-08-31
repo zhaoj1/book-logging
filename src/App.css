@@ -363,7 +363,7 @@ html, body, .App, #root {
 }
 
 .profileLineItem:hover{
-  transform: scale(1.2);
+  opacity: .6;
 }
 
 .library-books{
@@ -474,7 +474,7 @@ html, body, .App, #root {
 }
 
 .resultsLineItem:hover{
-  transform: scale(1.2);
+  opacity: .6;
 }
 
 .bookCover{

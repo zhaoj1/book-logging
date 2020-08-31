@@ -145,7 +145,7 @@ export default class Profile extends React.Component{
               <div className='profile-analytics-right'>
                 <label className='library-title'>Saved Books</label>
                 <div className='library'>
-                  {this.props.booksList !== undefined && this.props.booksList !== null && this.props.booksList.books !== undefined? 
+                  {this.props.booksList !== undefined || this.props.booksList !== null || this.props.booksList.books !== undefined? 
                       this.props.booksList.books.map(book => 
                         <ProfileBookCard
                           ele={book}
