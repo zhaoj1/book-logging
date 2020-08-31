@@ -18,7 +18,6 @@ export default class Login extends React.Component{
 
   handleLogin = (event) => {
     event.preventDefault()
-    this.props.toggleLoading()
     fetch('https://book-logging.herokuapp.com/token-auth/',{
       method: "POST",
       headers: {"Content-Type": "application/json"},
@@ -40,7 +39,7 @@ export default class Login extends React.Component{
     sessionStorage.setItem('token', input.token)
     this.props.setUser(input.user)
     this.props.toggleLoading()
-    this.props.history.push('/profile')
+    this.props.history.push('/profile', () => this.props.toggleLoading())
   }
  
   render(){
