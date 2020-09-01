@@ -24,10 +24,8 @@ export default class ProfileBookAnalytics extends React.Component{
     this.searchBook()
     
     {this.props.pages.pages !== null || this.props.pages.pages !== undefined ?
-      // pagesRead = this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)
       this.setState({pages: this.props.pages.pages.filter(page => page.book == this.props.selectedBook.id).reduce((acc, obj) => {return acc + obj.pagesRead}, 0)})
       :
-      // pagesRead = 0
       this.setState({pages: 0})
     }
   }
@@ -54,6 +52,7 @@ export default class ProfileBookAnalytics extends React.Component{
         completed: true
       })
     })
+    this.props.updateCompleteBook()
     if(postBook){this.props.fetchBooks()}
   }
   
@@ -151,15 +150,18 @@ export default class ProfileBookAnalytics extends React.Component{
         })
       })
       if(resp.ok){
+        if(parseInt(this.state.pages) + parseInt(this.state.pagesRead) == this.props.selectedBook.totalPages){
+          console.log('completed')
+          this.completeBook(() => {
+            this.setState({error:null})
+          })
+        } 
         this.props.fetchPages(()=>{this.calculateAnalytics()});
         this.setState({
           error: null,
           pages: parseInt(this.state.pages) + parseInt(this.state.pagesRead)
         })
       }
-      if(this.state.pages + this.state.pagesRead == this.props.selectedBook.totalPages){
-        this.completeBook(() => {this.setState({error:null})})
-      } 
     }
   }
 

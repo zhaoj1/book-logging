@@ -82,6 +82,13 @@ export default class Contents extends React.Component{
     })
   }
 
+  updateCompleteBook = () => {
+    let book = this.state.selectedBook
+    book.completed = true
+    console.log('book',book)
+    this.setState({selectedBook: book})
+  }
+
   confirmationPopup = (type) => {
     this.setState({
       modalIsOpen: true,
@@ -194,6 +201,7 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchBooks}
                 confirmationPopup={this.confirmationPopup}
                 setSelectedBook={this.setSelectedBook}
+                updateCompleteBook={this.updateCompleteBook}
               />
               :
               this.state.modalType == 'confirmation' ?
