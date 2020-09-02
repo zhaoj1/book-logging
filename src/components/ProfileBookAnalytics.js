@@ -3,8 +3,6 @@ import moment from 'moment';
 import LineChart from './LineChart'
 import ProfileBookDetails from './ProfileBookDetails'
 
-// let pagesRead
-
 export default class ProfileBookAnalytics extends React.Component{
 
   state = {
@@ -31,7 +29,7 @@ export default class ProfileBookAnalytics extends React.Component{
   }
 
   componentDidUpdate = (prevProps) => {
-    if(prevProps !== this.props){this.calculateAnalytics();}
+    if(prevProps !== this.props){this.calculateAnalytics()}
   }
 
   searchBook = async () => {
@@ -52,8 +50,9 @@ export default class ProfileBookAnalytics extends React.Component{
         completed: true
       })
     })
-    this.props.updateCompleteBook()
     if(postBook){this.props.fetchBooks()}
+    this.calculateAnalytics()
+    this.props.updateCompleteBook()
   }
   
   calculateAnalytics = () => {
@@ -151,12 +150,11 @@ export default class ProfileBookAnalytics extends React.Component{
       })
       if(resp.ok){
         if(parseInt(this.state.pages) + parseInt(this.state.pagesRead) == this.props.selectedBook.totalPages){
-          console.log('completed')
           this.completeBook(() => {
             this.setState({error:null})
           })
         } 
-        this.props.fetchPages(()=>{this.calculateAnalytics()});
+        this.props.fetchPages(()=>{this.calculateAnalytics()})
         this.setState({
           error: null,
           pages: parseInt(this.state.pages) + parseInt(this.state.pagesRead)

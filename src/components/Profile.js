@@ -132,10 +132,12 @@ export default class Profile extends React.Component{
                   </div>
                   <div className='profile-overall-analytics-right'>
                     <div className='profile-booklist-line-item'>
-                      {this.props.booksList.books.length}
+                      {this.props.booksList !== undefined || this.props.booksList !== null ?
+                        this.props.booksList.books.length : null
+                      }
                     </div>
                       <div className='profile-booklist-line-item'>
-                        {this.props.booksList ?  
+                        {this.props.booksList !== undefined || this.props.booksList !== null ?
                           this.props.booksList.books.filter(ele => ele.completed == true).length : 0
                         }
                       </div>
@@ -145,7 +147,7 @@ export default class Profile extends React.Component{
               <div className='profile-analytics-right'>
                 <label className='library-title'>Saved Books</label>
                 <div className='library'>
-                  {this.props.booksList !== undefined || this.props.booksList !== null || this.props.booksList.books !== undefined? 
+                  {this.props.booksList !== undefined || this.props.booksList !== null ? 
                       this.props.booksList.books.map(book => 
                         <ProfileBookCard
                           ele={book}

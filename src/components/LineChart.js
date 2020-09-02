@@ -22,6 +22,12 @@ export default class LineChart extends Component {
     this.setData()
   }
 
+  componentDidUpdate = (prevProps) => {
+    if(prevProps !== this.props){
+      this.setData()
+    }
+  }
+
   makeChart(){         
     const ctx = document.getElementById("myChart");
     myChart = new Chart(ctx, {
@@ -67,7 +73,7 @@ export default class LineChart extends Component {
 
   render() {
     return (
-    <canvas id="myChart" ></canvas>
+      <canvas id="myChart" ></canvas>
     )
   }
 

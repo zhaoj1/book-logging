@@ -16,23 +16,24 @@ export default class Login extends React.Component{
     })
   }
 
-  handleLogin = (event) => {
+  handleLogin = async (event) => {
     event.preventDefault()
-    fetch('https://book-logging.herokuapp.com/token-auth/',{
+    const login = fetch('https://book-logging.herokuapp.com/token-auth/',{
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(this.state)
     })
-    .then(data => data.json())
-    .then(resp => 
-      resp.non_field_errors?
-        this.setState({
-          error: true,
-          errorMsg: 'Username or password is incorrect.'
-        })
-        :
-        this.login(resp)
-    )
+    console.log(login)
+    // .then(data => data.json())
+    // .then(resp => 
+    //   resp.non_field_errors?
+    //     this.setState({
+    //       error: true,
+    //       errorMsg: 'Username or password is incorrect.'
+    //     })
+    //     :
+    //     this.login(resp)
+    // )
   }
 
   login = (input) => {
