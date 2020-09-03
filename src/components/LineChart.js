@@ -22,9 +22,10 @@ export default class LineChart extends Component {
     this.setData()
   }
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate(prevProps){
     if(prevProps !== this.props){
-      this.setData()
+      if(myChart){myChart.destroy()};
+      this.setData();
     }
   }
 
@@ -45,6 +46,9 @@ export default class LineChart extends Component {
         }]
       },
       options: {
+        tooltips: {
+          intersect: false
+        },
         scales: {
           yAxes: [{
             ticks: {
@@ -62,13 +66,6 @@ export default class LineChart extends Component {
         },
       }
     });
-  }
-
-  componentDidUpdate(prevProps){
-    if(prevProps !== this.props){
-      if(myChart){myChart.destroy()};
-      this.setData();
-    }
   }
 
   render() {

@@ -38,6 +38,9 @@ export default class LineChart extends Component {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        tooltips: {
+          intersect: false
+        },
         scales: {
           yAxes: [{
             ticks: {

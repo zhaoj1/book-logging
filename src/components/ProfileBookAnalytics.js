@@ -129,7 +129,6 @@ export default class ProfileBookAnalytics extends React.Component{
 
   createPages = async (event) => {
     event.preventDefault()
-
     if(this.state.pages + parseInt(this.state.pagesRead) > this.props.selectedBook.totalPages){
       this.setState({error: 'Please enter a valid number of pages.'})
     }else{
