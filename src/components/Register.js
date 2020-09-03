@@ -48,11 +48,18 @@ export default class Register extends React.Component{
       })
   }
 
-  login = (input) => {
+  login = async (input) => {
     sessionStorage.setItem('token', input.token)
     this.props.setUser({username: input.username, id: input.id})
     this.props.toggleLoading()
-    this.props.history.push('/profile', () => this.props.toggleLoading())
+    const fetch = await Promise.all([
+      this.props.fetchBooks(),
+      this.props.fetchPages()
+    ])
+    if(fetch){
+      this.setState({error: false})
+      this.props.history.push('/profile', () => this.props.toggleLoading())
+    }
   }
  
   render(){

@@ -55,6 +55,7 @@ export default class Contents extends React.Component{
     const resp = await fetch('https://book-logging.herokuapp.com/books/', {headers: {Authorization: `JWT ${sessionStorage.getItem('token')}`}})
     const json = await resp.json()
     this.setState({booksList: {...json}})
+    return resp
   }
 
   fetchPages = async () => {
@@ -85,7 +86,6 @@ export default class Contents extends React.Component{
   updateCompleteBook = () => {
     let book = this.state.selectedBook
     book.completed = true
-    console.log('book',book)
     this.setState({selectedBook: book})
   }
 
@@ -108,7 +108,8 @@ export default class Contents extends React.Component{
   logout = () => {
     this.setState({
       currentUser: null,
-      loggedIn: false
+      loggedIn: false,
+      loading: false
     })
     alert('Successfully logged out.')
   }
@@ -124,6 +125,8 @@ export default class Contents extends React.Component{
                 setUser={this.setUser}
                 toggleLoading={this.toggleLoading}
                 loading={this.state.loading}
+                fetchBooks={this.fetchBooks}
+                fetchPages={this.fetchPages}
               />
             } />
             <Route exact path='/register' render={(routerProps) => 
@@ -133,6 +136,8 @@ export default class Contents extends React.Component{
                   setUser={this.setUser}
                   toggleLoading={this.toggleLoading}
                   loading={this.state.loading}
+                  fetchBooks={this.fetchBooks}
+                  fetchPages={this.fetchPages}
                 />
               </div>
             } />
@@ -142,6 +147,8 @@ export default class Contents extends React.Component{
                 setUser={this.setUser}
                 toggleLoading={this.toggleLoading}
                 loading={this.state.loading}
+                fetchBooks={this.fetchBooks}
+                fetchPages={this.fetchPages}
               />
             } />
             <Route exact path='/profile' render={(routerProps) => 

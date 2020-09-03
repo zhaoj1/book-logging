@@ -18,29 +18,35 @@ export default class Login extends React.Component{
 
   handleLogin = async (event) => {
     event.preventDefault()
-    const login = fetch('https://book-logging.herokuapp.com/token-auth/',{
+    fetch('https://book-logging.herokuapp.com/token-auth/',{
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(this.state)
     })
-    console.log(login)
-    // .then(data => data.json())
-    // .then(resp => 
-    //   resp.non_field_errors?
-    //     this.setState({
-    //       error: true,
-    //       errorMsg: 'Username or password is incorrect.'
-    //     })
-    //     :
-    //     this.login(resp)
-    // )
+    .then(data => data.json())
+    .then(resp => 
+      resp.non_field_errors?
+        this.setState({
+          error: true,
+          errorMsg: 'Username or password is incorrect.'
+        })
+        :
+        setTimeout(this.login(resp), 500)
+    )
   }
 
-  login = (input) => {
+  login = async (input) => {
     sessionStorage.setItem('token', input.token)
     this.props.setUser(input.user)
     this.props.toggleLoading()
-    this.props.history.push('/profile', () => this.props.toggleLoading())
+    const fetch = await Promise.all([
+      this.props.fetchBooks(),
+      this.props.fetchPages()
+    ])
+    if(fetch){
+      this.setState({error: false})
+      this.props.history.push('/profile', () => this.props.toggleLoading())
+    }
   }
  
   render(){

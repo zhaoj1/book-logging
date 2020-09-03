@@ -22,6 +22,8 @@ function Landing(props){
           setUser={props.setUser}
           toggleLoading={props.toggleLoading}
           loading={props.loading}
+          fetchBooks={props.fetchBooks}
+          fetchPages={props.fetchPages}
         />
       </div>
     </div>
