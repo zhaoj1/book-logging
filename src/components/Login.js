@@ -31,21 +31,22 @@ export default class Login extends React.Component{
           errorMsg: 'Username or password is incorrect.'
         })
         :
-        setTimeout(this.login(resp), 500)
+        this.login(resp),
+        this.props.toggleLoading()
     )
   }
 
   login = async (input) => {
     sessionStorage.setItem('token', input.token)
     this.props.setUser(input.user)
-    this.props.toggleLoading()
     const fetch = await Promise.all([
       this.props.fetchBooks(),
       this.props.fetchPages()
     ])
     if(fetch){
       this.setState({error: false})
-      this.props.history.push('/profile', () => this.props.toggleLoading())
+      this.props.toggleLoading()
+      this.props.history.push('/profile')
     }
   }
  

@@ -1,8 +1,14 @@
 html, body, .App, #root {
-  height: 100%;
+  height: 100vh;
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+}
+
+.App{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .contents{
@@ -22,7 +28,7 @@ html, body, .App, #root {
 
 .wrapper {
   display: flex;
-  height: 100%;
+  /* height: 100%; */
   width: 100%;
   text-align: center;
 }
@@ -43,6 +49,17 @@ html, body, .App, #root {
   z-index: 5;
 }
 
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* ------------------------------- landing --------------------------------------- */
 
 .landing, .login-page, .register-page{
@@ -58,7 +75,6 @@ html, body, .App, #root {
   width: 50%;
   border-radius: 15px;
   margin: auto;
-  height: 25%;
   display: flex;
 }
 
@@ -69,29 +85,44 @@ html, body, .App, #root {
 
 .logo{
   top: 0;
-  margin: auto;
-  margin-bottom: 5%;
-  width: 70%;
   font-size: 40px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 1% 0 1% 0;
+  background-color: rgb(230,230,250);
 }
+
+.logo-btn-container{
+  float: right;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-right: 1%;
+}
+
+.logo-btns{
+  font-size: 35px;
+  margin: auto 1% auto 1%;
+  background-color: rgb(235,235,250);
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.logo-btns:hover{
+  color: white;
+  background-color: rgb(65,65,120);
+}
+
+
 
 .app-features{
   animation: slide-in 1s ease;
   margin-bottom: 1%;
 }
 
-.logo{
-  text-align: center;
-  width: 100%;
-  margin-bottom: 0;
-  padding: 1% 0 1% 0;
-  position: fixed;
-  z-index: 2;
-  background-color: rgb(230,230,250);
-}
-
 .landing-contents{
-  margin: 8% 1% 0 1%;
+  margin: 1% 1% 0 1%;
   width: 60%;
   padding: 2%;
   font-size: 24px;
@@ -120,24 +151,6 @@ html, body, .App, #root {
   margin: auto;
   margin-bottom: 10px;
   font-size: 20px;
-}
-
-.startBtn{
-  margin: auto;
-  margin-bottom: 50px;
-  font-size: 20px;
-  animation: slide-in 1s ease;
-}
-
-@keyframes slide-in {
-  0% {
-    opacity: 0;
-    transform: translateX(200px);
-  }
-  100%{
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 /* ------------------------------- login + register --------------------------------------- */
@@ -182,9 +195,8 @@ html, body, .App, #root {
   text-align: center;
   justify-content: center;
   justify-content: space-around;
-  padding-top: 10%;
+  padding-top: 1%;
   padding-bottom: 1%;
-  margin-bottom: 20px;
   z-index: 1;
 }
 
@@ -263,50 +275,6 @@ html, body, .App, #root {
   overflow:scroll;
   padding: 2% 0 2% 2%;
   margin-bottom: 1%;
-}
-
-.booklist-toggle-btn-left{
-  border: none;
-  background-color: rgb(180,180,180);
-  margin: auto;
-  height: 64px;
-  width: 64px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 80%;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.booklist-toggle-btn-left:hover{
-  background-color: rgb(140,140,140);
-}
-
-.booklist-toggle-btn-left:disabled{
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.booklist-toggle-btn-right{
-  border: none;
-  background-color: rgb(180,180,180);
-  margin: auto;
-  height: 64px;
-  width: 64px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 80%;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.booklist-toggle-btn-right:hover{
-  background-color: rgb(140,140,140);
-}
-
-.booklist-toggle-btn-right:disabled{
-  opacity: 0.4;
-  pointer-events: none;
 }
 
 .profile-booklist{
@@ -434,8 +402,8 @@ html, body, .App, #root {
 .results-page{
   display: flex;
   flex-direction: column;
-  padding-bottom: 2%;
-  padding-top: 9%;
+  padding-bottom: 1%;
+  padding-top: 1%;
 }
 
 .results-container{
@@ -508,7 +476,6 @@ html, body, .App, #root {
 
 .back-btn{
   margin: auto;
-  margin-top: 1%;
   font-size: 20px;
   background-color: rgb(235,235,250);
   border-radius: 7px;
@@ -517,6 +484,7 @@ html, body, .App, #root {
 .back-btn:hover{
   color: white;
   background-color: rgb(65,65,120);
+  border-color: rgb(230,230,230);
   border-radius: 7px;
 }
 

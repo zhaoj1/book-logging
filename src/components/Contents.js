@@ -35,7 +35,6 @@ Modal.setAppElement('#root');
 
 const defState = {
   currentUser: null,
-  loggedIn: false,
   results: [],
   modalIsOpen: false,
   modalType: null,
@@ -67,7 +66,10 @@ export default class Contents extends React.Component{
 
   componentDidMount = () => {sessionStorage.clear()}
 
-  setUser = (user) => {this.setState({currentUser: user, loggedIn: true})}
+  setUser = (user) => {
+    this.setState({currentUser: user})
+    this.props.toggleLoggedIn()
+  }
 
   setResults = (results) => {this.setState({results: results})}
 
@@ -108,9 +110,9 @@ export default class Contents extends React.Component{
   logout = () => {
     this.setState({
       currentUser: null,
-      loggedIn: false,
       loading: false
     })
+    this.props.toggleLoggedIn()
     alert('Successfully logged out.')
   }
 
@@ -155,7 +157,7 @@ export default class Contents extends React.Component{
               <Profile
                 {...routerProps}
                 currentUser={this.state.currentUser}
-                loggedIn={this.state.loggedIn}
+                loggedIn={this.props.loggedIn}
                 booksList={this.state.booksList}
                 modalIsOpen={this.state.modalIsOpen}
                 setResults={this.setResults}
@@ -172,7 +174,7 @@ export default class Contents extends React.Component{
               <Results
                 {...routerProps}
                 currentUser={this.state.currentUser}
-                loggedIn={this.state.loggedIn}
+                loggedIn={this.props.loggedIn}
                 setResults={this.setResults}
                 results={this.state.results}
                 setSelectedBook={this.setSelectedBook}
