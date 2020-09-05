@@ -85,10 +85,7 @@ html, body, .App, #root {
 
 .logo{
   top: 0;
-  font-size: 40px;
-  text-align: center;
   width: 100%;
-  margin-bottom: 0;
   padding: 1% 0 1% 0;
   background-color: rgb(230,230,250);
 }
@@ -188,24 +185,23 @@ html, body, .App, #root {
 /* ------------------------------- profile --------------------------------------- */
 
 .profile-page{
-  height: 100%;
+  height: 78%;
   position: relative;
   display:flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  justify-content: space-around;
-  padding-top: 1%;
-  padding-bottom: 1%;
+  justify-content: space-between;
+  /* padding-top: 1%;
+  padding-bottom: 1%; */
+  margin-top: 10px;
   z-index: 1;
 }
 
 .profile-analytics{
-  height: 70%;
+  height: 80%;
   width: 80%;
   margin: auto;
-  margin-top: 2%;
-  margin-bottom: 2%;
   display: flex;
   justify-content: space-between;
   background-color: rgba(245,245,245, 0.95);
@@ -215,7 +211,7 @@ html, body, .App, #root {
 
 .profile-lower{
   display: flex;
-  height: 15%;
+  /* height: 15%; */
 }
 
 .profile-analytics-left{
@@ -253,10 +249,8 @@ html, body, .App, #root {
 }
 
 .username{
-  background-color: rgb(250,250,250);
-  width: 50%;
-  margin: 1% auto 1% auto;
-  border-radius: 10px;
+  font-size: 35px;
+  width: 100%;
 }
 
 .library-title{
@@ -390,7 +384,7 @@ html, body, .App, #root {
 .search-container{
   display: flex;
   flex-direction: column;
-  background-color: rgba(240,240,240, 0.95);
+  background-color: rgba(245,245,245, 0.99);
   border-radius: 10px;
   width: 80%;
   margin: auto;

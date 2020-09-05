@@ -108,8 +108,8 @@ export default class Profile extends React.Component{
       this.props.loggedIn ?
         this.props.currentUser ? 
           <div className='profile-page'>
-            <h1 className='username'>{this.props.currentUser.username}</h1>
-            <button className='logout-btn' onClick={this.props.logout}>Logout</button>
+            {/* <h1 className='username'>{this.props.currentUser.username}</h1>
+            <button className='logout-btn' onClick={this.props.logout}>Logout</button> */}
             <div className='profile-lower'>
               <Search 
                 setResults={this.props.setResults}

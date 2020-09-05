@@ -34,7 +34,6 @@ const modalStyle = {
 Modal.setAppElement('#root');
 
 const defState = {
-  currentUser: null,
   results: [],
   modalIsOpen: false,
   modalType: null,
@@ -65,11 +64,6 @@ export default class Contents extends React.Component{
   }
 
   componentDidMount = () => {sessionStorage.clear()}
-
-  setUser = (user) => {
-    this.setState({currentUser: user})
-    this.props.toggleLoggedIn()
-  }
 
   setResults = (results) => {this.setState({results: results})}
 
@@ -107,15 +101,6 @@ export default class Contents extends React.Component{
 
   toggleLoading = () => {this.setState({loading: !this.state.loading})}
 
-  logout = () => {
-    this.setState({
-      currentUser: null,
-      loading: false
-    })
-    this.props.toggleLoggedIn()
-    alert('Successfully logged out.')
-  }
-
   render(){
     return(
       <>
@@ -124,7 +109,7 @@ export default class Contents extends React.Component{
             <Route exact path='/' render={(routerProps) => 
               <Landing 
                 {...routerProps}
-                setUser={this.setUser}
+                setUser={this.props.setUser}
                 toggleLoading={this.toggleLoading}
                 loading={this.state.loading}
                 fetchBooks={this.fetchBooks}
@@ -135,7 +120,7 @@ export default class Contents extends React.Component{
               <div className='wrapper'>
                 <Register 
                   {...routerProps}
-                  setUser={this.setUser}
+                  setUser={this.props.setUser}
                   toggleLoading={this.toggleLoading}
                   loading={this.state.loading}
                   fetchBooks={this.fetchBooks}
@@ -146,7 +131,7 @@ export default class Contents extends React.Component{
             <Route exact path='/login' render={(routerProps) => 
               <Login 
                 {...routerProps}
-                setUser={this.setUser}
+                setUser={this.props.setUser}
                 toggleLoading={this.toggleLoading}
                 loading={this.state.loading}
                 fetchBooks={this.fetchBooks}
@@ -156,7 +141,7 @@ export default class Contents extends React.Component{
             <Route exact path='/profile' render={(routerProps) => 
               <Profile
                 {...routerProps}
-                currentUser={this.state.currentUser}
+                currentUser={this.props.currentUser}
                 loggedIn={this.props.loggedIn}
                 booksList={this.state.booksList}
                 modalIsOpen={this.state.modalIsOpen}
@@ -167,13 +152,13 @@ export default class Contents extends React.Component{
                 fetchPages={this.fetchPages}
                 setDefaultSearch={this.setDefaultSearch}
                 setDefaultAuthor={this.setDefaultAuthor}
-                logout={this.logout}
+                logout={this.props.logout}
               />
             } />
             <Route exact path='/results' render={(routerProps) => 
               <Results
                 {...routerProps}
-                currentUser={this.state.currentUser}
+                currentUser={this.props.currentUser}
                 loggedIn={this.props.loggedIn}
                 setResults={this.setResults}
                 results={this.state.results}
@@ -193,7 +178,7 @@ export default class Contents extends React.Component{
           {this.state.modalType == 'details' ?
             <BookDetails
               selectedBook={this.state.selectedBook}
-              currentUser={this.state.currentUser}
+              currentUser={this.props.currentUser}
               fetchBooks={this.fetchBooks}
               closeModal={this.closeModal}
               confirmationPopup={this.confirmationPopup}
@@ -202,7 +187,7 @@ export default class Contents extends React.Component{
             this.state.modalType == 'profile' ?
               <ProfileBookAnalytics
                 selectedBook={this.state.selectedBook}
-                currentUser={this.state.currentUser}
+                currentUser={this.props.currentUser}
                 fetchBooks={this.fetchBooks}
                 closeModal={this.closeModal}
                 pages={this.state.pages}

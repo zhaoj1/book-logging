@@ -8,10 +8,23 @@ import Logo from './imgs/Logo v3.png'
 export default class App extends React.Component{
 
   state = {
+    currentUser: null,
     loggedIn: false
   }
 
-  toggleLoggedIn = () => {this.setState({loggedIn: !this.state.loggedIn})}
+  setUser = (user) => {
+    this.setState({currentUser: user}, () => {
+      this.setState({loggedIn: true})
+    })
+  }
+
+  logout = () => {
+    this.setState({
+      currentUser: null,
+      loggedIn: false
+    })
+    alert('Successfully logged out.')
+  }
 
   render(){
     return (
@@ -19,20 +32,20 @@ export default class App extends React.Component{
         <div className='logo' >
           <img src={Logo} style={{'float':'left'}} />
           <div className='logo-btn-container'>
-            {this.state.loggedIn?
+            {this.state.loggedIn ?
               <>
-                <button className='logo-btns' onClick={this.toggleLoggedIn}>PROFILE</button>
-                <button className='logo-btns' onClick={this.toggleLoggedIn}>LOGOUT</button>
+                <label className='username'>Logged in as: {this.state.currentUser.username}</label>
+                <button className='logo-btns' onClick={this.logout}>LOGOUT</button>
               </>
               :
               null
             }
-
           </div>
         </div>
         <Contents 
+          currentUser={this.state.currentUser}
           loggedIn={this.state.loggedIn}
-          toggleLoggedIn={this.toggleLoggedIn}
+          setUser={this.setUser}
         />
         <Footer />
       </div>
