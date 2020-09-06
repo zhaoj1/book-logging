@@ -30,7 +30,7 @@ export default class App extends React.Component{
     return (
       <div className="App">
         <div className='logo' >
-          <img src={Logo} style={{'float':'left'}} />
+          <img src={Logo} style={{'float':'left'}} height={50} />
           <div className='logo-btn-container'>
             {this.state.loggedIn ?
               <>

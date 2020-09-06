@@ -60,6 +60,42 @@ html, body, .App, #root {
   }
 }
 
+/* ------------------------------- header --------------------------------------- */
+
+.logo{
+  top: 0;
+  width: 100%;
+  padding: 1% 0 1% 0;
+  background-color: rgb(230,230,250);
+}
+
+.logo-btn-container{
+  float: right;
+  height: 100%;
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
+  margin-right: 1%;
+}
+
+.logo-btns{
+  font-size: 20px;
+  margin: auto 1% auto 1%;
+  background-color: rgb(235,235,250);
+  border-radius: 7px;
+  padding: 10px;
+}
+
+.logo-btns:hover{
+  color: white;
+  background-color: rgb(65,65,120);
+}
+
+.username{
+  font-size: 25px;
+  margin:auto;
+}
+
 /* ------------------------------- landing --------------------------------------- */
 
 .landing, .login-page, .register-page{
@@ -82,36 +118,6 @@ html, body, .App, #root {
   margin: auto;
   width: 90%;
 }
-
-.logo{
-  top: 0;
-  width: 100%;
-  padding: 1% 0 1% 0;
-  background-color: rgb(230,230,250);
-}
-
-.logo-btn-container{
-  float: right;
-  height: 100%;
-  display: flex;
-  justify-content: space-around;
-  margin-right: 1%;
-}
-
-.logo-btns{
-  font-size: 35px;
-  margin: auto 1% auto 1%;
-  background-color: rgb(235,235,250);
-  border-radius: 7px;
-  padding: 10px;
-}
-
-.logo-btns:hover{
-  color: white;
-  background-color: rgb(65,65,120);
-}
-
-
 
 .app-features{
   animation: slide-in 1s ease;
@@ -248,11 +254,6 @@ html, body, .App, #root {
   border-radius: 5px;
 }
 
-.username{
-  font-size: 35px;
-  width: 100%;
-}
-
 .library-title{
   color: rgb(250,250,250);
   font-size: 25px;
@@ -336,21 +337,6 @@ html, body, .App, #root {
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.logout-btn{
-  margin: auto;
-  margin-bottom: 1%;
-  font-size: 20px;
-  width: 10%;
-  background-color: rgb(235,235,250);
-  border-radius: 7px;
-}
-
-.logout-btn:hover{
-  color: white;
-  background-color: rgb(65,65,120);
-  border-radius: 7px;
 }
 
 /* ------------------------------- search --------------------------------------- */
