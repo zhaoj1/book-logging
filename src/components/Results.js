@@ -59,13 +59,11 @@ export default class Results extends React.Component{
   render(){
     return(
       <div className='results-page'>
-        <div className='search-box'>
-          <Search 
-            setResults={this.props.setResults}
-            defaultSearch={this.props.defaultSearch}
-            defaultAuthor={this.props.defaultAuthor}
-          />
-        </div>
+        <Search 
+          setResults={this.props.setResults}
+          defaultSearch={this.props.defaultSearch}
+          defaultAuthor={this.props.defaultAuthor}
+        />
         <button 
           onClick={this.backToProfile} 
           className='back-btn'

@@ -363,10 +363,6 @@ html, body, .App, #root {
   font-size: 20px;
 }
 
-.search-box{
-  height: 60px;
-}
-
 .search-container{
   display: flex;
   flex-direction: column;
@@ -374,6 +370,7 @@ html, body, .App, #root {
   border-radius: 10px;
   width: 80%;
   margin: auto;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -408,6 +405,15 @@ html, body, .App, #root {
   flex: 1;
   margin: auto 1% auto 1%;
   height: 600px;
+  background-color: rgb(235,235,250);
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.results-btn:hover{
+  color: white;
+  background-color: rgb(65,65,120);
+  border-color: rgb(230,230,230);
 }
 
 .resultsLineItem{
