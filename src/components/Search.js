@@ -28,24 +28,31 @@ export default class Search extends React.Component{
 
   searchAPI = async (event) => {
     event.preventDefault();
-    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.queryParams}+author:${this.state.authorQuery}&maxResults=40&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
-    const json = await resp.json()
-    if(json.totalItems == 0){
+    if(this.state.queryParams == '' && this.state.authorQuery == ''){
       this.setState({
         error: true,
-        errorMsg: 'No results found. Please try again.'
+        errorMsg: 'Please enter a query.'
       })
     }else{
-      if(this.props.setDefaultSearch){
-        this.props.setDefaultSearch(this.state.queryParams)
-        this.props.setDefaultAuthor(this.state.authorQuery)
+      const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.queryParams}+author:${this.state.authorQuery}&maxResults=40&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
+      const json = await resp.json()
+      if(json.totalItems == 0){
+        this.setState({
+          error: true,
+          errorMsg: 'No results found. Please try again.'
+        })
+      }else{
+        if(this.props.setDefaultSearch){
+          this.props.setDefaultSearch(this.state.queryParams)
+          this.props.setDefaultAuthor(this.state.authorQuery)
+        }
+        this.props.setResults(json)
+        this.setState({
+          searched: true,
+          error: false,
+          errorMsg: ''
+        })
       }
-      this.props.setResults(json)
-      this.setState({
-        searched: true,
-        error: false,
-        errorMsg: ''
-      })
     }
   }
 
@@ -78,7 +85,7 @@ export default class Search extends React.Component{
               type='submit' 
               value="Search"
             ></input>
-            <img src='https://books.google.com/googlebooks/images/poweredby.png' width='62' height='30' />
+            <img className='googleAttr' src='https://books.google.com/googlebooks/images/poweredby.png' />
           </form>
           {this.state.searched ? 
             <Redirect to='/results' />

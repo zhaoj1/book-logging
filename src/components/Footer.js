@@ -14,7 +14,7 @@ function Footer() {
         <img className='myLinks' src={github} />
       </a>
       <a href={'https://www.linkedin.com/in/justin-zh/'} target='blank'>
-        <img className='myLinks' src={linkedin} height={32} />
+        <img className='myLinks' src={linkedin}  />
       </a>
     </div>
   );

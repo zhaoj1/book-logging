@@ -67,6 +67,7 @@ html, body, .App, #root {
   width: 100%;
   padding: 1% 0 1% 0;
   background-color: rgb(230,230,250);
+  height: 4vw;
 }
 
 .logo-btn-container{
@@ -79,7 +80,7 @@ html, body, .App, #root {
 }
 
 .logo-btns{
-  font-size: 20px;
+  font-size: 1.5vw;
   margin: auto 1% auto 1%;
   background-color: rgb(235,235,250);
   border-radius: 7px;
@@ -108,10 +109,11 @@ html, body, .App, #root {
 .login-page, .register-page{
   padding: 2% 0 2% 0;
   background-color: rgba(245,245,245,0.95);
-  width: 50%;
+  width: 30vw;
   border-radius: 15px;
   margin: auto;
   display: flex;
+  font-size: 1.25vw;
 }
 
 .login-form{
@@ -121,12 +123,40 @@ html, body, .App, #root {
 
 .app-features{
   animation: slide-in 1s ease;
+  margin: 2% auto 2% auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.app-features-text{
+  margin-left: 10px;
+}
+
+.app-features-upper{
+  width: 100%;
+}
+
+.app-features-upper-right{
+  font-size: 2vw;
+  font-weight: bold;
+}
+
+.app-features-lower{
+  font-size: 1.5vw;
+}
+
+.landing-icon{
+  float: left;
+  margin-right: 2%;
+}
+
+.landing{
   margin-bottom: 1%;
 }
 
 .landing-contents{
   margin: 1% 1% 0 1%;
-  width: 60%;
+  width: 60vw;
   padding: 2%;
   font-size: 24px;
   background-color: rgba(250,250,250, 0.95);
@@ -134,12 +164,10 @@ html, body, .App, #root {
 }
 
 .landing-left{
-  width: 65%;
-  margin: 8% auto 1% 1%;
-  padding-top: 1%;
-  border-radius: 10px;
-  height: 110%;
-  overflow: scroll;
+  width: 100%;
+  margin: auto auto 1% 1%;
+  text-align: left;
+  font-size: 2vw;
 }
 
 .landing-right{
@@ -162,13 +190,13 @@ html, body, .App, #root {
   margin: auto;
   margin-bottom: 10px;
   width: 80%;
-  font-size: 20px;
+  font-size: 1.5vw;
 }
 
 .submitBtn{
   margin: auto;
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 1.5vw;
   background-color: rgb(235,235,250);
   border-radius: 7px;
 }
@@ -181,7 +209,8 @@ html, body, .App, #root {
 
 .errorMsg{
   color: red;
-  font-weight: bold;  
+  font-weight: bold; 
+  font-size: 1.25vw;
 }
 
 .loading{
@@ -353,14 +382,14 @@ html, body, .App, #root {
   width: 90%;
   display: flex;
   justify-content: space-between;
-  padding-top: 8px;
+  padding-top: 1%;
 }
 
 .search-input{
   margin: auto;
   margin-bottom: 10px;
   width: 40%;
-  font-size: 20px;
+  font-size: 1.5vw;
 }
 
 .search-container{
@@ -372,6 +401,12 @@ html, body, .App, #root {
   margin: auto;
   margin-bottom: 10px;
   text-align: center;
+}
+
+.googleAttr{
+  margin: auto;
+  margin-top: 0.25%;
+  height: 2vw;
 }
 
 /* ------------------------------- results --------------------------------------- */
@@ -408,12 +443,19 @@ html, body, .App, #root {
   background-color: rgb(235,235,250);
   border-radius: 7px;
   font-weight: bold;
+  font-size: 1.5vw;
 }
 
 .results-btn:hover{
   color: white;
   background-color: rgb(65,65,120);
   border-color: rgb(230,230,230);
+}
+
+.results-btn:disabled{
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: rgb(100,100,100);
 }
 
 .resultsLineItem{
@@ -433,11 +475,12 @@ html, body, .App, #root {
 
 .bookCover{
   margin: auto;
+  width: 90%;
 }
 
 .bookInfo{
   margin: auto;
-  height: 40%;
+  height: 50%;
   width: 90%;
   margin-bottom: 0;
   padding: 5%;
@@ -446,23 +489,22 @@ html, body, .App, #root {
 }
 
 .bookTitle{
-  font-size: 18px;
-  
+  font-size: 1.25vw;
 }
 
 .bookAuthor{
-  font-size: 15px;
+  font-size: 1vw;
   font-weight: bold;
 }
 
 .bookISBN{
-  font-size: 13px;
+  font-size: 0.8vw;
   margin-top: 4px;
 }
 
 .back-btn{
   margin: auto;
-  font-size: 20px;
+  font-size: 1.5vw;
   background-color: rgb(235,235,250);
   border-radius: 7px;
 }
@@ -590,6 +632,8 @@ html, body, .App, #root {
   padding: 5px;
   padding-top: 10px;
   bottom: 0;
+  height: 3vw;
+  font-size: 1vw;
 }
 
 .footer-left{
@@ -600,11 +644,13 @@ html, body, .App, #root {
 
 .footer-text{
   margin: auto;
+  font-size: 1vw;
 }
 
 .myLinks{
   padding: 5px;
-  margin-right: 10px;
+  margin-right: 1.5vw;
+  height: 80%;
 }
 
 .myLinks:hover{
