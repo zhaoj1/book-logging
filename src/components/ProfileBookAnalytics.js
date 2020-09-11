@@ -33,7 +33,7 @@ export default class ProfileBookAnalytics extends React.Component{
   }
 
   searchBook = async () => {
-    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.props.selectedBook.api_id}&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
+    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${this.props.selectedBook.isbn10}&key=` + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
     const json = await resp.json()
     this.setState({bookDetails:json.items[0].volumeInfo})
   }

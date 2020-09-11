@@ -113,7 +113,7 @@ html, body, .App, #root {
   border-radius: 15px;
   margin: auto;
   display: flex;
-  font-size: 1.25vw;
+  font-size: 1.5vw;
 }
 
 .login-form{
@@ -196,7 +196,7 @@ html, body, .App, #root {
 .submitBtn{
   margin: auto;
   margin-bottom: 10px;
-  font-size: 1.5vw;
+  font-size: 1.8vw;
   background-color: rgb(235,235,250);
   border-radius: 7px;
 }
@@ -309,6 +309,10 @@ html, body, .App, #root {
   width: 100%;
   justify-content: center;
   height: 100%;
+}
+
+.profile-book-details{
+  font-size: 1.5vw
 }
 
 .profile-booklist-left{
@@ -476,7 +480,6 @@ html, body, .App, #root {
 
 .bookCover{
   margin: auto;
-  height: 45%;
 }
 
 .bookInfo{
