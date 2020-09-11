@@ -55,15 +55,22 @@ export default class LineChart extends Component {
               min: 0,
               fontStyle: 'bold',
               precision: 0,
-              suggestedMax: 5
+              suggestedMax: 5,
+              fontSize: 18
             }
           }],
           xAxes: [{
             ticks: {
-              minRotation: 45
+              minRotation: 45,
+              fontSize: 18
             }
           }]
         },
+        legend: {
+          labels: {
+            fontSize: 25  
+          }
+        }
       }
     });
   }
