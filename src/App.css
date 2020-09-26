@@ -22,13 +22,12 @@ html, body, .App, #root {
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 0.4;
+  opacity: 0.3;
   z-index: -1;
 }
 
 .wrapper {
   display: flex;
-  /* height: 100%; */
   width: 100%;
   text-align: center;
 }

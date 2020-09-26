@@ -55,7 +55,10 @@ export default class Login extends React.Component{
       <div className='wrapper'>
         <div className='login-page'>
           {this.props.loading?
-            <h1 className='loading'>Loading...</h1>
+            <>
+              <h1 className='loading'>Loading...</h1>
+              <p className='loading' style={{'font-size':'1vw'}} >This may take a while...</p>
+            </>
             :
             <>
               <form className='login-form' onSubmit={this.handleLogin} >

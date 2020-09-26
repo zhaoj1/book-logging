@@ -5,7 +5,6 @@ export default class ProfileBookDetails extends React.Component{
   render(){
     return(
       <div className='profile-book-details'>
-        {console.log(this.props.bookDetails)}
         Rating: {
             this.props.bookDetails.averageRating == undefined ? 
               0
