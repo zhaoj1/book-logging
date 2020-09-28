@@ -20,7 +20,7 @@ function Landing(props){
                   Lookup books with details with the power of Google Books API.
                 </div>
                 <div className='app-features-lower'>
-                  BookLogging utilizes the Google Books API to search and provide details on books
+                  BookLogging utilizes the Google Books API to search and provide details on books.
                 </div>
               </div>
             </div>
@@ -33,7 +33,7 @@ function Landing(props){
                   Save books to profile to keep track of reading progress.
                 </div>
                 <div className='app-features-lower'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                  Monitor reading progress to aid in decision making.
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@ function Landing(props){
                   Make decisions with help from analytics and charts.
                 </div>
                 <div className='app-features-lower'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                  Utilize charts and analytics to adjust reading habits to fit your needs.
                 </div>
               </div>
             </div>
